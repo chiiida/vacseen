@@ -7,6 +7,13 @@
   font-family: "Montserrat", sans-serif;
 }
 
+.logo {
+  padding-top: 1rem;
+  padding-left: 2rem;
+  font-size: 2.5rem;
+  font-weight: 1000;
+}
+
 div.main {
   display: flex;
   width: 100vw;
@@ -103,4 +110,13 @@ user page
   height: 300px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+/* ===================
+regis vaccination page
+===================   */
+
+.vacc-bg {
+  background: linear-gradient(#4e6d7c, #85b3bb);
+  height: 100vh;
 }
