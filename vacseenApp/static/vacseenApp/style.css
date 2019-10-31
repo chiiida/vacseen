@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
+:root {
+  --pri-clr: #e6eff1;
+  --sec-clr: #85b3bb;
+  --tri-clr: #4e6d7c;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,12 +23,12 @@ div.main {
 }
 
 div.main > div.hero {
-  background: linear-gradient(#4e6d7c, #85b3bb);
+  background: linear-gradient(var(--tri-clr), var(--sec-clr));
   width: 55%;
   text-align: center;
   display: flex;
   height: 100vh;
-  color: #e6eff1;
+  color: var(--pri-clr);
   font-size: 150%;
 }
 
@@ -36,7 +42,7 @@ div.main > div.hero > div.hero-text {
 }
 
 div.main > div.cta {
-  color: #85b3bb;
+  color: var(--sec-clr);
   width: 45%;
   display: flex;
   flex-flow: column nowrap;
@@ -49,10 +55,10 @@ h4 {
 }
 
 .google-button {
-  padding-top: 1200px;;
+  padding-top: 1200px;
   height: 40px;
   border-width: 0;
-  background: #4285F4;
+  background: #4285f4;
   color: #fff;
   border-radius: 5px;
   white-space: nowrap;
@@ -67,7 +73,7 @@ h4 {
   box-shadow: 1px 4px 5px 1px rgba(0, 0, 0, 0.1);
 }
 .google-button:active {
-  background-color: #e5e5e5;
+  background-color: #fff;
   box-shadow: none;
   transition-duration: 10ms;
 }
@@ -93,14 +99,78 @@ h4 {
   font-family: "Roboto", arial, sans-serif;
 }
 
-
 /* ===================
 user page
 ===================   */
+.light-bg {
+  background: var(--pri-clr);
+  padding: 0 5%;
+  color: #fff;
+}
+
+.user-profile {
+  width: 40vw;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  color: var(--sec-clr);
+}
 
 .user-portrait {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   object-fit: cover;
+  margin: 0 5%;
+}
+
+.user-upcoming {
+  padding-top: 5%;
+  text-align: center;
+}
+
+.user-upcoming > h2 {
+  margin: 2%;
+}
+
+.upcoming-box {
+  margin: 5% auto;
+  width: auto;
+  height: 250px;
+  background: var(--tri-clr);
+  overflow: scroll;
+  border-radius: 10px;
+}
+
+.one-check {
+  display: flex;
+  justify-content: space-around;
+  margin: 3% 0;
+}
+
+.user-vaccine-add,
+.user-vaccine-remove {
+  width: 200px;
+  background-color: var(--tri-clr);
+  border-radius: 8px;
+  display: inline-block;
+  cursor: pointer;
+  color: #fff;
+  font-family: Arial;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 15px 32px;
+  text-decoration: none;
+}
+
+.user-vaccines {
+  width: 50%;
+  margin-left: 5%;
+  margin-top: 10%;
+  margin-bottom: auto;;
+}
+
+.collapse {
+  color: var(--tri-clr);
 }
