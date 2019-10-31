@@ -9,7 +9,6 @@ app_name = 'vacseenApp'
 urlpatterns = [
     path('', views.index_page, name='index'),
     path('login/', views.index_page, name='login'),
-    path('logout/', views.logout_page, name='logout'),
-    # path('register/', views.registerPage, name='register'),
-    # path('user/', views.userPage, name='user'),
+    path('user/', views.userPage, name='user'),
+    path('register/', views.registerPage, name='register'),
 ]

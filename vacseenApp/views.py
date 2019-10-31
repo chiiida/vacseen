@@ -18,4 +18,4 @@ def registerPage(req):
 def userPage(req):
     stuff = 'aaaaaaÀ'
     context = {'stuff': stuff}
-    return render(req, 'vacseenApp/index.html', context)
+    return render(req, 'vacseenApp/user.html', context)
