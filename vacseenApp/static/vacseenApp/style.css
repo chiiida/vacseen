@@ -12,6 +12,7 @@
   padding-left: 2rem;
   font-size: 2.5rem;
   font-weight: 1000;
+  color: #e6eff1;
 }
 
 div.main {
@@ -116,7 +117,126 @@ user page
 regis vaccination page
 ===================   */
 
-.vacc-bg {
+div.vacc-bg {
   background: linear-gradient(#4e6d7c, #85b3bb);
   height: 100vh;
+}
+
+div.page-title {
+  padding-top: 3%;
+  text-align: center;
+  color: #e6eff1;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.seperator-line {
+  width: 70%;
+  text-align: center;
+  border: 0.5px solid #e6eff1;
+  margin: 0 auto;
+  margin-top: 2%;
+  margin-bottom: 5%;
+}
+
+div.dot-outer {
+  background: #fff;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  margin: 7px 0px 0px 8px;
+}
+
+div.dot-inner {
+  content: "";
+  position: absolute;
+  background: #4e6d7c;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  top: 50%;
+  left: 50%;
+  margin: -7px 0px 0px -8px;
+}
+
+.add-vac-btn {
+  width: 35px;
+  height: 35px;
+  font-size: 40px;
+  color: #4E6C7C;
+  border: none;
+  padding: 0;
+  text-align: center;
+  border-radius: 50%;
+  margin: 0px 0px 0px 4px;
+}
+.add-vac-btn p {
+  position: relative;
+  top: -12px;
+}
+
+.vacc-name {
+  margin-left: 7%;
+  margin-right: 4%;
+}
+
+.vacc-dose {
+  margin-right: 4%;
+}
+
+.vacc-date {
+  width: 50px;
+}
+
+.form-control {
+  height: 40px;
+  border: 0px solid #BECCD2;
+  border-radius: 10px;
+  background: #BECCD2;
+  color: black;
+  margin-bottom: 2%;
+}
+
+.terms-box {
+  width: 900px;
+  height: 150px;
+  overflow: auto;
+  background-color: rgb(96, 141, 151);
+  padding: 3%;
+  padding-left: 4%;
+  color: #fff;
+  margin-top: 3%;
+}
+
+.terms-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.terms-sub {
+  font-size: 14px;
+}
+
+.terms-check-text {
+  color: #fff;
+}
+
+.terms-check {
+  padding-top: 10px;
+  padding-left: 5%;
+}
+
+.save-btn {
+  background-color: #4E6C7C;
+  text-align: center;
+  padding: 10px 100px;
+  border: none;
+  border-radius: 15px;
+  display: inline-block;
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  margin-right: 5%;
+  margin-top: 3%;
 }
