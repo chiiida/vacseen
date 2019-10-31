@@ -9,8 +9,8 @@
     <div class="main-reg">
             <h1>Personal Information</h1>
             <form>
-                <div class="row">
-                    <div class="col-lg-6">
+                <div class="row m-auto">
+                    <div class="col-lg-6" id="contel-col">
                         <div class="form-group">
                             <label for="FirstName">First Name *</label>
                             <input type="text" class="form-control" id="firstname"  placeholder="Enter First Name">
@@ -38,9 +38,14 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="avatar">
-                            <div class="file-loading">
-                                <input id="avatar-1" name="avatar-1" type="file" required>
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                <label for="imageUpload" id="imageUploadlabel"></label>
+                            </div>
+                            <div class="avatar-preview">
+                                <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                </div>
                             </div>
                         </div>
                     </div>
