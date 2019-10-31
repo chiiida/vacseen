@@ -92,3 +92,15 @@ h4 {
   font-weight: bold;
   font-family: "Roboto", arial, sans-serif;
 }
+
+
+/* ===================
+user page
+===================   */
+
+.user-portrait {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+}

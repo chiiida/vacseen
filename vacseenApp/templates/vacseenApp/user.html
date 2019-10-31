@@ -1,6 +1,27 @@
 {% extends 'vacseenApp/base.html' %}
 
 {% block content %}
+    <div class="main">
+        <div class="user-info">
+            <div class="user-profile">
+                <img src="https://source.unsplash.com/random" alt="" class="user-portrait">
+                <div class="user-profile-basic">
+                    <h1>Tim Cook</h1>
+                    <h2>Male, 50 years</h2>
+                    <a href="#">edit profile</a>
+                </div>
+            </div>
+            <div class="user-upcoming">
+                <h2>upcoming vaccine</h2>
+            </div>
+        </div>
+        <div class="user-vaccines">
+            <div class="user-vaccines-list">
+                for vaccine in user.vaccine: 
+                    blah blah
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}
