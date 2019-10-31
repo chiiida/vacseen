@@ -2,5 +2,54 @@
 
 {% block content %}
 
+<div class="register">
+    <header class="logo">
+            VACSEEN
+    </header>
+    <div class="main-reg">
+            <h1>Personal Information</h1>
+            <form>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="FirstName">First Name *</label>
+                            <input type="text" class="form-control" id="firstname"  placeholder="Enter First Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="LastName">Last Name *</label>
+                            <input type="text" class="form-control" id="lastname" placeholder="Enter Last Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="PhoneNumber">Phone Number *</label>
+                            <input type="tel" class="form-control" id="phonenumber" placeholder="Enter Phone Number">
+                        </div> 
+                        <div class="form-group">
+                            <label for="Gender">Gender</label>
+                            <select class="form-control" id="gender">
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="example-date-input">Date</label>
+                            <input class="form-control" type="date" value="2019-10-31" id="example-date-input">
+        
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="avatar">
+                            <div class="file-loading">
+                                <input id="avatar-1" name="avatar-1" type="file" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+</div>
+
+
 
 {% endblock %}

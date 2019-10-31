@@ -13,7 +13,7 @@ def logout_page(req):
 def registerPage(req):
     stuff = 'aaaaaaÀ'
     context = {'stuff': stuff}
-    return render(req, 'vacseenApp/index.html', context)
+    return render(req, 'vacseenApp/regbasic.html', context)
 
 def userPage(req):
     stuff = 'aaaaaaÀ'

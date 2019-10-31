@@ -5,6 +5,7 @@
   padding: 0;
   box-sizing: border-box; 
   font-family: "Montserrat", sans-serif;
+  margin-left: 0!important; 
 }
 
 div.main {
@@ -17,6 +18,7 @@ div.main {
 }
 
 div.main > div.hero {
+  /* background: red; */
   background: linear-gradient(#4e6d7c, #85b3bb);
   width: 55%;
   text-align: center;
@@ -103,4 +105,70 @@ user page
   height: 300px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+
+/* register page */
+
+div.register {
+  background: linear-gradient(#4e6d7c, #85b3bb);
+  color : white ;
+  margin : 0px ;
+  
+}
+
+.logo {
+  padding-top: 1rem;
+  padding-left :2rem ;
+  font-weight: 2000 ; 
+  font-size: 2.5rem;
+
+}
+
+div.main-reg {
+  width: 100vw ;
+  height: 100vh;
+}
+
+div.main-reg h1{
+  margin : 3rem ;
+  margin-top : 0em ;
+  text-align: center ;
+  color: white;
+  margin-bottom: 1em;
+  padding-bottom: 1em ;
+  font-weight:bold;
+  border-bottom: 1px solid white ;
+
+}
+
+
+div.form-group {
+
+  padding-left : 15rem ;
+  padding-bottom: 1rem; 
+  width : 70% ; 
+}
+
+.form-control {
+  margin-top : 0.5rem;
+  border-radius: .5rem ;
+  border-width: 0.05em ;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+#gender {
+  width : 20rem;
+  height : 2rem ;
+  padding : 2rem ;
+  border-width: 0.05em ;
+
+}
+.avatar {
+  margin-top : 3em ;
+}
+
+.next {
+  text-align: end;
+  /* margin-right: 5em;
+  margin-bottom: 2em; */
 }
