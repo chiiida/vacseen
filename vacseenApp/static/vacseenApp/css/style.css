@@ -1,10 +1,24 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+:root {
+  --pri-clr: #e6eff1;
+  --sec-clr: #85b3bb;
+  --tri-clr: #4e6d7c;
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
+}
+
+.logo {
+  padding-top: 1rem;
+  padding-left: 2rem;
+  font-size: 2.5rem;
+  font-weight: 1000;
+  color: #e6eff1;
 }
 
 div.main {
@@ -17,12 +31,12 @@ div.main {
 }
 
 div.main > div.hero {
-  background: linear-gradient(#4e6d7c, #85b3bb);
+  background: linear-gradient(var(--tri-clr), var(--sec-clr));
   width: 55%;
   text-align: center;
   display: flex;
   height: 100vh;
-  color: #e6eff1;
+  color: var(--pri-clr);
   font-size: 150%;
 }
 
@@ -36,7 +50,7 @@ div.main > div.hero > div.hero-text {
 }
 
 div.main > div.cta {
-  color: #85b3bb;
+  color: var(--sec-clr);
   width: 45%;
   display: flex;
   flex-flow: column nowrap;
@@ -49,10 +63,10 @@ h4 {
 }
 
 .google-button {
-  padding-top: 1200px;;
+  padding-top: 1200px;
   height: 40px;
   border-width: 0;
-  background: #4285F4;
+  background: #4285f4;
   color: #fff;
   border-radius: 5px;
   white-space: nowrap;
@@ -67,7 +81,7 @@ h4 {
   box-shadow: 1px 4px 5px 1px rgba(0, 0, 0, 0.1);
 }
 .google-button:active {
-  background-color: #e5e5e5;
+  background-color: #fff;
   box-shadow: none;
   transition-duration: 10ms;
 }
@@ -92,8 +106,6 @@ h4 {
   font-weight: bold;
   font-family: "Roboto", arial, sans-serif;
 }
-
-
 /* ===================
 user page
 ===================   */
