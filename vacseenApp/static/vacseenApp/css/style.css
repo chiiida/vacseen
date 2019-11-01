@@ -1,10 +1,24 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+:root {
+  --pri-clr: #e6eff1;
+  --sec-clr: #85b3bb;
+  --tri-clr: #4e6d7c;
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
+}
+
+.logo {
+  padding-top: 1rem;
+  padding-left: 2rem;
+  font-size: 2.5rem;
+  font-weight: 1000;
+  color: #e6eff1;
 }
 
 div.main {
@@ -17,12 +31,12 @@ div.main {
 }
 
 div.main > div.hero {
-  background: linear-gradient(#4e6d7c, #85b3bb);
+  background: linear-gradient(var(--tri-clr), var(--sec-clr));
   width: 55%;
   text-align: center;
   display: flex;
   height: 100vh;
-  color: #e6eff1;
+  color: var(--pri-clr);
   font-size: 150%;
 }
 
@@ -36,7 +50,7 @@ div.main > div.hero > div.hero-text {
 }
 
 div.main > div.cta {
-  color: #85b3bb;
+  color: var(--sec-clr);
   width: 45%;
   display: flex;
   flex-flow: column nowrap;
@@ -49,10 +63,10 @@ h4 {
 }
 
 .google-button {
-  padding-top: 1200px;;
+  padding-top: 1200px;
   height: 40px;
   border-width: 0;
-  background: #4285F4;
+  background: #4285f4;
   color: #fff;
   border-radius: 5px;
   white-space: nowrap;
@@ -67,7 +81,7 @@ h4 {
   box-shadow: 1px 4px 5px 1px rgba(0, 0, 0, 0.1);
 }
 .google-button:active {
-  background-color: #e5e5e5;
+  background-color: #fff;
   box-shadow: none;
   transition-duration: 10ms;
 }
@@ -93,14 +107,227 @@ h4 {
   font-family: "Roboto", arial, sans-serif;
 }
 
-
 /* ===================
 user page
 ===================   */
+.light-bg {
+  background: var(--pri-clr);
+  padding: 0 5%;
+  color: #fff;
+}
+
+.user-profile {
+  width: 40vw;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  color: var(--sec-clr);
+}
+
+.user-profile-basic{
+  font-weight: bold;
+}
 
 .user-portrait {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   object-fit: cover;
+  margin: 0 5%;
+}
+
+.user-upcoming {
+  padding-top: 5%;
+  text-align: center;
+}
+
+.user-upcoming > h2 {
+  margin: 2%;
+}
+
+.upcoming-box {
+  margin: 5% auto;
+  width: auto;
+  height: 250px;
+  background: var(--tri-clr);
+  overflow: scroll;
+  border-radius: 10px;
+}
+
+.one-check {
+  display: flex;
+  justify-content: space-around;
+  margin: 3% 0;
+}
+
+.user-vaccine-add,
+.user-vaccine-remove {
+  width: 200px;
+  background-color: var(--tri-clr);
+  border-radius: 8px;
+  display: inline-block;
+  cursor: pointer;
+  color: #fff;
+  font-family: Arial;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 15px 32px;
+  text-decoration: none;
+}
+
+.user-vaccines {
+  width: 50%;
+  margin-left: 5%;
+  margin-top: 10%;
+  margin-bottom: auto;;
+}
+
+.collapse {
+  color: var(--tri-clr);
+}
+
+/* ===================
+regis vaccination page
+===================   */
+
+div.vacc-bg {
+  background: linear-gradient(#4e6d7c, #85b3bb);
+  height: 100vh;
+}
+
+div.page-title {
+  padding-top: 3%;
+  text-align: center;
+  color: #e6eff1;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.seperator-line {
+  width: 70%;
+  text-align: center;
+  border: 0.5px solid #e6eff1;
+  margin: 0 auto;
+  margin-top: 2%;
+  margin-bottom: 5%;
+}
+
+div.dot-outer {
+  background: #fff;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  margin: 7px 0px 0px 8px;
+}
+
+div.dot-inner {
+  content: "";
+  position: absolute;
+  background: #4e6d7c;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  top: 50%;
+  left: 50%;
+  margin: -7px 0px 0px -8px;
+}
+
+.add-vac-btn {
+  width: 35px;
+  height: 35px;
+  font-size: 40px;
+  color: #4E6C7C;
+  border: none;
+  padding: 0;
+  text-align: center;
+  border-radius: 50%;
+  margin: 0px 0px 0px 4px;
+}
+.add-vac-btn p {
+  position: relative;
+  top: -12px;
+}
+.add-vac-btn:focus {
+  box-shadow: 0 0 1pt 2pt rgb(190, 207, 216);
+  outline: none;
+}
+
+.vacc-name {
+  display: block;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  background: #BECCD2;
+  color: black;
+  margin-left: 7%;
+  margin-right: 4%;
+  margin-bottom: 2%;
+}
+
+.vacc-dose {
+  margin-right: 4%;
+}
+
+.vacc-date {
+  width: 50px;
+}
+
+.form-control-vacc {
+  display: block;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  background: #BECCD2;
+  color: black;
+  /* margin: 0% 4% 2% 7%; */
+  margin-bottom: 2%;
+}
+
+.terms-box {
+  width: 900px;
+  height: 150px;
+  overflow: auto;
+  background-color: rgb(96, 141, 151);
+  padding: 3%;
+  padding-left: 4%;
+  color: #fff;
+  margin-top: 3%;
+}
+
+.terms-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.terms-sub {
+  font-size: 14px;
+}
+
+.terms-check-text {
+  color: #fff;
+}
+
+.terms-check {
+  padding-top: 30px;
+  padding-left: 5%;
+}
+
+.save-btn {
+  background-color: #4E6C7C;
+  text-align: center;
+  padding: 10px 100px;
+  border: none;
+  border-radius: 15px;
+  display: inline-block;
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  margin-right: 5%;
+  margin-top: 3%;
+}
+.save-btn:focus {
+  box-shadow: 0 0 1pt 2pt rgb(113, 141, 156);
+  outline: none;
 }
