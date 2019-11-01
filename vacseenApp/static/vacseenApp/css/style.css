@@ -130,27 +130,28 @@ div.register {
   width: 70%;
   text-align : center ;
   border : 0.5px solid #e6eff1 ;
-  /* margin : 0 auto ;
-  margin-top : 2% ;
-  margin-bottom : 5% ; */
+  margin-bottom: 20px ;
 }
 
 div.main-reg {
+  
   width: 100vw ;
   height: 100vh;
 }
 
 div.main-reg h1{
+
   text-align: center ;
   color: white;
-  /* margin-bottom: 1em;
-  padding-bottom: 1em ; */
   font-weight:bold;
-  /* border-bottom: 2px solid white ; */
+  padding-top : 10px ;
+  padding-bottom : 10px ;
+
 
 }
 
 div.form-group-reg {
+ 
   padding-left : 15rem ;
   padding-bottom: 1rem; 
   width : 100% ; 
@@ -167,18 +168,17 @@ div.form-group-reg {
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-.avatar {
-  margin-top : 3em ;
-}
-
 .next {
-  text-align: end;
+  text-align: left;
+  color: white ;
+  background: transparent;
+  border : transparent ;
   font-size: 30px ;
-  margin-top : 18rem ;
-  margin-right: 5em;
-  margin-bottom: 2em;
+  padding-left : 500px ;
+  padding-top : 18rem ;
+  padding-right: 2em;
+  
 }
-
 
 .avatar-upload {
   padding-left : 8rem ;
