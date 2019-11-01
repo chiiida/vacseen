@@ -1,17 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
-
-:root {
-  --pri-clr: #e6eff1;
-  --sec-clr: #85b3bb;
-  --tri-clr: #4e6d7c;
-}
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
-  margin-left: 0!important; 
 }
 
 div.main {
@@ -29,7 +22,7 @@ div.main > div.hero {
   text-align: center;
   display: flex;
   height: 100vh;
-  color: var(--pri-clr);
+  color: #e6eff1;
   font-size: 150%;
 }
 
@@ -43,7 +36,7 @@ div.main > div.hero > div.hero-text {
 }
 
 div.main > div.cta {
-  color: var(--sec-clr);
+  color: #85b3bb;
   width: 45%;
   display: flex;
   flex-flow: column nowrap;
@@ -56,10 +49,10 @@ h4 {
 }
 
 .google-button {
-  padding-top: 1200px;
+  padding-top: 1200px;;
   height: 40px;
   border-width: 0;
-  background: #4285f4;
+  background: #4285F4;
   color: #fff;
   border-radius: 5px;
   white-space: nowrap;
@@ -74,7 +67,7 @@ h4 {
   box-shadow: 1px 4px 5px 1px rgba(0, 0, 0, 0.1);
 }
 .google-button:active {
-  background-color: #fff;
+  background-color: #e5e5e5;
   box-shadow: none;
   transition-duration: 10ms;
 }
@@ -111,7 +104,6 @@ user page
   border-radius: 50%;
   object-fit: cover;
 }
-
 /* ===================
 register page
 ===================   */
