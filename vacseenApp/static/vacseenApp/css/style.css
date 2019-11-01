@@ -173,8 +173,10 @@ div.form-group-reg {
 
 .next {
   text-align: end;
-  /* margin-right: 5em;
-  margin-bottom: 2em; */
+  font-size: 30px ;
+  margin-top : 18rem ;
+  margin-right: 5em;
+  margin-bottom: 2em;
 }
 
 
