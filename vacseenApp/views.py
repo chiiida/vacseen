@@ -15,6 +15,11 @@ def registerPage(req):
     context = {'stuff': stuff}
     return render(req, 'vacseenApp/regbasic.html', context)
 
+def register_vacc_page(req):
+    stuff = 'aaaaaaÀ'
+    context = {'stuff': stuff}
+    return render(req, 'vacseenApp/regvaccine.html', context)
+
 def userPage(req):
     stuff = 'aaaaaaÀ'
     context = {'stuff': stuff}
