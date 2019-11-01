@@ -10,17 +10,17 @@ def logout_page(req):
     logout(req)
     return redirect('vacseenApp:index')
 
-def registerPage(req):
+def register_page(req):
     stuff = 'aaaaaaÀ'
     context = {'stuff': stuff}
     return render(req, 'vacseenApp/regbasic.html', context)
+
+def user_page(req):
+    stuff = 'aaaaaaÀ'
+    context = {'stuff': stuff}
+    return render(req, 'vacseenApp/user.html', context)
 
 def register_vacc_page(req):
     stuff = 'aaaaaaÀ'
     context = {'stuff': stuff}
     return render(req, 'vacseenApp/regvaccine.html', context)
-
-def userPage(req):
-    stuff = 'aaaaaaÀ'
-    context = {'stuff': stuff}
-    return render(req, 'vacseenApp/user.html', context)
