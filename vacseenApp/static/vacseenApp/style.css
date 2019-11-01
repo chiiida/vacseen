@@ -175,6 +175,10 @@ div.dot-inner {
   position: relative;
   top: -12px;
 }
+.add-vac-btn:focus {
+  box-shadow: 0 0 1pt 2pt rgb(190, 207, 216);
+  outline: none;
+}
 
 .vacc-name {
   margin-left: 7%;
@@ -189,7 +193,7 @@ div.dot-inner {
   width: 50px;
 }
 
-.form-control {
+.form-control-vacc {
   height: 40px;
   border: 0px solid #BECCD2;
   border-radius: 10px;
@@ -223,7 +227,7 @@ div.dot-inner {
 }
 
 .terms-check {
-  padding-top: 10px;
+  padding-top: 30px;
   padding-left: 5%;
 }
 
@@ -239,4 +243,8 @@ div.dot-inner {
   font-weight: bold;
   margin-right: 5%;
   margin-top: 3%;
+}
+.save-btn:focus {
+  box-shadow: 0 0 1pt 2pt rgb(113, 141, 156);
+  outline: none;
 }

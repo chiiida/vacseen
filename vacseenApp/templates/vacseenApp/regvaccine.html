@@ -1,12 +1,12 @@
 {% extends 'vacseenApp/base.html' %}
 
 {% block content %}
-<div class="vacc-bg">
+<div class="vacc-bg m-auto">
     <header>
         <div class="logo">VACSEEN</div>
     </header>
 
-    <div class="col-lg-10 m-auto">
+    <div class="col-lg-8 m-auto">
         <div class="page-title">Vaccination</div>
         <hr class="seperator-line" />
 
@@ -14,36 +14,36 @@
             <div class="dot-outer">
                 <div class="dot-inner"></div>
             </div>
-            <input class="col-lg-6 form-control vacc-name" placeholder="Vaccine name" />
-            <select class="col-lg-2 form-control vacc-dose">
+            <input class="col-lg-6 form-control form-control-vacc vacc-name" placeholder="Vaccine name" />
+            <select class="col-lg-2 form-control form-control-vacc vacc-dose">
                 <option selected>Dose 1</option>
                 <option>Dose 2</option>
             </select>
-            <input class="col-lg-2 form-control vacc-date" type="date" max="3000-12-31" placeholder="Expired" />
+            <input class="col-lg-2 form-control form-control-vacc vacc-date" type="date" max="3000-12-31" placeholder="Expired" />
         </div>
 
         <div class="row m-auto">
             <div class="dot-outer">
                 <div class="dot-inner"></div>
             </div>
-            <input class="col-lg-6 form-control vacc-name" placeholder="Vaccine name" />
-            <select class="col-lg-2 form-control vacc-dose">
+            <input class="col-lg-6 form-control form-control-vacc vacc-name" placeholder="Vaccine name" />
+            <select class="col-lg-2 form-control form-control-vacc vacc-dose">
                 <option selected>Dose 1</option>
                 <option>Dose 2</option>
             </select>
-            <input class="col-lg-2 form-control vacc-date" type="date" max="3000-12-31" placeholder="Expired" />
+            <input class="col-lg-2 form-control form-control-vacc vacc-date" type="date" max="3000-12-31" placeholder="Expired" />
         </div>
 
         <div class="row m-auto">
             <div class="dot-outer">
                 <div class="dot-inner"></div>
             </div>
-            <input class="col-lg-6 form-control vacc-name" placeholder="Vaccine name" />
-            <select class="col-lg-2 form-control vacc-dose">
+            <input class="col-lg-6 form-control form-control-vacc vacc-name" placeholder="Vaccine name" />
+            <select class="col-lg-2 form-control form-control-vacc vacc-dose">
                 <option selected>Dose 1</option>
                 <option>Dose 2</option>
             </select>
-            <input class="col-lg-2 form-control vacc-date" type="date" max="3000-12-31" placeholder="Expired" />
+            <input class="col-lg-2 form-control form-control-vacc vacc-date" type="date" max="3000-12-31" placeholder="Expired" />
         </div>
 
         <div class="row m-auto"><button class="add-vac-btn">
@@ -67,7 +67,7 @@
             </label>
         </div>
 
-        <button type="button" class="save-btn float-right">Save</button>
+        <button type="button" class="save-btn float-right" onclick="">Save</button>
     </div>
 </div>
 {% endblock %}
