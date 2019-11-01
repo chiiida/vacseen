@@ -181,8 +181,15 @@ div.dot-inner {
 }
 
 .vacc-name {
+  display: block;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  background: #BECCD2;
+  color: black;
   margin-left: 7%;
   margin-right: 4%;
+  margin-bottom: 2%;
 }
 
 .vacc-dose {
@@ -194,11 +201,13 @@ div.dot-inner {
 }
 
 .form-control-vacc {
+  display: block;
   height: 40px;
-  border: 0px solid #BECCD2;
+  border: none;
   border-radius: 10px;
   background: #BECCD2;
   color: black;
+  /* margin: 0% 4% 2% 7%; */
   margin-bottom: 2%;
 }
 
