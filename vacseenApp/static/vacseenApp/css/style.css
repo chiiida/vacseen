@@ -107,9 +107,9 @@ user page
   object-fit: cover;
 }
 
-
-/* register page */
-
+/* ===================
+register page
+===================   */
 div.register {
   background: linear-gradient(#4e6d7c, #85b3bb);
   color : white ;
@@ -125,6 +125,16 @@ div.register {
 
 }
 
+.separator-line {
+  padding-left : 2rem;
+  width: 70%;
+  text-align : center ;
+  border : 0.5px solid #e6eff1 ;
+  /* margin : 0 auto ;
+  margin-top : 2% ;
+  margin-bottom : 5% ; */
+}
+
 div.main-reg {
   width: 100vw ;
   height: 100vh;
@@ -133,21 +143,26 @@ div.main-reg {
 div.main-reg h1{
   text-align: center ;
   color: white;
-  margin-bottom: 1em;
-  padding-bottom: 1em ;
+  /* margin-bottom: 1em;
+  padding-bottom: 1em ; */
   font-weight:bold;
-  /* border-bottom: 1px solid white ; */
+  /* border-bottom: 2px solid white ; */
 
 }
 
-div.form-group {
+div.form-group-reg {
   padding-left : 15rem ;
   padding-bottom: 1rem; 
   width : 100% ; 
 }
 
-.form-control {
-  border-radius: .8rem ;
+.form-control-reg {
+  display: block ;
+  padding : 10px ;
+  width : 100% ;
+  height: 40px;
+  border : 0px ;
+  border-radius: 10px ;
   border-width: 0.05em ;
   background-color: rgba(255, 255, 255, 0.6);
 }
@@ -164,14 +179,16 @@ div.form-group {
 
 
 .avatar-upload {
-  padding-left : 15rem ;
+  padding-left : 8rem ;
   position: relative;
   /* max-width: 205px; */
   
 }
+
 .avatar-edit {
     position: absolute;
-    right: 12px;
+    padding-left: 11rem;
+    /* right: 12px; */
     z-index: 1;
     top: 10px;
 }
@@ -180,8 +197,8 @@ div.form-group {
 }
 #imageUploadlabel {
     display: inline-block;
-    width: 34px;
-    height: 34px;
+    width: 3rem;
+    height: 3rem;
     margin-bottom: 0;
     border-radius: 100%;
     background: #FFFFFF;
@@ -192,10 +209,12 @@ div.form-group {
     transition: all .2s ease-in-out;
 }
 #imageUploadlabel:hover {
+
     background: #f1f1f1;
     border-color: #d6d6d6;
 }
 #imageUploadlabel:after {
+    padding-left: 11rem;
     content: "\f040";
     font-family: 'FontAwesome';
     color: #757575;
@@ -208,8 +227,8 @@ div.form-group {
 }
 
 .avatar-preview {
-    width: 192px;
-    height: 192px;
+    width: 15rem;
+    height: 15rem;
     position: relative;
     border-radius: 100%;
     border: 6px solid #F8F8F8;
