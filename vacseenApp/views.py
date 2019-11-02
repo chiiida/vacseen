@@ -54,7 +54,7 @@ def gmail_authenticate(request):
         print('access_token = ', credential.access_token) 
         status = True
   
-        return render(request, 'vacseenApp/index.html', {'status': status})
+        return render(request, 'vacseenApp/user.html', {'status': status})
 
 def auth_return(request): 
     get_state = bytes(request.GET.get('state'), 'utf8') 
