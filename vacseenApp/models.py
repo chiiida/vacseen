@@ -1,20 +1,19 @@
 import datetime
-
 from django.db import models
+from django.contrib import admin 
+from django.contrib.auth.models import User
+from oauth2client.contrib.django_util.models import CredentialsField
 from django.utils import timezone
 
-class User(models.Model):
-    user_name = models.CharField(max_length=30)
-    user_surname = models.CharField(max_length=30)
-    user_gender = models.BooleanField(default=True)
-    user_tel = models.CharField(max_length=10)
-    user_birthday = models.DateField()
-    user_contact = models.CharField(max_length=30, default='')
-    user_emer_contact = models.CharField(max_length=30)
-    user_vaccines = []
-
-    def __str__(self):
-        return self.user_name + ' ' + self.user_surname 
+class CredentialsModel(models.Model): 
+    id = models.ForeignKey(User, primary_key = True, on_delete = models.CASCADE) 
+    credential = CredentialsField() 
+    task = models.CharField(max_length = 80, null = True) 
+    updated_time = models.CharField(max_length = 80, null = True) 
+  
+  
+class CredentialsAdmin(admin.ModelAdmin): 
+    pass
 
 class Vaccine(models.Model):
     vaccine_name = models.CharField(max_length=100)

@@ -108,6 +108,123 @@ h4 {
 }
 
 /* ===================
+register page
+===================   */
+div.register {
+  background: linear-gradient(#4e6d7c, #85b3bb);
+  color : white ;
+  margin : 0px ;
+  
+}
+
+div.main-reg {
+  width: 100vw ;
+  height: 100vh;
+}
+
+div.main-reg h1{
+  text-align: center ;
+  color: white;
+  font-weight:bold;
+  padding-top : 10px ;
+  padding-bottom : 10px ;
+}
+
+div.form-group-reg {
+  padding-left : 15rem ;
+  padding-bottom: 1rem; 
+  width : 100% ; 
+}
+
+.form-control-reg {
+  display: block ;
+  padding : 10px ;
+  width : 100% ;
+  height: 40px;
+  border : 0px ;
+  border-radius: 10px ;
+  border-width: 0.05em ;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.next {
+  text-align: left;
+  color: white ;
+  background: transparent;
+  border : transparent ;
+  font-size: 30px ;
+  padding-left : 500px ;
+  padding-top : 18rem ;
+  padding-right: 2em;
+  
+}
+
+.avatar-upload {
+  padding-left : 8rem ;
+  position: relative;
+  /* max-width: 205px; */
+  
+}
+
+.avatar-edit {
+  position: absolute;
+  padding-left: 11rem;
+  /* right: 12px; */
+  z-index: 1;
+  top: 10px;
+}
+#imageUpload{
+  display: none;
+}
+#imageUploadlabel {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #FFFFFF;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all .2s ease-in-out;
+}
+#imageUploadlabel:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
+#imageUploadlabel:after {
+  padding-left: 11rem;
+  content: "\f040";
+  font-family: 'FontAwesome';
+  color: #757575;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+}
+
+.avatar-preview {
+  width: 15rem;
+  height: 15rem;
+  position: relative;
+  border-radius: 100%;
+  border: 6px solid #F8F8F8;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+#imagePreview{
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+
+/* ===================
 user page
 ===================   */
 .light-bg {
@@ -193,7 +310,7 @@ regis vaccination page
 
 div.vacc-bg {
   background: linear-gradient(#4e6d7c, #85b3bb);
-  height: 100vh;
+  height: 100%;
 }
 
 div.page-title {
