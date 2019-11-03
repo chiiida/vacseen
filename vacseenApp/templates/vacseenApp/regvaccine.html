@@ -3,7 +3,7 @@
 {% block content %}
 <div class="vacc-bg m-auto">
     <header>
-        <div class="logo">VACSEEN</div>
+        <div class="logo"><a herf="{% url 'vacseenApp:user' %}">VACSEEN</a></div>
     </header>
 
     <div class="col-lg-8 m-auto">
@@ -14,7 +14,7 @@
             <div class="dot-outer">
                 <div class="dot-inner"></div>
             </div>
-        <input class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" />
+            <input class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" id="vaccname1" />
             <select class="col-lg-2 form-control-vacc vacc-dose">
                 <option selected>Dose 1</option>
                 <option>Dose 2</option>
@@ -26,7 +26,7 @@
             <div class="dot-outer">
                 <div class="dot-inner"></div>
             </div>
-            <input class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" />
+            <input class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" id="vaccname2" />
             <select class="col-lg-2 form-control-vacc vacc-dose">
                 <option selected>Dose 1</option>
                 <option>Dose 2</option>
@@ -38,7 +38,7 @@
             <div class="dot-outer">
                 <div class="dot-inner"></div>
             </div>
-            <input class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" />
+            <input class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" id="vaccname3" />
             <select class="col-lg-2 form-control-vacc vacc-dose">
                 <option selected>Dose 1</option>
                 <option>Dose 2</option>
@@ -46,9 +46,7 @@
             <input class="col-lg-2 form-control-vacc vacc-date" type="date" max="3000-12-31" placeholder="Expired" />
         </div>
 
-        <div class="row m-auto"><button class="add-vac-btn">
-                <p>+</p>
-            </button></div>
+        <div class="row m-auto"><button class="add-vac-btn"><p>+</p></button></div>
 
         <div class="terms-box mx-auto">
             <h5 class="terms-title">Terms and Conditions</h5>

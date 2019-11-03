@@ -20,6 +20,9 @@
   font-weight: 1000;
   color: #e6eff1;
 }
+.logo a {
+  text-decoration: none;
+}
 
 div.main {
   display: flex;

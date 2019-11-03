@@ -6,11 +6,10 @@ from oauth2client.contrib.django_util.models import CredentialsField
 from django.utils import timezone
 
 class CredentialsModel(models.Model): 
-    id = models.ForeignKey(User, primary_key = True, on_delete = models.CASCADE) 
+    id = models.ForeignKey(User, primary_key = True, unique=True, on_delete = models.CASCADE) 
     credential = CredentialsField() 
     task = models.CharField(max_length = 80, null = True) 
     updated_time = models.CharField(max_length = 80, null = True) 
-  
   
 class CredentialsAdmin(admin.ModelAdmin): 
     pass

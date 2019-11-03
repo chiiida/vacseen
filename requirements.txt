@@ -5,3 +5,4 @@ social-auth-app-django >= 3.1.0
 oauth2client >= 4.1.2
 jsonpickle >= 0.9.6
 django-oauth-toolkit >= 1.2.0
+clear_cache >= 0.3

@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'oauth2_provider',
+    'clear_cache',
 ]
 
 MIDDLEWARE = [

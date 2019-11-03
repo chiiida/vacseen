@@ -19,7 +19,10 @@ FLOW = flow_from_clientsecrets(
 def index_page(request):
     return render(request, 'vacseenApp/index.html')
 
-def logout_page(request):
+def logout_user(request):
+    """
+    Function to logout user and redirect to index page. 
+    """
     logout(request)
     return redirect('vacseenApp:index')
 
@@ -39,8 +42,9 @@ def register_vacc_page(request):
     return render(request, 'vacseenApp/regvaccine.html', context)
 
 def gmail_authenticate(request): 
-    storage = DjangoORMStorage(CredentialsModel, 'id', request.user, 'credential') 
+    storage = DjangoORMStorage(CredentialsModel, 'id', request.user.id, 'credential') 
     credential = storage.get() 
+    login_user(request)
   
     if credential is None or credential.invalid: 
         FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY, 
@@ -53,7 +57,6 @@ def gmail_authenticate(request):
         service = build('gmail', 'v1', http = http) 
         print('access_token = ', credential.access_token) 
         status = True
-  
         return render(request, 'vacseenApp/user.html', {'status': status})
 
 def auth_return(request): 
@@ -63,19 +66,19 @@ def auth_return(request):
         return HttpResponseBadRequest() 
   
     credential = FLOW.step2_exchange(request.GET.get('code')) 
-    storage = DjangoORMStorage(CredentialsModel, 'id', request.user, 'credential') 
+    storage = DjangoORMStorage(CredentialsModel, 'id', request.user.id, 'credential') 
     storage.put(credential) 
   
     print("access_token: % s" % credential.access_token) 
     return HttpResponseRedirect("/")
 
-def home(request): 
+def login_user(request): 
     status = True
-  
+
     if not request.user.is_authenticated: 
-        return HttpResponseRedirect('admin') 
+        return render(request, 'vacseenApp/regbasic.html')
   
-    storage = DjangoORMStorage(CredentialsModel, 'id', request.user, 'credential') 
+    storage = DjangoORMStorage(CredentialsModel, 'id', request.user.id, 'credential') 
     credential = storage.get() 
   
     try: 
@@ -87,4 +90,4 @@ def home(request):
         status = False
         print('Not Found') 
   
-    return render(request, 'vacseenApp/index.html', {'status': status})
+    return render(request, 'vacseenApp/user.html', {'status': status})
