@@ -1,4 +1,4 @@
-"""vacseensite URL Configuration
+"""demo_project URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('vacseenApp.urls')),
+    path('', include('pages.urls')),  # new
+    path('users/', include('users.urls')),  # new
+    path('accounts/', include('allauth.urls')), # new
     path('admin/', admin.site.urls),
-    path('o/', include('social_django.urls', namespace='social')),
 ]
