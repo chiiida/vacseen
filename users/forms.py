@@ -3,8 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
 
 GENDER_CHOICES = [
-    ('M', 'Male'),
-    ('F', 'Female')
+    ('Male', 'Male'),
+    ('Female', 'Female')
 ]
 
 class CustomUserCreationForm(UserCreationForm):

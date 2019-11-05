@@ -14,16 +14,16 @@
         <hr class="separator-line">
         </hr>
         <div class="col-lg-6" id="contel-col">
-          <form method="POST">
-              {% csrf_token %}
-              {% for field in form %}
-                <div class="form-group-reg">
-                  {{ field.label_tag }}
-                  {{ field }} <br />
-                </div>
-              {% endfor %}
-              <button type="submit">Sign up</button>
-            </form>
+          <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+              <div class="form-group-reg">
+                {{ field.label_tag }}
+                {{ field }} <br />
+              </div>
+            {% endfor %}
+            <button type="submit" formmethod="post">Sign up</button>
+          </form>
         </div>
         <div class="col-lg-6" id="profile-col">
           <div class="avatar-upload">
