@@ -1,17 +1,17 @@
 Vacseen
 ===
 
-Try first
-```
-$ pip install psycopg2
-or 
-$ pip install psycopg2-binary
-```
+Team Members
+---
 
-If it does not work then create Virtual Python Environment and install dependencies
-```
-$ virtualenv env
-$ source ./env/bin/activate
-$ pip install -r requirements.txt
-```
+| Name                      | Roles                    | GitHub                                        |
+|---------------------------|--------------------------|-----------------------------------------------|
+| Chanachida Fuachai        | Developer                | [llleyelll](https://github.com/llleyelll)     |
+| Sirikorn Songsaengthong   | Developer                | [Sirikonss](https://github.com/Sirikonss)     |
+| Sivanat Subpaisarn        | Developer                | [tiemfah](https://github.com/tiemfah)         |
+
+Documents
+---
+- Task Board – [Trello](https://trello.com/b/o1FQrdfy)
+- Issue Tracker – [Github Issues](https://github.com/llleyelll/vacseen/issues)
 
