@@ -129,5 +129,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-LOGIN_REDIRECT_URL = 'home' # new
+LOGIN_REDIRECT_URL = 'loginhandler' # new
 LOGOUT_REDIRECT_URL = 'home' # new
