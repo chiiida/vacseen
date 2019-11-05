@@ -13,7 +13,7 @@ class CustomUserCreationForm(UserCreationForm):
     contact = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control-reg', 'placeholder': 'Enter Phone Number'}))
     emergency_contact = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control-reg', 'placeholder': 'Enter Phone Number'}))
     gender = forms.CharField(widget=forms.Select(choices=GENDER_CHOICES))
-    birthdate = forms.DateField(widget=forms.DateInput())
+    birthdate = forms.DateField(widget=forms.SelectDateWidget)
 
     class Meta:
         model = CustomUser
