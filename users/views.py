@@ -9,15 +9,15 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 # Create your views here.
 
 
-class SignUpView(CreateView):
-    form_class = CustomUserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'signup.html'
+# class SignUpView(CreateView):
+#     form_class = CustomUserCreationForm
+#     success_url = reverse_lazy('login')
+#     template_name = 'signup.html'
 
 
 def signup(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = CustomUserChangeForm(request.POST)
         user = CustomUser.objects.get(pk=request.user.pk)
         if form.is_valid():
             first_name = form.cleaned_data.get('first_name')
@@ -27,18 +27,11 @@ def signup(request):
             emergency_contact = form.cleaned_data.get('emergency_contact')
             gender = form.cleaned_data.get('gender')
             birthdate = form.cleaned_data.get('birthdate')
-<<<<<<< HEAD
-            user.update_profile(username='hana', email='hana@gmail.com', first_name=first_name, last_name=last_name,
+            user.update_profile(username=user.email, first_name=first_name, last_name=last_name,
                                 contact=contact, emergency_contact=emergency_contact, gender=gender, birthdate=birthdate)
-            # user.save()
-            # print('bahhhhhhhhhhhhhhhhh: ' + user.first_name)
-=======
-            
-            user = CustomUser(username='hana', email='hana@gmail.com', first_name=first_name, last_name=last_name, contact=contact, emergency_contact=emergency_contact, gender=gender, birthdate=birthdate)
             user.save()
-            # login(request, user)
->>>>>>> 4152a99ccd55f2cf68fdceb0091da4c4d8657556
-            return HttpResponseRedirect('home')
+            # print('bahhhhhhhhhhhhhhhhh: ' + user.first_name)
+            return render(request, 'home.html', {'user': user})
     else:
         form = CustomUserCreationForm()
         return render(request, 'registration/signup.html', {'form': form})
@@ -47,12 +40,9 @@ def signup(request):
 def vaccination_signup(request):
     return render(request, 'registration/vaccination.html')
 
+
 def user_view(request, user_id):
     user = CustomUser.objects.get(id=user_id)
     print(dir(user))
-    context = {'user' : user}
-<<<<<<< HEAD
-    return render(request, 'test.html', context) 
-=======
+    context = {'user': user}
     return render(request, 'test.html', context)
->>>>>>> 4152a99ccd55f2cf68fdceb0091da4c4d8657556
