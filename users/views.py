@@ -27,10 +27,17 @@ def signup(request):
             emergency_contact = form.cleaned_data.get('emergency_contact')
             gender = form.cleaned_data.get('gender')
             birthdate = form.cleaned_data.get('birthdate')
+<<<<<<< HEAD
             user.update_profile(username='hana', email='hana@gmail.com', first_name=first_name, last_name=last_name,
                                 contact=contact, emergency_contact=emergency_contact, gender=gender, birthdate=birthdate)
             # user.save()
             # print('bahhhhhhhhhhhhhhhhh: ' + user.first_name)
+=======
+            
+            user = CustomUser(username='hana', email='hana@gmail.com', first_name=first_name, last_name=last_name, contact=contact, emergency_contact=emergency_contact, gender=gender, birthdate=birthdate)
+            user.save()
+            # login(request, user)
+>>>>>>> 4152a99ccd55f2cf68fdceb0091da4c4d8657556
             return HttpResponseRedirect('home')
     else:
         form = CustomUserCreationForm()
@@ -44,4 +51,8 @@ def user_view(request, user_id):
     user = CustomUser.objects.get(id=user_id)
     print(dir(user))
     context = {'user' : user}
+<<<<<<< HEAD
     return render(request, 'test.html', context) 
+=======
+    return render(request, 'test.html', context)
+>>>>>>> 4152a99ccd55f2cf68fdceb0091da4c4d8657556
