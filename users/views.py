@@ -25,6 +25,7 @@ def signup(request):
             emergency_contact = form.cleaned_data.get('emergency_contact')
             gender = form.cleaned_data.get('gender')
             birthdate = form.cleaned_data.get('birthdate')
+            
             user = CustomUser(username='hana', email='hana@gmail.com', first_name=first_name, last_name=last_name, contact=contact, emergency_contact=emergency_contact, gender=gender, birthdate=birthdate)
             user.save()
             # login(request, user)
@@ -35,3 +36,9 @@ def signup(request):
 
 def vaccination_signup(request):
     return render(request, 'registration/vaccination.html')
+
+def user_view(request, user_id):
+    user = CustomUser.objects.get(id=user_id)
+    print(dir(user))
+    context = {'user' : user}
+    return render(request, 'test.html', context)
