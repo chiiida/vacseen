@@ -15,7 +15,9 @@ class SignUpView(CreateView):
 
 def signup(request):
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
+        print(request.user)
+        # user = CustomUser.objects.filter(email=request.user)
         if form.is_valid():
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
