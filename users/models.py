@@ -14,6 +14,6 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.email
 
-    def update_profile(self, *args, **kwargs):
+    def update_profile(self, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
