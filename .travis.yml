@@ -1,0 +1,15 @@
+language: python
+  
+python: "3.6"
+
+git:
+  depth: 1
+  
+install:
+  - pip3 install pipenv
+  - pipenv install
+  
+# script to run tests. Script can have many commands, one per line.
+script:
+  - pipenv shell
+  - python manage.py test users/tests
