@@ -8,8 +8,9 @@ class CustomUser(AbstractUser):
     last_name = models.CharField(max_length=30)
     contact = models.CharField(max_length=30, blank=True, null=True)
     emergency_contact = models.CharField(max_length=30, blank=True, null=True)
-    gender = models.CharField(max_length=1)
+    gender = models.CharField(max_length=6)
     birthdate = models.DateField(blank=True, null=True)
+    age = models.IntegerField(default=0)
 
     def __str__(self):
         return self.email

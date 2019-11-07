@@ -1,12 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
+import datetime
 
 GENDER_CHOICES = [
     ('Male', 'Male'),
     ('Female', 'Female')
 ]
-
 
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(label='First name', widget=forms.TextInput(
@@ -48,4 +48,5 @@ class FormThatWork(forms.Form):
     emergency_contact = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control-reg', 'placeholder': 'Enter Phone Number'}))
     gender = forms.CharField(widget=forms.Select(choices=GENDER_CHOICES))
-    birthdate = forms.DateField(widget=forms.SelectDateWidget)
+    birthdate = forms.DateField(widget=forms.SelectDateWidget(
+        years=range(1940, 2019)), initial=datetime.date.today)

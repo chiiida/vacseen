@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect
 
 from .models import CustomUser
 from .forms import  FormThatWork as MekInwRegisForm
+import datetime
 # Create your views here.
 
 
@@ -19,6 +20,7 @@ def signup(request):
     if request.method == 'POST':
         form = MekInwRegisForm(request.POST)
         user = CustomUser.objects.get(pk=request.user.pk)
+        now = datetime.datetime.now()
         if form.is_valid():
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
@@ -26,13 +28,15 @@ def signup(request):
             emergency_contact = form.cleaned_data.get('emergency_contact')
             gender = form.cleaned_data.get('gender')
             birthdate = form.cleaned_data.get('birthdate')
-
-            user.update_profile(first_name=first_name,
+            age = abs(now.year - birthdate.year)
+            user.update_profile(username=user.email,
+                                first_name=first_name,
                                 last_name=last_name,
                                 contact=contact,
                                 emergency_contact=emergency_contact,
                                 gender=gender,
-                                birthdate=birthdate)
+                                birthdate=birthdate,
+                                age=age)
             user.save()
             # might change to redirect to vaccine page later.
             return  HttpResponseRedirect(reverse('users:user', args=[request.user.pk]))
@@ -48,4 +52,4 @@ def vaccination_signup(request):
 def user_view(request, user_id):
     user = CustomUser.objects.get(id=user_id)
     context = {'user': user}
-    return render(request, 'test.html', context)
+    return render(request, 'user.html', context)
