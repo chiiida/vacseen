@@ -13,3 +13,4 @@ function readURL(input) {
 $("#imageUpload").change(function() {
     readURL(this);
 });
+

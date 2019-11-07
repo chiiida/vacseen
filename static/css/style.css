@@ -4,6 +4,8 @@
   --pri-clr: #e6eff1;
   --sec-clr: #85b3bb;
   --tri-clr: #4e6d7c;
+
+  --status : none !important;
 }
 
 * {
@@ -16,13 +18,14 @@
 .nav-top {
   margin: 0;
 }
-ul {
+
+ul{
   list-style-type: none;
   margin: 0;
   margin-bottom : 0 ;
   padding: 0;
   overflow: hidden;
-  background-color:var(--tri-clr);
+  background-color: var(--tri-clr);
 }
 
 li {
@@ -148,6 +151,29 @@ h4 {
   font-weight: bold;
   font-family: "Roboto", arial, sans-serif;
 }
+
+.login{
+  padding : 2rem ;
+  text-align: center;
+  font-size : 20px ;
+}
+
+.login-button {
+  margin : 2rem ;
+  color: white;
+  display: block;
+  padding : 0.8rem ;
+  padding-left: 2rem ;
+  padding-right: 2rem ;
+  border-radius: 15px;
+  text-align: center;
+  background:var(--sec-clr);
+}
+.login-button a{
+  color: white;
+  font-size : 14px ;
+}
+
 
 /* ===================
 register page
