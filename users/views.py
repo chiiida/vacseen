@@ -1,19 +1,11 @@
-from django.views.generic.edit import CreateView
-from django.urls import reverse_lazy
-from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect, reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout
+from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
 
 from .models import CustomUser
-from .forms import  FormThatWork as MekInwRegisForm
+from .forms import FormThatWork as MekInwRegisForm
 import datetime
-# Create your views here.
-
-
-class SignUpView(CreateView):
-    form_class = MekInwRegisForm
-    success_url = reverse_lazy('login')
-    template_name = 'signup.html'
 
 
 def signup(request):
@@ -38,8 +30,7 @@ def signup(request):
                                 birthdate=birthdate,
                                 age=age)
             user.save()
-            # might change to redirect to vaccine page later.
-            return  HttpResponseRedirect(reverse('users:user', args=[request.user.pk]))
+            return HttpResponseRedirect(reverse('users:profile'))
     else:
         form = MekInwRegisForm()
         return render(request, 'registration/signup.html', {'form': form})
@@ -49,7 +40,8 @@ def vaccination_signup(request):
     return render(request, 'registration/vaccination.html')
 
 
-def user_view(request, user_id):
-    user = CustomUser.objects.get(id=user_id)
+@login_required
+def user_view(request):
+    user = CustomUser.objects.get(id=request.user.id)
     context = {'user': user}
     return render(request, 'user.html', context)
