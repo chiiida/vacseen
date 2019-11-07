@@ -1,5 +1,9 @@
 Vacseen
 ===
+
+[![Build Status](https://travis-ci.com/llleyelll/vacseen.svg?token=Vf6PJtHdqGqqThMwgTem&branch=user-auth)](https://travis-ci.com/llleyelll/vacseen)
+
+
 Prerequisite
 ---
 - Python 3.7+
