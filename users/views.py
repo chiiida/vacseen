@@ -4,15 +4,18 @@ from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
 
 from .models import CustomUser
-from .forms import FormThatWork as MekInwRegisForm
-import datetime
+from .forms import CustomUserForm
+from datetime import date
 
+def calculate_age(born):
+    today = date.today()
+    month = abs(today.month - born.month)/10
+    return (today.year - born.year)+month
 
 def signup(request):
     if request.method == 'POST':
-        form = MekInwRegisForm(request.POST)
+        form = CustomUserForm(request.POST)
         user = CustomUser.objects.get(pk=request.user.pk)
-        now = datetime.datetime.now()
         if form.is_valid():
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
@@ -20,7 +23,7 @@ def signup(request):
             emergency_contact = form.cleaned_data.get('emergency_contact')
             gender = form.cleaned_data.get('gender')
             birthdate = form.cleaned_data.get('birthdate')
-            age = abs(now.year - birthdate.year)
+            age = calculate_age(birthdate)
             user.update_profile(username=user.email,
                                 first_name=first_name,
                                 last_name=last_name,
@@ -32,7 +35,7 @@ def signup(request):
             user.save()
             return HttpResponseRedirect(reverse('users:profile'))
     else:
-        form = MekInwRegisForm()
+        form = CustomUserForm()
         return render(request, 'registration/signup.html', {'form': form})
 
 

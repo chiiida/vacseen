@@ -10,9 +10,10 @@
         <div class="user-profile">
             <img src="https://source.unsplash.com/random" alt="" class="user-portrait">
             <div class="user-profile-basic">
-                
                 <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-                <h2>{{ user.gender }}, {{ user.age }} years</h2>
+                <h2>{{ user.gender }}, {{ user.age }}
+                {% if user.age > 0.11 %} years {% else %} months {% endif %}
+                </h2>
                 <a href="#">edit profile</a>
             </div>
         </div>

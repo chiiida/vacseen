@@ -38,7 +38,7 @@ class CustomUserChangeForm(UserChangeForm):
                   'emergency_contact', 'gender', 'birthdate',)
 
 
-class FormThatWork(forms.Form):
+class CustomUserForm(forms.Form):
     first_name = forms.CharField(label='First name', widget=forms.TextInput(
         attrs={'class': 'form-control-reg', 'placeholder': 'Enter First Name'}))
     last_name = forms.CharField(label='Last name', widget=forms.TextInput(
@@ -50,3 +50,8 @@ class FormThatWork(forms.Form):
     gender = forms.CharField(widget=forms.Select(choices=GENDER_CHOICES))
     birthdate = forms.DateField(widget=forms.SelectDateWidget(
         years=range(1940, 2019)), initial=datetime.date.today)
+
+class VaccinationForm(forms.Form):
+    vaccine_name = forms.CharField(label='Vaccine name', widget=forms.TextInput(
+        attrs={'class': 'col-lg-6 form-control-vacc vacc-name', 'placeholder': 'Vaccine name'}))
+    dose = forms.CharField(widget=forms.Select(choices=GENDER_CHOICES))

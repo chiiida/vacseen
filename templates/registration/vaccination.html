@@ -10,14 +10,21 @@
     <div class="col-lg-8 m-auto">
         <div class="page-title">Vaccination</div>
         <hr class="seperator-line" />
-        
+
         <div class="vaccgroup">
             <div class="row m-auto">
                 <div class="dot-outer">
                     <div class="dot-inner"></div>
                 </div>
                 <form method="post" class="col-lg-12">
-                    <input class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" />
+                    <input class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" list="vaccine"/>
+                    <datalist class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" id="vaccine">
+                        <option value="BCG">
+                        <option value="HB1">
+                        <option value="HB2">
+                        <option value="Rotavirus">
+                        <option value="Haemophilus influenzae type b">
+                    </datalist>
                     <select class="col-lg-2 form-control-vacc vacc-dose">
                         <option selected>Dose 1</option>
                         <option>Dose 2</option>

@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',  # new
     'users', # new
     'pages', # new
+    'vaccine',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser' # new
