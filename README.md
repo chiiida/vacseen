@@ -30,4 +30,3 @@ Documents
 - Mockup - [Figma](https://www.figma.com/file/ltBOLL9zFanE05sdb7XHlv/Vacseen)
 - Task Board – [Trello](https://trello.com/b/o1FQrdfy)
 - Issue Tracker – [Github Issues](https://github.com/llleyelll/vacseen/issues)
-
