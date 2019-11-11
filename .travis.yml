@@ -1,0 +1,13 @@
+language: python
+  
+python: "3.6"
+
+git:
+  depth: 1
+  
+install:
+  - pip install pipenv
+  - pipenv install
+  
+script:
+  - python manage.py test users/tests
