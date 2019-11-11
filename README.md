@@ -1,7 +1,7 @@
 Vacseen
 ===
 
-[![Build Status](https://travis-ci.com/llleyelll/vacseen.svg?token=Vf6PJtHdqGqqThMwgTem&branch=user-auth)](https://travis-ci.com/llleyelll/vacseen)
+[![Build Status](https://travis-ci.com/llleyelll/vacseen.svg?token=Vf6PJtHdqGqqThMwgTem&branch=master)](https://travis-ci.com/llleyelll/vacseen)
 
 
 Prerequisite
