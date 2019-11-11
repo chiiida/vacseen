@@ -30,4 +30,4 @@ Documents
 - Mockup - [Figma](https://www.figma.com/file/ltBOLL9zFanE05sdb7XHlv/Vacseen)
 - Task Board – [Trello](https://trello.com/b/o1FQrdfy)
 - Issue Tracker – [Github Issues](https://github.com/llleyelll/vacseen/issues)
-- Iterations Plan – [Google Doc](https://docs.google.com/document/d/17WCf1Z5uMvR2h9EOO3qqsbqW-7lzxDNflHzLacBrkoA/edit?usp=sharing)
+- Iteration Plan – [Google Doc](https://docs.google.com/document/d/17WCf1Z5uMvR2h9EOO3qqsbqW-7lzxDNflHzLacBrkoA/edit?usp=sharing)
