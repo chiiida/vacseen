@@ -3,8 +3,10 @@ from django.contrib.auth import login, logout
 from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
 
+from django import forms
 from .models import CustomUser
-from .forms import CustomUserForm
+from vaccine.models import VaccineModel, Vaccine, DoseModel, Dose
+from .forms import CustomUserForm, VaccinationForm
 from datetime import date
 
 def calculate_age(born):
@@ -33,14 +35,43 @@ def signup(request):
                                 birthdate=birthdate,
                                 age=age)
             user.save()
-            return HttpResponseRedirect(reverse('users:profile'))
+            return HttpResponseRedirect(reverse('users:vaccination'))
     else:
         form = CustomUserForm()
         return render(request, 'registration/signup.html', {'form': form})
 
+def get_doseset(vaccine_name):
+    print(vaccine_name)
+    vaccine = VaccineModel.objects.get(vaccine_name=vaccine_name)
+    dose_choice = []
+    doses = vaccine.dose_set.all()
+    for dose in doses:
+        d = (dose, str(dose))
+        dose_choice.append(d)
+    return dose_choice
 
 def vaccination_signup(request):
-    return render(request, 'registration/vaccination.html')
+    if request.method == 'POST':
+        form = VaccinationForm(request.POST)
+        if form.is_valid():
+            vaccine_name = form.cleaned_data.get('vaccine_name')
+            dose_count = form.cleaned_data.get('dose_count')
+            expired = form.cleaned_data.get('expired')
+            vacc_model = VaccineModel.objects.get(vaccine_name=vaccine_name)
+            vaccine = Vaccine(vaccine_name=vacc_model.vaccine_name, 
+                              required_age=vacc_model.required_age, 
+                              required_gender=vacc_model.required_gender,
+                              user=request.user)
+            vaccine.save()
+            left_dose = list(vacc_model.dosemodel_set.all()[(dose_count-1):])
+            print(left_dose)
+            for dose in left_dose:
+                user_dose = Dose(vaccine=vaccine, dose_count=dose.dose_count, dose_duration=dose.dose_duration)
+                user_dose.save()
+            return HttpResponseRedirect(reverse('users:profile'))
+    else:
+        form = VaccinationForm()
+    return render(request, 'registration/vaccination.html', {'form': form})
 
 
 @login_required

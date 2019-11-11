@@ -362,7 +362,7 @@ div.dot-inner {
   padding: 0;
   text-align: center;
   border-radius: 50%;
-  margin: 0px 0px 0px 4px;
+  margin: 0px 0px 0px -10px;
 }
 .add-vac-btn p {
   position: relative;
@@ -373,20 +373,6 @@ div.dot-inner {
   outline: none;
 }
 
-.vacc-name {
-  margin-left: 7%;
-  margin-right: 4%;
-  margin-bottom: 2%;
-}
-
-.vacc-dose {
-  margin-right: 4%;
-}
-
-.vacc-date {
-  width: 50px;
-}
-
 .form-control-vacc {
   /* display: inline; */
   height: 40px;
@@ -395,6 +381,21 @@ div.dot-inner {
   background: #BECCD2;
   color: black;
   margin-bottom: 2%;
+}
+
+.vacc-name {
+  margin-left: 7%;
+  margin-right: 4%;
+  margin-bottom: 2%;
+}
+
+.vacc-dose {
+  width: 50px;
+  margin-right: 4%;
+}
+
+.vacc-date {
+  width: 50px;
 }
 
 .terms-box {

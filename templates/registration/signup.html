@@ -22,7 +22,7 @@
                 {{ field }} 
               </div>
             {% endfor %}
-            <button type="submit" formmethod="post">Sign up</button>
+            <button type="submit" formmethod="post">Next</button>
           </form>
         </div>
         <div class="col-lg-6" id="profile-col">
@@ -36,7 +36,6 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="next"><a href="{% url 'users:vaccination' %}">Next</a></button>
         </div>
 
       </div>
@@ -50,4 +49,4 @@
 {% endblock %}
 
 {% load staticfiles %}
-<script src="{% static "js/script.js" %}"></script>
+<script src="{% static js/script.js" %}"></script>

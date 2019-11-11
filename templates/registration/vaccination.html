@@ -17,7 +17,8 @@
                     <div class="dot-inner"></div>
                 </div>
                 <form method="post" class="col-lg-12">
-                    <input class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" list="vaccine"/>
+                    {% csrf_token %}
+                    {{ form.vaccine_name }}
                     <datalist class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" id="vaccine">
                         <option value="BCG">
                         <option value="HB1">
@@ -25,19 +26,14 @@
                         <option value="Rotavirus">
                         <option value="Haemophilus influenzae type b">
                     </datalist>
-                    <select class="col-lg-2 form-control-vacc vacc-dose">
-                        <option selected>Dose 1</option>
-                        <option>Dose 2</option>
-                    </select>
-                    <input class="col-lg-2 form-control-vacc vacc-date" type="date" max="3000-12-31"
-                        placeholder="Expired" />
+                    {{ form.dose_count }}
+                    {{ form.expired }}
+                    <div class="row m-auto"><button class="add-vac-btn" onclick="addVaccine()" formmethod="post">
+                            <p>+</p>
+                        </button></div>
                 </form>
             </div>
         </div>
-
-        <div class="row m-auto"><button class="add-vac-btn" onclick="addVaccine()">
-                <p>+</p>
-            </button></div>
 
         <div class="terms-box mx-auto">
             <h5 class="terms-title">Terms and Conditions</h5>
@@ -55,11 +51,11 @@
                 <h6>I have read and agree to the terms and conditions</h6>
             </label>
         </div>
-        <button type="button" class="save-btn float-right" onclick="">Save</button>
+        <button type="button" class="save-btn float-right"><a href="{% url users:profile%""}></a> Save</button>
     </div>
 </div>
 {% block scripts %}
-<script src="{% static 'js/vaccination.js' %}"></script>
-{% endblock %}
+<script src=" {% static 'js/vaccination.js' %}"></script>
+                {% endblock %}
 
-{% endblock %}
+                {% endblock %}
