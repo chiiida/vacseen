@@ -11,3 +11,7 @@ install:
   
 script:
   - python manage.py test users/tests
+
+notifications:
+  slack: vacseen:7ogtQG6Nde9OFbafzV41HWHd
+  
