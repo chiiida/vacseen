@@ -1,7 +1,7 @@
 Vacseen
 ===
 
-[![Build Status](https://travis-ci.com/llleyelll/vacseen.svg?token=Vf6PJtHdqGqqThMwgTem&branch=user-auth)](https://travis-ci.com/llleyelll/vacseen)
+[![Build Status](https://travis-ci.com/llleyelll/vacseen.svg?token=Vf6PJtHdqGqqThMwgTem&branch=master)](https://travis-ci.com/llleyelll/vacseen)
 
 
 Prerequisite
@@ -30,4 +30,4 @@ Documents
 - Mockup - [Figma](https://www.figma.com/file/ltBOLL9zFanE05sdb7XHlv/Vacseen)
 - Task Board – [Trello](https://trello.com/b/o1FQrdfy)
 - Issue Tracker – [Github Issues](https://github.com/llleyelll/vacseen/issues)
-
+- Iteration Plan – [Google Doc](https://docs.google.com/document/d/17WCf1Z5uMvR2h9EOO3qqsbqW-7lzxDNflHzLacBrkoA/edit?usp=sharing)
