@@ -42,17 +42,17 @@ li a {
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 10px 12px;
   text-decoration: none;
 } 
 .nav-vac {
-  
-  font-size: 2.5rem;
+  padding: 0px;
+  font-size: 2rem;
   font-weight: 1000;
   color: var(--pri-clr);
 }
 .nav-log {
-  padding: 10px;
+  /* padding: 10px; */
   float: right;
   font-size: 1.5rem;
   color: var(--pri-clr);
@@ -147,6 +147,7 @@ h4 {
   display: inline-block;
   vertical-align: middle;
   padding: 0 24px;
+  padding-bottom: 5px;
   font-size: 14px;
   font-weight: bold;
   font-family: "Roboto", arial, sans-serif;
