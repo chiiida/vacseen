@@ -4,7 +4,7 @@ from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
 
 from users.models import CustomUser
-from users.forms import FormThatWork as MekInwRegisForm
+from users.forms import CustomUserForm
 import datetime
 
 from django.test import TestCase, Client
