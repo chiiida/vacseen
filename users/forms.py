@@ -1,7 +1,8 @@
 from django import forms
+from django.forms import formset_factory, modelformset_factory
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
-from vaccine.models import VaccineModel, Vaccine
+from vaccine.models import VaccineModel, Vaccine, Dose
 import datetime
 
 GENDER_CHOICES = [
@@ -52,16 +53,6 @@ class CustomUserForm(forms.Form):
     gender = forms.CharField(widget=forms.Select(choices=GENDER_CHOICES))
     birthdate = forms.DateField(widget=forms.SelectDateWidget(
         years=range(1940, 2019)), initial=datetime.date.today)
- 
-def get_doseset(vaccine_name):
-    print(vaccine_name)
-    vaccine = VaccineModel.objects.get(vaccine_name=vaccine_name)
-    dose_choice = []
-    doses = vaccine.dose_set.all()
-    for dose in doses:
-        d = (dose, str(dose))
-        dose_choice.append(d)
-    return dose_choice
 
 class VaccinationForm(forms.Form):
     vaccine_name = forms.CharField(label='Vac cine name', widget=forms.TextInput(
@@ -71,3 +62,4 @@ class VaccinationForm(forms.Form):
     expired = forms.DateField(widget=forms.SelectDateWidget(
         years=range(1940, 2019)), initial=datetime.date.today)
 
+VaccineFormSet = formset_factory(VaccinationForm, extra=1)

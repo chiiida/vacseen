@@ -13,33 +13,38 @@
 
         <div class="vaccgroup">
             <div class="row m-auto">
-                <div class="dot-outer">
-                    <div class="dot-inner"></div>
-                </div>
                 <form method="post" class="col-lg-12">
                     {% csrf_token %}
-                    {{ form.vaccine_name }}
-                    <datalist placeholder="Vaccine name" id="vaccine">
-                        <option value="BCG">
-                        <option value="HB1">
-                        <option value="HB2">
-                        <option value="DTP-HB1">
-                        <option value="OPV1">
-                        <option value="Hepatitis A">
-                    </datalist>
-                    {{ form.dose_count }}
-                    <div class="vacc-date">
-                        {{ form.expired }}
+                    {{ formset.management_form }}
+                    {% for form in formset %}
+                    <div class="form-row">
+                        <div class="dot-outer">
+                            <div class="dot-inner"></div>
+                        </div>
+                        {{ form.vaccine_name }}
+                        <datalist placeholder="Vaccine name" id="vaccine">
+                            <option value="BCG">
+                            <option value="HB1">
+                            <option value="HB2">
+                            <option value="DTP-HB1">
+                            <option value="OPV1">
+                            <option value="Hepatitis A">
+                        </datalist>
+                        {{ form.dose_count }}
+                        <div class="vacc-date">
+                            {{ form.expired }}
+                        </div>
+                        {% endfor %}
                     </div>
-                    <div class="row m-auto"><button class="add-vac-btn" formmethod="post">
+                    <div class="row m-auto">
+                        <button class="add-form-row add-vac-btn" formmethod="post">
                             <p>+</p>
-                        </button></div> 
+                        </button>
+                    </div>
+                    <button type="submit" class="save-btn float-right">Save</button>
                 </form>
             </div>
         </div>
-        <div class="row m-auto"><button class="add-vac-btn" onclick="addVaccine()">
-                <p>+</p>
-            </button></div>
 
         <div class="terms-box mx-auto">
             <h5 class="terms-title">Terms and Conditions</h5>
@@ -57,11 +62,13 @@
                 <h6>I have read and agree to the terms and conditions</h6>
             </label>
         </div>
-        <button type="button" class="save-btn float-right"><a href="{% url users:profile%""}></a> Save</button>
+        <!-- <button type="button" class="save-btn float-right"><a href="{% url users:profile%""}></a> Save</button> -->
     </div>
 </div>
 {% block scripts %}
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
 <script src=" {% static 'js/vaccination.js' %}"></script>
-                {% endblock %}
+{% endblock %}
 
-                {% endblock %}
+{% endblock %}
