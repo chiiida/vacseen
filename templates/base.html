@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 <!doctype html>
@@ -14,6 +15,19 @@
 </head>
 
 <body>
+    {% if user.is_authenticated %}
+    <ul class="nav-top">
+        <li><a class="nav-vac" href="#">VACSEEN</a></li>
+        <li style="float:right" class="nav-log"><a href="{% url 'account_logout' %}">Log out</a></li>
+    </ul>
+    {% else %}
+    <ul class="nav-top">
+        <li><a class="nav-vac" href="#">VACSEEN</a></li>
+        <li style="float:right" class="nav-log"><a href="{% provider_login_url 'google' %}">Log in</a></li>
+    </ul>
+    {% endif %}
+        
+
     {% block content %}
     {% endblock %}
 
