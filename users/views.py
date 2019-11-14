@@ -74,7 +74,7 @@ def vaccination_signup(request):
     return render(request, 'registration/vaccination.html', {'form': form})
 
 
-@login_required
+@login_required(login_url='home')
 def user_view(request):
     user = CustomUser.objects.get(id=request.user.id)
     context = {'user': user}

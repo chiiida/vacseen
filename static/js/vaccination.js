@@ -1,4 +1,6 @@
+const datalist = '<datalist placeholder="Vaccine name" id="vaccine"><option value="BCG"><option value="HB1"><option value="HB2"><option value="DTP-HB1"><option value="OPV1"><option value="Hepatitis A"></datalist>';
+
 function addVaccine() {
     let vaccGroup = document.getElementsByClassName('vaccgroup')[0];
-    vaccGroup.innerHTML += '<div class="row m-auto"><div class="dot-outer"><div class="dot-inner"></div></div><form method="post" class="col-lg-12"><input class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" /><select class="col-lg-2 form-control-vacc vacc-dose"><option selected>Dose 1</option><option>Dose 2</option></select><input class="col-lg-2 form-control-vacc vacc-date" type="date" max="3000-12-31"placeholder="Expired" /></form></div>';
+    vaccGroup.innerHTML += '<form method="post" class="col-lg-12">{% csrf_token %}{{ form.vaccine_name }}' + datalist + '{{ form.dose_count }}<div class="vacc-date">{{ form.expired }}</div>'
 }

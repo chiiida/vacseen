@@ -38,6 +38,7 @@ class Dose(models.Model):
     vaccine = models.ForeignKey(Vaccine, on_delete=models.CASCADE)
     dose_count = models.IntegerField(default=1)
     dose_duration = models.IntegerField(default=0)
+    date_expired = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return f"{str(self.vaccine)} : dose {self.dose_count}" 

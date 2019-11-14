@@ -64,10 +64,10 @@ def get_doseset(vaccine_name):
     return dose_choice
 
 class VaccinationForm(forms.Form):
-    vaccine_name = forms.CharField(label='Vaccine name', widget=forms.TextInput(
-        attrs={'class': 'col-lg-6 form-control-vacc vacc-name', 'placeholder': 'Vaccine name', 'id': 'vaccine'}))
+    vaccine_name = forms.CharField(label='Vac cine name', widget=forms.TextInput(
+        attrs={'class': 'form-control-vacc vacc-name', 'placeholder': 'Vaccine name', 'list': 'vaccine'}))
     dose_count = forms.IntegerField(widget=forms.NumberInput(
-        attrs={'class': 'col-lg-2 form-control-vacc vacc-dose', 'max': '3', 'min': '1'}))
+        attrs={'class': 'form-control-vacc vacc-dose', 'placeholder': 'Dose count', 'max': '3', 'min': '1'}))
     expired = forms.DateField(widget=forms.SelectDateWidget(
         years=range(1940, 2019)), initial=datetime.date.today)
 

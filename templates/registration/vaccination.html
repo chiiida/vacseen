@@ -19,21 +19,27 @@
                 <form method="post" class="col-lg-12">
                     {% csrf_token %}
                     {{ form.vaccine_name }}
-                    <datalist class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" id="vaccine">
+                    <datalist placeholder="Vaccine name" id="vaccine">
                         <option value="BCG">
                         <option value="HB1">
                         <option value="HB2">
-                        <option value="Rotavirus">
-                        <option value="Haemophilus influenzae type b">
+                        <option value="DTP-HB1">
+                        <option value="OPV1">
+                        <option value="Hepatitis A">
                     </datalist>
                     {{ form.dose_count }}
-                    {{ form.expired }}
-                    <div class="row m-auto"><button class="add-vac-btn" onclick="addVaccine()" formmethod="post">
+                    <div class="vacc-date">
+                        {{ form.expired }}
+                    </div>
+                    <div class="row m-auto"><button class="add-vac-btn" formmethod="post">
                             <p>+</p>
-                        </button></div>
+                        </button></div> 
                 </form>
             </div>
         </div>
+        <div class="row m-auto"><button class="add-vac-btn" onclick="addVaccine()">
+                <p>+</p>
+            </button></div>
 
         <div class="terms-box mx-auto">
             <h5 class="terms-title">Terms and Conditions</h5>

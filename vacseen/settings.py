@@ -132,3 +132,5 @@ STATICFILES_DIRS = [
 ]
 LOGIN_REDIRECT_URL = 'loginhandler' # new
 LOGOUT_REDIRECT_URL = 'home' # new
+
+ACCOUNT_LOGOUT_ON_GET = True
