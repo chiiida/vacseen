@@ -1,25 +1,22 @@
 import os
 from decouple import config
-import django_heroku
+# import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 SECRET_KEY = config('SECRET_KEY', default='secrect')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
+ALLOWED_HOSTS = []
+
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_POSTGRES_JSONFIELD = config('SOCIAL_AUTH_POSTGRES_JSONFIELD', default=False, cast=bool)
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY', default='secrect')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET', default='secrect')
-
-# ALLOWED_HOSTS = ["testserver"]
 
 
 # Application definition
@@ -141,4 +138,4 @@ LOGOUT_REDIRECT_URL = 'home'  # new
 
 ACCOUNT_LOGOUT_ON_GET = True
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())

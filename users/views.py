@@ -14,6 +14,9 @@ def calculate_age(born):
     month = abs(today.month - born.month)/10
     return (today.year - born.year)+month
 
+def next_date(date, duration):
+    pass
+
 def signup(request):
     if request.method == 'POST':
         form = CustomUserForm(request.POST)
