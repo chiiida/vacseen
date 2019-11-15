@@ -6,42 +6,44 @@
 
 <div class="main light-bg">
     <div class="user-info">
-        <div class="user-profile">
-            <img src="https://source.unsplash.com/random" alt="" class="user-portrait">
-            <div class="user-profile-basic">
-                
-                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-                <h2>{{ user.gender }}, {{ user.age }} years</h2>
-                <a href="#">edit profile</a>
+        <p><a href="{% url 'account_logout' %}">Log out</a>
+            <div class="user-profile">
+                <img alt="" class="user-portrait" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
+                <div class="user-profile-basic">
+                    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                    <h2>{{ user.gender }}, {{ user.age }}
+                        {% if user.age > 0.11 %} years {% else %} months {% endif %}
+                    </h2>
+                    <a href="#">edit profile</a>
+                </div>
             </div>
-        </div>
-        <div class="user-upcoming">
-            <h2>upcoming vaccine</h2>
-            <hr>
-            <div class="upcoming-box">
-                <div class="form-check">
-                    <div class="one-check">
-                        <div>
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
-                                Default checkbox
-                            </label>
-                        </div>
-                        <div>
-                            <p>1/1/2019</p>
+            <div class="user-upcoming">
+                <h2>upcoming vaccine</h2>
+                <hr>
+                <div class="upcoming-box">
+                    <div class="form-check">
+                        <div class="one-check">
+                            <div>
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Default checkbox
+                                </label>
+                            </div>
+                            <div>
+                                <p>1/1/2019</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="add-remove">
+                    <a href="" class="user-vaccine-add">
+                        ADD
+                    </a>
+                    <a href="" class="user-vaccine-remove">
+                        REMOVE
+                    </a>
+                </div>
             </div>
-            <div class="add-remove">
-                <a href="" class="user-vaccine-add">
-                    ADD
-                </a>
-                <a href="" class="user-vaccine-remove">
-                    REMOVE
-                </a>
-            </div>
-        </div>
     </div>
     <div class="user-vaccines">
         <div class="accordion" id="accordionExample">

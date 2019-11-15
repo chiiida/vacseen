@@ -378,8 +378,10 @@ regis vaccination page
 ===================   */
 
 div.vacc-bg {
+  position: relative;
+  min-height: 150%;
   background: linear-gradient(#4e6d7c, #85b3bb);
-  height: 100%;
+  background-size: cover;
 }
 
 div.page-title {
@@ -429,7 +431,6 @@ div.dot-inner {
   padding: 0;
   text-align: center;
   border-radius: 50%;
-  margin: 0px 0px 0px 4px;
 }
 .add-vac-btn p {
   position: relative;
@@ -440,35 +441,43 @@ div.dot-inner {
   outline: none;
 }
 
-.vacc-name {
-  display: block;
+.form-control-vacc {
+  /* display: inline; */
   height: 40px;
   border: none;
   border-radius: 10px;
   background: #BECCD2;
   color: black;
-  margin-left: 7%;
+  margin-bottom: 2%;
+}
+
+.vacc-name {
+  margin-left: 8%;
   margin-right: 4%;
   margin-bottom: 2%;
+  width: 350px;
+  padding-left: 1%;
 }
 
 .vacc-dose {
+  width: 150px;
   margin-right: 4%;
+  padding-left: 1%;
 }
-
 .vacc-date {
-  width: 50px;
+  display: inline;
+}
+.vacc-date select {
+  background: #BECCD2;
+  border: none;
+  margin-right: 0.5%;
+  border: none;
+  height: 40px;
+  width: fit-content;
 }
 
-.form-control-vacc {
-  display: block;
-  height: 40px;
-  border: none;
-  border-radius: 10px;
-  background: #BECCD2;
-  color: black;
-  /* margin: 0% 4% 2% 7%; */
-  margin-bottom: 2%;
+.form-row {
+  display: inline;
 }
 
 .terms-box {

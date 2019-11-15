@@ -1,19 +1,22 @@
 import os
+from decouple import config
+# import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'dlbybteqsm&2hh+&_t3ngoawn)fxaixt%kt90bkrft^b$_n+d_'
+SECRET_KEY = config('SECRET_KEY', default='secrect')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-# ALLOWED_HOSTS = ["testserver"]
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_POSTGRES_JSONFIELD = config('SOCIAL_AUTH_POSTGRES_JSONFIELD', default=False, cast=bool)
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY', default='secrect')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET', default='secrect')
+
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -25,26 +28,27 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites', # new
-    'allauth', # new
-    'allauth.account', # new
-    'allauth.socialaccount', # new
+    'django.contrib.sites',  # new
+    'allauth',  # new
+    'allauth.account',  # new
+    'allauth.socialaccount',  # new
     'allauth.socialaccount.providers.google',  # new
-    'users', # new
-    'pages', # new
+    'users',  # new
+    'pages',  # new
+    'vaccine',
 ]
 
-AUTH_USER_MODEL = 'users.CustomUser' # new
+AUTH_USER_MODEL = 'users.CustomUser'  # new
 
 AUTHENTICATION_BACKENDS = (
-    "django.contrib.auth.backends.ModelBackend", # new
-    "allauth.account.auth_backends.AuthenticationBackend", # new
+    "django.contrib.auth.backends.ModelBackend",  # new
+    "allauth.account.auth_backends.AuthenticationBackend",  # new
 )
 
-SITE_ID = 1 # new
+SITE_ID = 1  # new
 
-ACCOUNT_EMAIL_REQUIRED = True # new
-ACCOUNT_USERNAME_REQUIRED = False # new
+ACCOUNT_EMAIL_REQUIRED = True  # new
+ACCOUNT_USERNAME_REQUIRED = False  # new
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,7 +65,7 @@ ROOT_URLCONF = 'vacseen.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')], # new
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # new
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,5 +133,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-LOGIN_REDIRECT_URL = 'loginhandler' # new
-LOGOUT_REDIRECT_URL = 'home' # new
+LOGIN_REDIRECT_URL = 'loginhandler'  # new
+LOGOUT_REDIRECT_URL = 'home'  # new
+
+ACCOUNT_LOGOUT_ON_GET = True
+
+# django_heroku.settings(locals())

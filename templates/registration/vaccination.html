@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block content %}
 <div class="vacc-bg m-auto">
@@ -10,64 +11,63 @@
         <div class="page-title">Vaccination</div>
         <hr class="seperator-line" />
 
-        <div class="row m-auto">
-            <div class="dot-outer">
-                <div class="dot-inner"></div>
+        <div class="vaccgroup">
+            <div class="row m-auto">
+                <form method="post" class="col-lg-12">
+                    {% csrf_token %}
+                    {{ formset.management_form }}
+                    {% for form in formset %}
+                    <div style="display: inline;" class="form-row">
+                        <div class="dot-outer">
+                            <div class="dot-inner"></div>
+                        </div>
+                        {{ form.vaccine_name }}
+                        <datalist placeholder="Vaccine name" id="vaccine">
+                            <option value="BCG">
+                            <option value="HB1">
+                            <option value="HB2">
+                            <option value="DTP-HB1">
+                            <option value="OPV1">
+                            <option value="Hepatitis A">
+                        </datalist>
+                        {{ form.dose_count }}
+                        <div class="vacc-date">
+                            {{ form.expired }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row m-auto">
+                        <button class="add-form-row add-vac-btn" formmethod="post">
+                            <p>+</p>
+                        </button>
+                    </div>
+                    <div class="terms-box mx-auto">
+                        <h5 class="terms-title">Terms and Conditions</h5>
+                        <p class="terms-sub">&emsp;&emsp;&emsp;Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
+                            magni veritatis, odit, autem dolorum
+                            temporibus molestiae quam itaque eos velit atque quia voluptates nihil quae ut rerum alias. Numquam,
+                            nostrum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit magni veritatis, odit,
+                            autem dolorum
+                            temporibus molestiae quam itaque eos velit atque quia voluptates nihil quae ut rerum alias. Numquam,
+                            nostrum. </p>
+                    </div>
+                    <div style="padding-top: 30px; padding-left: 5%;" class="form-check terms-check m-auto">
+                        <input required style="margin-top: 1px;" class="form-check-input" type="checkbox" value="" id="terms-check-box">
+                        <label class="form-check-label terms-check-text" for="defaultCheck1">
+                            <h6>I have read and agree to the terms and conditions</h6>
+                        </label>
+                    </div>
+                    <button type="submit" class="save-btn float-right">Save</button>
+                </form>
             </div>
-        <input class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" />
-            <select class="col-lg-2 form-control-vacc vacc-dose">
-                <option selected>Dose 1</option>
-                <option>Dose 2</option>
-            </select>
-            <input class="col-lg-2 form-control-vacc vacc-date" type="date" max="3000-12-31" placeholder="Expired" />
         </div>
 
-        <div class="row m-auto">
-            <div class="dot-outer">
-                <div class="dot-inner"></div>
-            </div>
-            <input class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" />
-            <select class="col-lg-2 form-control-vacc vacc-dose">
-                <option selected>Dose 1</option>
-                <option>Dose 2</option>
-            </select>
-            <input class="col-lg-2 form-control-vacc vacc-date" type="date" max="3000-12-31" placeholder="Expired" />
-        </div>
-
-        <div class="row m-auto">
-            <div class="dot-outer">
-                <div class="dot-inner"></div>
-            </div>
-            <input class="col-lg-6 form-control-vacc vacc-name" placeholder="Vaccine name" />
-            <select class="col-lg-2 form-control-vacc vacc-dose">
-                <option selected>Dose 1</option>
-                <option>Dose 2</option>
-            </select>
-            <input class="col-lg-2 form-control-vacc vacc-date" type="date" max="3000-12-31" placeholder="Expired" />
-        </div>
-
-        <div class="row m-auto"><button class="add-vac-btn">
-                <p>+</p>
-            </button></div>
-
-        <div class="terms-box mx-auto">
-            <h5 class="terms-title">Terms and Conditions</h5>
-            <p class="terms-sub">&emsp;&emsp;&emsp;Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
-                magni veritatis, odit, autem dolorum
-                temporibus molestiae quam itaque eos velit atque quia voluptates nihil quae ut rerum alias. Numquam,
-                nostrum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit magni veritatis, odit,
-                autem dolorum
-                temporibus molestiae quam itaque eos velit atque quia voluptates nihil quae ut rerum alias. Numquam,
-                nostrum. </p>
-        </div>
-        <div style="padding-top: 30px; padding-left: 5%;" class="form-check terms-check m-auto">
-            <input style="margin-top: 1px;" class="form-check-input" type="checkbox" value="" id="terms-check-box">
-            <label class="form-check-label terms-check-text" for="defaultCheck1">
-                <h6>I have read and agree to the terms and conditions</h6>
-            </label>
-        </div>
-
-        <button type="button" class="save-btn float-right" onclick="">Save</button>
     </div>
 </div>
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+<script src=" {% static 'js/vaccination.js' %}"></script>
+{% endblock %}
+
 {% endblock %}
