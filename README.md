@@ -16,7 +16,7 @@ Get started
 ---
 1. ` git clone https://github.com/llleyelll/vacseen.git && cd vacseen/`
 2. `virtualenv venv`
-3. `pip install -r requirements.txt`
+3. `(venv) pip install -r requirements.txt`
 4. create superuser and add and configure Google credential in localhost:8000 using `python manage.py runserver` to start a server
 
 Team Members
