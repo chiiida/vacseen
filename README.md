@@ -33,3 +33,6 @@ Project Documents
 - Task Board – [Trello](https://trello.com/b/o1FQrdfy)
 - Issue Tracker – [Github Issues](https://github.com/llleyelll/vacseen/issues)
 - Iteration Plan – [Google Doc](https://docs.google.com/document/d/17WCf1Z5uMvR2h9EOO3qqsbqW-7lzxDNflHzLacBrkoA/edit?usp=sharing)
+- Iteration Script – [Google Doc](https://docs.google.com/document/d/1paqaK2TXelRTuHvvccfSNGVF_0o_pkhiHLibLo6QdT0/edit?usp=sharing)
+- Code Review Checklist – [Google Doc](https://docs.google.com/document/d/1sJqZ3WlXeycAEXh6zB1JEkJHjNAY0ihp8oIT0eFlDfk/edit?usp=sharing)
+- Code Review – [Google Doc](https://docs.google.com/document/d/1YScK9uWoZnyaVXmA61DaatdICU6vgYCh_Xi2Ky7ckfA/edit?usp=sharing)
