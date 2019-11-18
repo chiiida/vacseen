@@ -89,5 +89,6 @@ def vaccination_signup(request):
 @login_required(login_url='home')
 def user_view(request):
     user = CustomUser.objects.get(id=request.user.id)
-    context = {'user': user}
+    vaccines = Vaccine.objects.filter(user_id=request.user.id)
+    context = {'user': user, 'vaccines': vaccines}
     return render(request, 'user.html', context)
