@@ -1,6 +1,8 @@
 Vacseen
 ===
 
+![alt text](image/logo.png?raw=true)
+
 [![Build Status](https://travis-ci.com/llleyelll/vacseen.svg?token=Vf6PJtHdqGqqThMwgTem&branch=master)](https://travis-ci.com/llleyelll/vacseen)
 
 
@@ -14,25 +16,34 @@ Prerequisite
 
 Get started (run locally)
 ---
-1. Clone the repository and change directory to `vacseen`.
+1. Clone the repository and change directory to `vacseen` directory.
 ```
 $ git clone https://github.com/llleyelll/vacseen.git && cd vacseen/
 ```
-2. Create virtualenv in the directory and activate virtualenv.
+2. Create `.env` file for python decouple. In `.env` file should have these following.
+```
+DEBUG=True
+SECRET_KEY=YOURSECRETKEY
+TIME_ZONE=Asia/Bangkok
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=YOURGOOLEAPIKEY
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=YOURGOOLEAPISECRETKEY
+SOCIAL_AUTH_POSTGRES_JSONFIELD=True
+```
+3. Create virtualenv in the directory and activate virtualenv.
 ```
 $ virtualenv venv
 $ source venv/bin/activate
 ```
-3. Install all dependencies and then run database migrations by the following commands.
+4. Install all dependencies and then run database migrations by the following commands.
 ```
 (venv) pip install -r requirements.txt
 (venv) python manage.py migrate
 ```
-4. Create superuser
+5. Create superuser
 ```
 (venv) python manage.py createsuperuser
 ``` 
-5. Add and configure Google credential in `http://127.0.0.1:8000/` using `python manage.py runserver` to start a server. Go to `http://127.0.0.1:8000//admin` to configure Google credential by setting sites and social applications table. While setting social applications add Client id and Secret key and add your created site to available sites.
+6. Add and configure Google credential in `http://127.0.0.1:8000/` using `python manage.py runserver` to start a server. Go to `http://127.0.0.1:8000//admin` to configure Google credential by setting sites and social applications table. While setting social applications add Client id and Secret key and add your created site to available sites.
 
 Team Members
 ---
