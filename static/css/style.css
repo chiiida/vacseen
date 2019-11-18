@@ -332,6 +332,10 @@ user page
   margin: 2%;
 }
 
+.user-upcoming > p {
+  color: var(--tri--clr);
+}
+
 .upcoming-box {
   margin: 5% auto;
   width: auto;
