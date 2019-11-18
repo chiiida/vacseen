@@ -7,7 +7,7 @@ from django import forms
 from .models import CustomUser
 from vaccine.models import VaccineModel, Vaccine, DoseModel, Dose
 from .forms import CustomUserForm, VaccinationForm, VaccineFormSet
-from datetime import date
+from datetime import date, timedelta
 
 def calculate_age(born):
     today = date.today()

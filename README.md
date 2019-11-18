@@ -9,15 +9,30 @@ Vacseen
 Prerequisite
 ---
 - Python 3.7+
-- Pipenv (`pip3 install pipenv`)
+- Django 2.2.7
 - Google OAuth API
 
-Get started
+Get started (run locally)
 ---
-1. ` git clone https://github.com/llleyelll/vacseen.git && cd vacseen/`
-2. `virtualenv venv`
-3. `(venv) pip install -r requirements.txt`
-4. create superuser and add and configure Google credential in localhost:8000 using `python manage.py runserver` to start a server
+1. Clone the repository and change directory to `vacseen`.
+```
+$ git clone https://github.com/llleyelll/vacseen.git && cd vacseen/
+```
+2. Create virtualenv in the directory and activate virtualenv.
+```
+$ virtualenv venv
+$ source venv/bin/activate
+```
+3. Install all dependencies and then run database migrations by the following commands.
+```
+(venv) pip install -r requirements.txt
+(venv) python manage.py migrate
+```
+4. Create superuser
+```
+(venv) python manage.py createsuperuser
+``` 
+5. Add and configure Google credential in `http://127.0.0.1:8000/` using `python manage.py runserver` to start a server. Go to `http://127.0.0.1:8000//admin` to configure Google credential by setting sites and social applications table. While setting social applications add Client id and Secret key and add your created site to available sites.
 
 Team Members
 ---
