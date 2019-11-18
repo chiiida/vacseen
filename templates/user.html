@@ -6,129 +6,66 @@
 
 <div class="main light-bg">
     <div class="user-info">
-        <p><a href="{% url 'account_logout' %}">Log out</a>
-            <div class="user-profile">
-                <img alt="" class="user-portrait" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
-                <div class="user-profile-basic">
-                    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-                    <h2>{{ user.gender }}, {{ user.age }}
-                        {% if user.age > 0.11 %} years {% else %} months {% endif %}
-                    </h2>
-                    <a href="#">edit profile</a>
-                </div>
+        <div class="user-profile">
+            <img alt="" class="user-portrait" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
+            <div class="user-profile-basic">
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                <h2>{{ user.gender }}, {{ user.age }}
+                    {% if user.age > 0.11 %} years {% else %} months {% endif %}
+                </h2>
+                <a href="#">edit profile</a>
             </div>
-            <div class="user-upcoming">
-                <h2>upcoming vaccine</h2>
-                <hr>
-                <div class="upcoming-box">
-                    <div class="form-check">
-                        <div class="one-check">
-                            <div>
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">
-                                    Default checkbox
-                                </label>
-                            </div>
-                            <div>
-                                <p>1/1/2019</p>
-                            </div>
+        </div>
+        <div class="user-upcoming">
+            <h2>upcoming vaccine</h2>
+            <hr>
+            <div class="upcoming-box">
+                <div class="form-check">
+                    <div class="one-check">
+                        <div>
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Default checkbox
+                            </label>
+                        </div>
+                        <div>
+                            <p>1/1/2019</p>
                         </div>
                     </div>
                 </div>
-                <div class="add-remove">
-                    <a href="{% url 'users:vaccination' %}" class="user-vaccine-add">
-                        EDIT
-                    </a>
-                </div>
             </div>
+            <div class="add-remove">
+                <a href="{% url 'users:vaccination' %}" class="user-vaccine-add">
+                    EDIT
+                </a>
+            </div>
+        </div>
     </div>
     <div class="user-vaccines">
         <div class="accordion" id="accordionExample">
 
-            {% for vaccine in vaccines %}
+            {% for vaccine in vaccine_set.all %}
             <div class="card">
-                    <div class="card-header" id="heading{{ forloop.counter }}">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
-                                {{ vaccine.vaccine_name }}
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="collapse{{ forloop.counter }}" class="collapse" aria-labelledby="heading{{ forloop.counter }}" data-parent="#accordionExample">
-                        <div class="card-body">
-                            {{ vaccine }}
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-            <!-- <div class="card">
-                <div class="card-header" id="headingOne">
+                <div class="card-header" id="heading{{ forloop.counter }}">
                     <h2 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne">
-                            Collapsible Group Item #1
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapse{{ forloop.counter }}" aria-expanded="false"
+                            aria-controls="collapse{{ forloop.counter }}">
+                            {{ vaccine.vaccine_name }}
                         </button>
                     </h2>
                 </div>
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                <div id="collapse{{ forloop.counter }}" class="collapse" aria-labelledby="heading{{ forloop.counter }}"
                     data-parent="#accordionExample">
                     <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                        squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                        nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                        single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
-                        beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-                        lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-                        probably haven't heard of them accusamus labore sustainable VHS.
+                        {% for dose in vaccine.dose_set.all %}
+                            Dose: {{ dose.dose_count }} {{ dose.date_expired }}
+                            <br />
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                            data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Collapsible Group Item #2
-                        </button>
-                    </h2>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                        squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                        nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                        single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
-                        beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-                        lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-                        probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                            data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Collapsible Group Item #3
-                        </button>
-                    </h2>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                        squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa
-                        nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
-                        single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
-                        beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-                        lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you
-                        probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                </div>
-            </div> -->
-
+            {% endfor %}
         </div>
     </div>
 </div>

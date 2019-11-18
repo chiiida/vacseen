@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from .models import CustomUser
 from vaccine.models import VaccineModel, Vaccine, Dose
 from .forms import CustomUserForm, VaccineFormSet
-from datetime import date
+from datetime import date, time, timedelta
 
 
 def calculate_age(born):
@@ -15,7 +15,7 @@ def calculate_age(born):
 
 
 def next_date(date, duration):
-    pass
+    return date + timedelta(days=duration)
 
 
 def signup(request):
@@ -79,7 +79,7 @@ def vaccination_signup(request):
                     user_dose = Dose(vaccine=vaccine,
                                      dose_count=dose.dose_count,
                                      dose_duration=dose.dose_duration,
-                                     date_expired=expired)
+                                     date_expired=next_date(expired, dose.dose_duration))
                     user_dose.save()
             return HttpResponseRedirect(reverse('users:profile'))
     return render(request, 'registration/vaccination.html',
@@ -89,6 +89,6 @@ def vaccination_signup(request):
 @login_required(login_url='home')
 def user_view(request):
     user = CustomUser.objects.get(id=request.user.id)
-    vaccines = Vaccine.objects.filter(user_id=request.user.id)
-    context = {'user': user, 'vaccines': vaccines}
+    vaccine_set = user.vaccine_set
+    context = {'user': user, 'vaccine_set': vaccine_set}
     return render(request, 'user.html', context)
