@@ -21,17 +21,19 @@
             <hr>
             <div class="upcoming-box">
                 <div class="form-check">
+                    {% for dose in upcoming_vaccine %}
                     <div class="one-check">
                         <div>
                             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                             <label class="form-check-label" for="defaultCheck1">
-                                Default checkbox
+                                {{ dose }}
                             </label>
                         </div>
                         <div>
-                            <p>1/1/2019</p>
+                            <p>{{ dose.date_expired }}</p>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="add-remove">
@@ -59,8 +61,17 @@
                     data-parent="#accordionExample">
                     <div class="card-body">
                         {% for dose in vaccine.dose_set.all %}
-                            Dose: {{ dose.dose_count }} {{ dose.date_expired }}
-                            <br />
+                            <div class="status">
+                                <div class="status-received"></div>
+                            </div>
+                            <div class="dose">
+                                Dose: {{ dose.dose_count }} {{ dose.date_expired }}
+                            </div>
+                            <div class="vl"></div>
+                            <!-- <br />
+                                        <br />
+                                        <br /> -->
+                            <!-- <div class="connect-line"></div> -->
                         {% endfor %}
                     </div>
                 </div>

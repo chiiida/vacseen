@@ -2,7 +2,7 @@ Vacseen
 ===
 
 <p align="center">
-  <img src="image/logo.png">
+  <img src="static/image/logo.png">
 </p>
 
 [![Build Status](https://travis-ci.com/llleyelll/vacseen.svg?token=Vf6PJtHdqGqqThMwgTem&branch=master)](https://travis-ci.com/llleyelll/vacseen)

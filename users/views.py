@@ -52,7 +52,8 @@ def vaccine_suggest(user: CustomUser):
     """Filter vaccine that match with user then create vaccine and save to database"""
     vaccine_model = VaccineModel.objects.all()
     user_vaccine_list = [vaccine.vaccine_name for vaccine in user.vaccine_set.all()]
-    vaccines = [vaccine for vaccine in vaccine_model if user.age >= vaccine.required_age and vaccine.vaccine_name not in user_vaccine_list]
+    vaccines = [vaccine for vaccine in vaccine_model if user.age >= vaccine.required_age 
+                and vaccine.vaccine_name not in user_vaccine_list]
     for vaccine in vaccines:
         user_vaccine = Vaccine(vaccine_name=vaccine.vaccine_name,
                                 required_age=vaccine.required_age,
@@ -92,16 +93,28 @@ def vaccination_signup(request):
                                      dose_duration=dose.dose_duration,
                                      date_expired=next_date(expired, dose.dose_duration))
                     user_dose.save()
+                vaccine_suggest(request.user)
             return HttpResponseRedirect(reverse('users:profile'))
     return render(request, 'registration/vaccination.html',
                   {'formset': formset, })
 
+def upcoming_vaccine(user: CustomUser):
+    """Return list of upcoming vaccines in 10 days"""
+    today = date.today()
+    upcoming_vaccine_list = []
+    for vaccine in user.vaccine_set.all():
+        for dose in vaccine.dose_set.all():
+            if dose.date_expired:
+                delta = dose.date_expired - today
+                if 0 < delta.days <= 10:
+                    upcoming_vaccine_list.append(dose)
+    return upcoming_vaccine_list
 
 @login_required(login_url='home')
 def user_view(request):
     """Render user's page"""
     user = CustomUser.objects.get(id=request.user.id)
     vaccine_set = user.vaccine_set
-    vaccine_suggest(request.user)
-    context = {'user': user, 'vaccine_set': vaccine_set}
+    upcoming_vaccine_list = upcoming_vaccine(user)
+    context = {'user': user, 'vaccine_set': vaccine_set, 'upcoming_vaccine': upcoming_vaccine_list}
     return render(request, 'user.html', context)
