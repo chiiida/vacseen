@@ -8,6 +8,15 @@ from .forms import CustomUserForm, VaccineFormSet
 from datetime import date
 
 
+def base_view(request):
+    # TODO get user
+    # TODO get user vaccine
+    # TODO get vaccine nearing date
+    # TODO if yes -> user_noti = true : false
+    # render(req, 'template', {user_noti:user_noti})
+    pass
+
+
 def calculate_age(born):
     today = date.today()
     month = abs(today.month - born.month)/10
@@ -90,5 +99,6 @@ def vaccination_signup(request):
 def user_view(request):
     user = CustomUser.objects.get(id=request.user.id)
     vaccines = Vaccine.objects.filter(user_id=request.user.id)
+    print(dir(vaccines[0]))
     context = {'user': user, 'vaccines': vaccines}
     return render(request, 'user.html', context)
