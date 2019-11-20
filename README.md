@@ -52,7 +52,7 @@ Team Members
 
 | Name                      | Roles                    | GitHub                                        |
 |---------------------------|--------------------------|-----------------------------------------------|
-| Chanachida Fuachai        | Developer                | [llleyelll](https://github.com/llleyelll)     |
+| Chanachida Fuachai        | 	Scrum Master, Developer                | [llleyelll](https://github.com/llleyelll)     |
 | Sirikorn Songsaengthong   | Developer                | [Sirikonss](https://github.com/Sirikonss)     |
 | Sivanat Subpaisarn        | Developer                | [tiemfah](https://github.com/tiemfah)         |
 
