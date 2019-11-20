@@ -88,10 +88,14 @@ def vaccination_signup(request):
                 left_dose = list(vacc_model.dosemodel_set.all()[
                                  (dose_count-1):])
                 for dose in left_dose:
+                    status = False
+                    if next_date(expired, dose.dose_duration) == expired:
+                        status = True
                     user_dose = Dose(vaccine=vaccine,
                                      dose_count=dose.dose_count,
                                      dose_duration=dose.dose_duration,
-                                     date_expired=next_date(expired, dose.dose_duration))
+                                     date_expired=next_date(expired, dose.dose_duration),
+                                     received=status)
                     user_dose.save()
                 vaccine_suggest(request.user)
             return HttpResponseRedirect(reverse('users:profile'))
@@ -106,7 +110,7 @@ def upcoming_vaccine(user: CustomUser):
         for dose in vaccine.dose_set.all():
             if dose.date_expired:
                 delta = dose.date_expired - today
-                if 0 < delta.days <= 10:
+                if 0 < delta.days <= 7 and not dose.received:
                     upcoming_vaccine_list.append(dose)
     return upcoming_vaccine_list
 

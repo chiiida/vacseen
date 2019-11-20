@@ -61,17 +61,19 @@
                     data-parent="#accordionExample">
                     <div class="card-body">
                         {% for dose in vaccine.dose_set.all %}
-                            <div class="status">
-                                <div class="status-received"></div>
-                            </div>
-                            <div class="dose">
-                                Dose: {{ dose.dose_count }} {{ dose.date_expired }}
-                            </div>
-                            <div class="vl"></div>
-                            <!-- <br />
-                                        <br />
-                                        <br /> -->
-                            <!-- <div class="connect-line"></div> -->
+                            {% if dose.date_expired %}
+                                <div class="status">
+                                    {% if dose.received %}
+                                    <div class="status-received"></div>
+                                    {% endif %}
+                                </div>
+                                <div class="dose">
+                                    Dose: {{ dose.dose_count }} {{ dose.date_expired }}
+                                </div>
+                                <div class="vl"></div>
+                            {% else %}
+                                <a href="{% url 'users:vaccination' %}">Start tracking</a>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
