@@ -10,15 +10,16 @@ import datetime
 from django.test import TestCase, Client
 from users.views import signup, vaccination_signup
 
-class ViewsTests(TestCase) :
 
-    def test_index(self) :
+class ViewsTests(TestCase):
+
+    def test_index(self):
         c = Client()
         response = c.get(path='')
         status = response.status_code
         self.assertEqual(status, 200)
-    
-    def test_signup(self) :
+
+    def test_signup(self):
         c = Client()
         response = c.get(path='/users/signup/')
         status = response.status_code

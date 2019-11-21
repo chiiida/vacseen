@@ -1,6 +1,7 @@
 from django.db import models
 from users.models import CustomUser
 
+
 class VaccineModel(models.Model):
     """
     count age that less than one year as decimal
@@ -10,9 +11,10 @@ class VaccineModel(models.Model):
     required_age = models.FloatField(default=0.0)
     required_gender = models.CharField(max_length=6, default='None')
     stimulate_phase = models.IntegerField(default=0)
-    
+
     def __str__(self):
         return 'Model: ' + self.vaccine_name
+
 
 class DoseModel(models.Model):
     """
@@ -23,7 +25,8 @@ class DoseModel(models.Model):
     dose_duration = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{str(self.vaccine)} : dose {self.dose_count}" 
+        return f"{str(self.vaccine)} : dose {self.dose_count}"
+
 
 class Vaccine(models.Model):
     """
@@ -35,9 +38,10 @@ class Vaccine(models.Model):
     required_gender = models.CharField(max_length=6, default='None')
     stimulate_phase = models.IntegerField(default=0)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return f"{self.user.first_name}: {self.vaccine_name}"
+
 
 class Dose(models.Model):
     """
@@ -50,7 +54,7 @@ class Dose(models.Model):
     received = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{str(self.vaccine)}: dose {self.dose_count}" 
+        return f"{str(self.vaccine)}: dose {self.dose_count}"
 
     @property
     def not_last_dose(self):

@@ -2,6 +2,7 @@ from django.test import TestCase
 
 from users.models import CustomUser
 
+
 class CustomUserTests(TestCase):
 
     def test_update_user_info(self):

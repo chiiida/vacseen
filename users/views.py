@@ -4,8 +4,8 @@ from django.http import HttpResponseRedirect
 
 from .models import CustomUser
 from vaccine.models import VaccineModel, Vaccine, Dose
-from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
-from datetime import date, time, timedelta
+from .forms import CustomUserForm, VaccineFormSet
+from datetime import date, timedelta
 
 
 def base_view(request):
@@ -58,11 +58,15 @@ def signup(request):
 
 
 def vaccine_suggest(user: CustomUser):
-    """Filter vaccine that match with user then create vaccine and save to database"""
+    """
+    Filter vaccine that match with user
+    then create vaccine and save to database
+    """
     vaccine_model = VaccineModel.objects.all()
     user_vaccine_list = [
         vaccine.vaccine_name for vaccine in user.vaccine_set.all()]
-    vaccines = [vaccine for vaccine in vaccine_model if vaccine.vaccine_name not in user_vaccine_list
+    vaccines = [vaccine for vaccine in vaccine_model
+                if vaccine.vaccine_name not in user_vaccine_list
                 and user.age >= vaccine.required_age]
     for vaccine in vaccines:
         user_vaccine = Vaccine(vaccine_name=vaccine.vaccine_name,
@@ -78,7 +82,9 @@ def vaccine_suggest(user: CustomUser):
 
 
 def vaccination_signup(request):
-    """Get user's vaccination from from then create vaccine and save to database"""
+    """
+    Get user's vaccination from from then create vaccine and save to database
+    """
     if request.method == 'GET':
         formset = VaccineFormSet(request.GET or None)
     elif request.method == 'POST':

@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, redirect
 
 # Create your views here.
-from django.views.generic import TemplateView
 
 
 def IndexView(request):
@@ -9,14 +8,20 @@ def IndexView(request):
 
 
 def LoginHandler(request):
-    if request.user.gender and request.user.birthdate and request.user.contact and request.user.emergency_contact and request.user.first_name and request.user.last_name:
+    if request.user.gender and \
+        request.user.birthdate and \
+        request.user.contact and \
+        request.user.emergency_contact and \
+        request.user.first_name and \
+            request.user.last_name:
         return redirect('users:profile')
     else:
         return redirect('users:signup')
 
 
 def handler404(request, exception):
-    return render(request,'404.html', status = 404)
+    return render(request, '404.html', status=404)
+
 
 def handler500(request, *args, **argv):
     response = render(request, '500.html', {})
