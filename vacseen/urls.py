@@ -1,4 +1,4 @@
-from pages.views import handler404
+from pages.views import handler404, handler500
 from django.contrib import admin
 from django.urls import path, include
 
@@ -10,3 +10,4 @@ urlpatterns = [
 ]
 
 handler404 = 'pages.views.handler404'
+handler500 = 'pages.views.handler500'

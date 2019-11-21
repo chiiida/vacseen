@@ -15,8 +15,60 @@
   font-family: "Montserrat", sans-serif;
 }
 
+
+/* ===================
+404 handler page
+===================   */
+
+div.message {
+  background-repeat: var(--sec-clr);
+  position: absolute ;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100vw;
+  font-family: "Montserrat", sans-serif;
+  color : #4E6D7C ;
+}
+div.message img {
+  width : 25vw;
+  height: auto;
+}
+div.message h2 {
+  margin :0 ;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-weight: bolder;
+}
+
+div.message p {
+  margin :0 ;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  font-size : 1.2rem;
+}
+
+div.message button {
+  margin-top: 2rem ;
+  padding: 10px ;
+  padding-left: 50px ;
+  padding-right: 50px ;
+  border-radius: 10px;
+  color : #4E6D7C ;
+
+}
+
+div.message a {
+  color : var(--tri-clr);
+}
+
+/* ===================
+nav
+===================   */
+
 .nav-top {
   margin: 0;
+  padding : 8px ;
 }
 
 ul{
@@ -46,7 +98,7 @@ li a {
   text-decoration: none;
 } 
 .nav-vac {
-  padding: 0px;
+  padding: 8px;
   font-size: 2rem;
   font-weight: 1000;
   color: var(--pri-clr);
@@ -65,6 +117,12 @@ li a {
   font-weight: 1000;
   color: #e6eff1;
 }
+
+
+/* ===================
+index page
+===================   */
+
 
 div.main {
   display: flex;
@@ -181,6 +239,7 @@ register page
 ===================   */
 div.register {
   background: linear-gradient(#4e6d7c, #85b3bb);
+  background-size: cover;
   color : white ;
   margin : 0px ;
   
@@ -200,7 +259,8 @@ div.main-reg h1{
 }
 
 div.form-group-reg {
-  padding-left : 15rem ;
+  padding-left : 27rem ;
+  padding-right : 3rem ;
   padding-bottom: 1rem; 
   width : 100% ; 
 }
@@ -217,81 +277,17 @@ div.form-group-reg {
 }
 
 .next {
-  text-align: left;
+  text-align: center;
   color: white ;
   background: transparent;
   border : transparent ;
   font-size: 30px ;
-  padding-left : 500px ;
-  padding-top : 18rem ;
+  padding-left : 60rem ;
+  padding-bottom : 1rem;
   padding-right: 2em;
   
 }
 
-.avatar-upload {
-  padding-left : 8rem ;
-  position: relative;
-  /* max-width: 205px; */
-  
-}
-
-.avatar-edit {
-  position: absolute;
-  padding-left: 11rem;
-  /* right: 12px; */
-  z-index: 1;
-  top: 10px;
-}
-#imageUpload{
-  display: none;
-}
-#imageUploadlabel {
-  display: inline-block;
-  width: 3rem;
-  height: 3rem;
-  margin-bottom: 0;
-  border-radius: 100%;
-  background: #FFFFFF;
-  border: 1px solid transparent;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
-  cursor: pointer;
-  font-weight: normal;
-  transition: all .2s ease-in-out;
-}
-#imageUploadlabel:hover {
-  background: #f1f1f1;
-  border-color: #d6d6d6;
-}
-#imageUploadlabel:after {
-  padding-left: 11rem;
-  content: "\f040";
-  font-family: 'FontAwesome';
-  color: #757575;
-  position: absolute;
-  top: 10px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  margin: auto;
-}
-
-.avatar-preview {
-  width: 15rem;
-  height: 15rem;
-  position: relative;
-  border-radius: 100%;
-  border: 6px solid #F8F8F8;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
-}
-#imagePreview{
-  width: 100%;
-  height: 100%;
-  border-radius: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-
-}
 
 /* ===================
 user page
