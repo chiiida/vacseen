@@ -19,4 +19,4 @@ class CustomUser(AbstractUser):
             setattr(self, key, value)
     
     def sorted_vaccine(self):
-        return self.vaccine_set.all().order_by('vaccine_name-')
+        return self.vaccine_set.all().order_by('vaccine_name')
