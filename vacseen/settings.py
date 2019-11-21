@@ -19,7 +19,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config(
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config(
     'SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET', default='secrect')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.heroku.com']
 
 
 # Application definition
