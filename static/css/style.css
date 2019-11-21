@@ -58,6 +58,10 @@ div.message button {
 
 }
 
+div.message a {
+  color : var(--tri-clr);
+}
+
 /* ===================
 nav
 ===================   */
@@ -235,6 +239,7 @@ register page
 ===================   */
 div.register {
   background: linear-gradient(#4e6d7c, #85b3bb);
+  background-size: cover;
   color : white ;
   margin : 0px ;
   
@@ -242,7 +247,7 @@ div.register {
 
 div.main-reg {
   width: 100vw ;
-  height: 80vh;
+  height: 100vh;
 }
 
 div.main-reg h1{
@@ -254,8 +259,8 @@ div.main-reg h1{
 }
 
 div.form-group-reg {
-  padding-left : 25rem ;
-  padding-right : 25rem ;
+  padding-left : 27rem ;
+  padding-right : 3rem ;
   padding-bottom: 1rem; 
   width : 100% ; 
 }
@@ -277,8 +282,8 @@ div.form-group-reg {
   background: transparent;
   border : transparent ;
   font-size: 30px ;
-  padding-left : 500px ;
-  padding-bottom : 2rem;
+  padding-left : 60rem ;
+  padding-bottom : 1rem;
   padding-right: 2em;
   
 }
