@@ -1,0 +1,67 @@
+[
+  {
+    "model": "vaccine.VaccineModel",
+    "pk": 1,
+    "fields": {
+      "vaccine_name": "BCG",
+      "required_age": "0",
+      "required_gender": "None",
+      "stimulate_phase": "1"
+    }
+  },
+
+  {
+    "model": "vaccine.VaccineModel",
+    "pk": 2,
+    "fields": {
+      "vaccine_name": "HB1",
+      "required_age": "0",
+      "required_gender": "None",
+      "stimulate_phase": "1"
+    }
+  },
+
+  {
+    "model": "vaccine.VaccineModel",
+    "pk": 3,
+    "fields": {
+      "vaccine_name": "HB2",
+      "required_age": "0",
+      "required_gender": "None",
+      "stimulate_phase": "1"
+    }
+  },
+
+  {
+    "model": "vaccine.VaccineModel",
+    "pk": 4,
+    "fields": {
+      "vaccine_name": "DTP-HB1",
+      "required_age": "0",
+      "required_gender": "None",
+      "stimulate_phase": "1"
+    }
+  },
+
+  {
+    "model": "vaccine.VaccineModel",
+    "pk": 5,
+    "fields": {
+      "vaccine_name": "OPV1",
+      "required_age": "0",
+      "required_gender": "None",
+      "stimulate_phase": "1"
+    }
+  },
+
+  {
+    "model": "vaccine.VaccineModel",
+    "pk": 6,
+    "fields": {
+      "vaccine_name": "Hepatitis A",
+      "required_age": "0",
+      "required_gender": "None",
+      "stimulate_phase": "1"
+    }
+  }
+]

@@ -12,9 +12,12 @@ SECRET_KEY = config('SECRET_KEY', default='secrect')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
-SOCIAL_AUTH_POSTGRES_JSONFIELD = config('SOCIAL_AUTH_POSTGRES_JSONFIELD', default=False, cast=bool)
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY', default='secrect')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET', default='secrect')
+SOCIAL_AUTH_POSTGRES_JSONFIELD = config(
+    'SOCIAL_AUTH_POSTGRES_JSONFIELD', default=False, cast=bool)
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config(
+    'SOCIAL_AUTH_GOOGLE_OAUTH2_KEY', default='secrect')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config(
+    'SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET', default='secrect')
 
 ALLOWED_HOSTS = []
 
