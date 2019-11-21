@@ -15,6 +15,9 @@ class VaccineModel(models.Model):
         return 'Model: ' + self.vaccine_name
 
 class DoseModel(models.Model):
+    """
+    A dose model class
+    """
     vaccine = models.ForeignKey(VaccineModel, on_delete=models.CASCADE)
     dose_count = models.IntegerField(default=1)
     dose_duration = models.IntegerField(default=0)
@@ -37,6 +40,9 @@ class Vaccine(models.Model):
         return f"{self.user.first_name}: {self.vaccine_name}"
 
 class Dose(models.Model):
+    """
+    A user's dose class
+    """
     vaccine = models.ForeignKey(Vaccine, on_delete=models.CASCADE)
     dose_count = models.IntegerField(default=1)
     dose_duration = models.IntegerField(default=0)
@@ -45,3 +51,7 @@ class Dose(models.Model):
 
     def __str__(self):
         return f"{str(self.vaccine)}: dose {self.dose_count}" 
+
+    @property
+    def not_last_dose(self):
+        return self.dose_count != len(self.vaccine.dose_set.all())

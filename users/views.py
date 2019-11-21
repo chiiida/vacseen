@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 
 from .models import CustomUser
 from vaccine.models import VaccineModel, Vaccine, Dose
-from .forms import CustomUserForm, VaccineFormSet
+from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
 from datetime import date, time, timedelta
 
 
@@ -14,11 +14,9 @@ def calculate_age(born):
     month = abs(today.month - born.month)/10
     return (today.year - born.year)+month
 
-
 def next_date(date: date, duration: int):
     """Return date that need to receive next dose (injuction) of vaccine"""
     return date + timedelta(days=duration)
-
 
 def signup(request):
     """Get user's infomation from from then create user and save to database"""
@@ -47,7 +45,6 @@ def signup(request):
         form = CustomUserForm()
         return render(request, 'registration/signup.html', {'form': form})
 
-
 def vaccine_suggest(user: CustomUser):
     """Filter vaccine that match with user then create vaccine and save to database"""
     vaccine_model = VaccineModel.objects.all()
@@ -65,7 +62,6 @@ def vaccine_suggest(user: CustomUser):
                             dose_count=dose.dose_count,
                             dose_duration=dose.dose_duration)
             user_dose.save()
-
 
 def vaccination_signup(request):
     """Get user's vaccination from from then create vaccine and save to database"""
@@ -118,7 +114,35 @@ def upcoming_vaccine(user: CustomUser):
 def user_view(request):
     """Render user's page"""
     user = CustomUser.objects.get(id=request.user.id)
-    vaccine_set = user.vaccine_set
+    vaccine_set = user.sorted_vaccine()
     upcoming_vaccine_list = upcoming_vaccine(user)
-    context = {'user': user, 'vaccine_set': vaccine_set, 'upcoming_vaccine': upcoming_vaccine_list}
-    return render(request, 'user.html', context)
+    if request.method == 'POST':
+        form = VaccinationForm(request.POST)
+        if form.is_valid():
+            vaccine_name = form.cleaned_data.get('vaccine_name')
+            dose_count = form.cleaned_data.get('dose_count')
+            expired = form.cleaned_data.get('expired')
+            vacc_model = VaccineModel.objects.get(
+                vaccine_name=vaccine_name)
+            vaccine = Vaccine(vaccine_name=vacc_model.vaccine_name,
+                                required_age=vacc_model.required_age,
+                                required_gender=vacc_model.required_gender,
+                                user=request.user)
+            vaccine.save()
+            left_dose = list(vacc_model.dosemodel_set.all()[
+                                (dose_count-1):])
+            for dose in left_dose:
+                status = False
+                if next_date(expired, dose.dose_duration) == expired:
+                    status = True
+                user_dose = Dose(vaccine=vaccine,
+                                    dose_count=dose.dose_count,
+                                    dose_duration=dose.dose_duration,
+                                    date_expired=next_date(expired, dose.dose_duration),
+                                    received=status)
+                user_dose.save()
+        return HttpResponseRedirect(reverse('users:profile'))
+    else:
+        form = VaccinationForm()
+        context = {'user': user, 'vaccine_set': vaccine_set, 'upcoming_vaccine': upcoming_vaccine_list, 'form': form}
+        return render(request, 'user.html', context)

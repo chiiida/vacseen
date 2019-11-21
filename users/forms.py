@@ -63,3 +63,4 @@ class VaccinationForm(forms.Form):
         years=range(1940, 2020)), initial=datetime.date.today)
 
 VaccineFormSet = formset_factory(VaccinationForm, extra=1)
+

@@ -70,7 +70,9 @@
                                 <div class="dose">
                                     Dose: {{ dose.dose_count }} {{ dose.date_expired }}
                                 </div>
-                                <div class="vl"></div>
+                                {% if dose.not_last_dose %}
+                                    <div class="vl"></div>
+                                {% endif %}
                             {% else %}
                                 <a href="{% url 'users:vaccination' %}">Start tracking</a>
                             {% endif %}
