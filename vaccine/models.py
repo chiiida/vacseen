@@ -9,6 +9,7 @@ class VaccineModel(models.Model):
     vaccine_name = models.CharField(max_length=100)
     required_age = models.FloatField(default=0.0)
     required_gender = models.CharField(max_length=6, default='None')
+    stimulate_phase = models.IntegerField(default=0)
     
     def __str__(self):
         return 'Model: ' + self.vaccine_name
