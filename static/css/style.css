@@ -332,6 +332,10 @@ user page
   margin: 2%;
 }
 
+.user-upcoming > p {
+  color: var(--tri--clr);
+}
+
 .upcoming-box {
   margin: 5% auto;
   width: auto;
@@ -371,6 +375,41 @@ user page
 
 .collapse {
   color: var(--tri-clr);
+}
+
+.status {
+  background: #4e6d7c;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  position: absolute;
+}
+
+.status-received {
+  content: "";
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  top: 50%;
+  left: 50%;
+  margin: -5px 0px 0px -5px;
+}
+
+.connect-line {
+  border: solid #4e6d7c 5px;
+  height: 10px;
+}
+
+.dose {
+  margin-left: 30px;
+}
+
+.vl {
+  border-left: 6px solid #4e6d7c;
+  height: 60px;
+  margin: -5px 0px -5px 7px;
 }
 
 /* ===================
