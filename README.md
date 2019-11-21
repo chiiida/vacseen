@@ -58,14 +58,17 @@ $ venv\Scripts\activate
 ```
 (venv) pip install -r requirements.txt
 (venv) python manage.py migrate
+(venv) python manage.py loaddata vaccine/fixtures/vaccine.json
 ```
 4. Create superuser
 ```
 (venv) python manage.py createsuperuser
 ``` 
-5. Add and configure Google credential in `http://127.0.0.1:8000/` using `python manage.py runserver` to start a server. Go to `http://127.0.0.1:8000//admin` to configure Google credential by setting sites and social applications table. While setting social applications add Client id and Secret key and add your created site to available sites.
+5. Add and configure Google credential in `http://127.0.0.1:8000/admin` after starting the server.
+ - In `Site` -> set your domain field to match your domain (example. '127.0.0.1')
+ - In `Social` -> set your provider as Google, fill your `Client id` and `Secret key`.
 
-6. Exit the virtualenv when done.
+6. Exit the virtualenv when done. Have fun!
 ```
 (venv) deactivate
 ```
