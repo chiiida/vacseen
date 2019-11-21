@@ -1,5 +1,6 @@
 from django.test import TestCase
 
+from users.models import CustomUser
 from vaccine.models import VaccineModel, Vaccine, DoseModel, Dose
 
 class VaccineModelTest(TestCase):
