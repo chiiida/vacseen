@@ -18,7 +18,7 @@
 <body>
     {% if user.is_authenticated %}
     <ul class="nav-top">
-        <li><a class="nav-vac" href="#">VACSEEN</a></li>
+        <li class="nav-vac">VACSEEN</li>
         <li style="float:right" class="nav-log"><a href="{% url 'account_logout' %}">Log out</a></li>
     </ul>
     {% else %}

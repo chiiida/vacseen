@@ -4,44 +4,26 @@
 {% block content %}
 
 <div class="register">
-  <!-- <header class="logo">
-    VACSEEN
-  </header> -->
   <div class="main-reg">
     <h1>Personal Information</h1>
     <form>
-      <div class="row m-auto">
-        <hr class="separator-line">
-        </hr>
-        <div class="col-lg-6" id="contel-col">
-          <form method="post">
-            {% csrf_token %}
-            {% for field in form %}
-              <div class="form-group-reg">
-                {{ field.label_tag }}
-                {{ field }} 
-              </div>
-            {% endfor %}
-            <button type="submit" formmethod="post">Next</button>
-          </form>
-        </div>
-        <div class="col-lg-6" id="profile-col">
-          <div class="avatar-upload">
-            <div class="avatar-edit">
-              <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-              <label for="imageUpload" id="imageUploadlabel"></label>
-            </div>
-            <div class="avatar-preview">
-              <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
-              </div>
+        <div class="row m-auto">
+          <hr class="seperator-line" />
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                  <div class="form-group-reg">
+                    {{ field.label_tag }}
+                    {{ field }} 
+                  </div>
+                {% endfor %}
+              </form>
             </div>
           </div>
-        </div>
-
-      </div>
-    </form>
+          <center><button class="next" type="submit" formmethod="post">Next</button></center>
+      </form>
+      
   </div>
-
 </div>
 
 
