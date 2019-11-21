@@ -9,11 +9,12 @@ class VaccineModelTest(TestCase):
         self.assertEqual(str(vac),'Model: ' + vac.vaccine_name)
 
 
-# class VaccineTest(TestCase):
+class VaccineTest(TestCase):
     
-#     def test_string_representation(self):
-#         vac = Vaccine(vaccine_name="Hepatitis A")
-#         self.assertEqual(str(vac),vac.vaccine_name)
+    def test_string_representation(self):
+        user = CustomUser(first_name='User A')
+        vac = Vaccine(vaccine_name="Hepatitis A", user=user)
+        self.assertEqual(str(vac), f"{vac.user.first_name}: {vac.vaccine_name}")
 
 
 class DoseModelTest(TestCase):
