@@ -54,6 +54,7 @@ class CustomUserForm(forms.Form):
     birthdate = forms.DateField(widget=forms.SelectDateWidget(
         years=range(1940, 2020)), initial=datetime.date.today)
 
+
 class VaccinationForm(forms.Form):
     vaccine_name = forms.CharField(label='Vac cine name', widget=forms.TextInput(
         attrs={'class': 'form-control-vacc vacc-name', 'placeholder': 'Vaccine name', 'list': 'vaccine'}))
@@ -61,6 +62,7 @@ class VaccinationForm(forms.Form):
         attrs={'class': 'form-control-vacc vacc-dose', 'placeholder': 'Dose count', 'max': '3', 'min': '1'}))
     expired = forms.DateField(widget=forms.SelectDateWidget(
         years=range(1940, 2020)), initial=datetime.date.today)
+
 
 VaccineFormSet = formset_factory(VaccinationForm, extra=1)
 
