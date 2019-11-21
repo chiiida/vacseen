@@ -1,0 +1,107 @@
+[
+  {
+    "model": "vaccine.vaccinemodel",
+    "pk": 1,
+    "fields": {
+      "vaccine_name": "BCG",
+      "required_age": 0.0,
+      "required_gender": "None",
+      "stimulate_phase": 0
+    }
+  },
+  {
+    "model": "vaccine.vaccinemodel",
+    "pk": 2,
+    "fields": {
+      "vaccine_name": "HB1",
+      "required_age": 0.0,
+      "required_gender": "None",
+      "stimulate_phase": 0
+    }
+  },
+  {
+    "model": "vaccine.vaccinemodel",
+    "pk": 3,
+    "fields": {
+      "vaccine_name": "HB2",
+      "required_age": 0.1,
+      "required_gender": "None",
+      "stimulate_phase": 0
+    }
+  },
+  {
+    "model": "vaccine.vaccinemodel",
+    "pk": 4,
+    "fields": {
+      "vaccine_name": "DTP-HB1",
+      "required_age": 0.2,
+      "required_gender": "None",
+      "stimulate_phase": 0
+    }
+  },
+  {
+    "model": "vaccine.vaccinemodel",
+    "pk": 5,
+    "fields": {
+      "vaccine_name": "OPV1",
+      "required_age": 0.2,
+      "required_gender": "None",
+      "stimulate_phase": 0
+    }
+  },
+  {
+    "model": "vaccine.vaccinemodel",
+    "pk": 6,
+    "fields": {
+      "vaccine_name": "Hepatitis A",
+      "required_age": 1.0,
+      "required_gender": "None",
+      "stimulate_phase": 0
+    }
+  },
+  {
+    "model": "vaccine.vaccinemodel",
+    "pk": 7,
+    "fields": {
+      "vaccine_name": "Influenza",
+      "required_age": 0.0,
+      "required_gender": "None",
+      "stimulate_phase": 10
+    }
+  },
+  {
+    "model": "vaccine.dosemodel",
+    "pk": 1,
+    "fields": { "vaccine": 1, "dose_count": 1, "dose_duration": 0 }
+  },
+  {
+    "model": "vaccine.dosemodel",
+    "pk": 2,
+    "fields": { "vaccine": 2, "dose_count": 1, "dose_duration": 0 }
+  },
+  {
+    "model": "vaccine.dosemodel",
+    "pk": 3,
+    "fields": { "vaccine": 3, "dose_count": 1, "dose_duration": 0 }
+  },
+  {
+    "model": "vaccine.dosemodel",
+    "pk": 4,
+    "fields": { "vaccine": 4, "dose_count": 1, "dose_duration": 0 }
+  },
+  {
+    "model": "vaccine.dosemodel",
+    "pk": 5,
+    "fields": { "vaccine": 5, "dose_count": 1, "dose_duration": 0 }
+  },
+  {
+    "model": "vaccine.dosemodel",
+    "pk": 6,
+    "fields": { "vaccine": 6, "dose_count": 1, "dose_duration": 0 }
+  },
+  {
+    "model": "vaccine.dosemodel",
+    "pk": 7,
+    "fields": { "vaccine": 6, "dose_count": 2, "dose_duration": 180 }
+  }
+]
