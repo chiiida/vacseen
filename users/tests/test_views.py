@@ -10,19 +10,24 @@ import datetime
 from django.test import TestCase, Client
 from users.views import signup, vaccination_signup
 
-class ViewsTests(TestCase) :
+class ViewsTests(TestCase):
+    
+    def setUp(self):
+       self.client = Client()
 
-    def test_index(self) :
-        c = Client()
-        response = c.get(path='')
+    def test_index(self):
+        response = self.client.get(path='')
         status = response.status_code
         self.assertEqual(status, 200)
     
     def test_signup(self) :
-        c = Client()
-        response = c.get(path='/users/signup/')
+        response = self.client.get(path='/users/signup/')
         status = response.status_code
         self.assertEqual(status, 200)
+
+    def test_without_login_redirect(self):
+        response = self.client.get(path='/users/profile/', follow=True)
+        self.assertRedirects(response, '/?next=/users/profile/')
 
     # def test_profile(self) :
     #     c = Client()
