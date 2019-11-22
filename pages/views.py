@@ -1,6 +1,4 @@
 from django.shortcuts import render, redirect, render_to_response
-
-# Create your views here.
 from django.views.generic import TemplateView
 
 
@@ -13,6 +11,7 @@ def LoginHandler(request):
         return redirect('users:profile')
     else:
         return redirect('users:signup')
+
 
 def handler404(request, exception, template_name="404.html"):
     response = render_to_response("404.html")
