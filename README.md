@@ -6,7 +6,8 @@ Vacseen
 </p>
 
 [![Build Status](https://travis-ci.com/llleyelll/vacseen.svg?token=Vf6PJtHdqGqqThMwgTem&branch=master)](https://travis-ci.com/llleyelll/vacseen)
-![Codecov branch](https://img.shields.io/codecov/c/github/llleyelll/vacseen/tracking-vaccine)
+
+Tracking-vaccine branch: ![Codecov branch](https://img.shields.io/codecov/c/github/llleyelll/vacseen/tracking-vaccine)
 
 
 **Vacseen** is an online tracker that gives user help related to basic vaccines such as type of vaccine, suggestions according to user's gender and age such as that a 1-month old newborn baby needs to take the second dose of Hepatitis B. And also notifies the user if he/she needs to get the vaccine again. It is accessible anywhere and anytime through the “Internet”, which is surely more convenient than carrying or finding a vaccine book.
