@@ -12,6 +12,7 @@ GENDER_CHOICES = [
 
 
 class CustomUserCreationForm(UserCreationForm):
+    """ User's profile input form """
     first_name = forms.CharField(label='First name',
                                  widget=forms.TextInput(
                                      attrs={'class': 'form-control-reg',
@@ -41,6 +42,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
+    """ User's profile change input form """
     class Meta:
         model = CustomUser
         fields = ('first_name', 'last_name', 'contact',
@@ -48,6 +50,7 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class CustomUserForm(forms.Form):
+    """ User's profile input form """
     first_name = forms.CharField(label='First name', widget=forms.TextInput(
         attrs={'class': 'form-control-reg',
                'placeholder': 'Enter First Name'}))
@@ -66,6 +69,7 @@ class CustomUserForm(forms.Form):
 
 
 class VaccinationForm(forms.Form):
+    """ User's vaccination input form """
     vaccine_name = forms.CharField(label='Vaccine name',
                                    widget=forms.TextInput(
                                        attrs={'class': 'form-control-vacc vacc-name',

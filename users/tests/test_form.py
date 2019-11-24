@@ -7,8 +7,10 @@ from users.forms import *
 
 class FormsTest(TestCase):
 
-    def setup(self):
-        user = CustomUser.objects.create(first_name='User', last_name='User')
+    def test_delete_password_field(self):
+        form = CustomUserCreationForm()
+        self.assertTrue('password1' not in form.fields)
+        self.assertTrue('password2' not in form.fields)
 
     def test_valid_custom_user_form(self):
         """Test the valid user form."""
@@ -46,7 +48,7 @@ class FormsTest(TestCase):
             })
         self.assertTrue(form.is_valid())
 
-    def test_valid_vaccination_form(self):
+    def test_invalid_vaccination_form(self):
         """Test the invalid vaccination form."""
         form = VaccinationForm(
             data={
@@ -56,7 +58,7 @@ class FormsTest(TestCase):
             })
         self.assertFalse(form.is_valid())
 
-    def test_valid_vaccine_form_set(self):
+    def test_valid_vaccination_form_set(self):
         """Test the valid vaccination form set."""
         formset = VaccineFormSet(
             data={
@@ -71,7 +73,7 @@ class FormsTest(TestCase):
             })
         self.assertTrue(formset.is_valid())
 
-    def test_invalid_vaccine_form_set(self):
+    def test_invalid_vaccination_form_set(self):
         """Test the invalid vaccination form set."""
         formset = VaccineFormSet(
             data={
