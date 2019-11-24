@@ -23,20 +23,20 @@ class ProfileViewTest(TestCase):
         self.client = APIClient()
         self.response = user_view(self.request)
 
-    # def test_index(self):
-    #     response = self.client.get(path='')
-    #     status = response.status_code
-    #     self.assertEqual(status, 200)
+    def test_index(self):
+        response = self.client.get(path='')
+        status = response.status_code
+        self.assertEqual(status, 200)
 
-    # def test_signup(self):
-    #     response = self.client.get(path='/users/signup/')
-    #     status = response.status_code
-    #     self.assertEqual(status, 200)
+    def test_signup(self):
+        response = self.client.get(path='/users/signup/')
+        status = response.status_code
+        self.assertEqual(status, 200)
 
-    def test_user_view_without_login(self):
-        # self.assertTrue(200, self.response.status_code)
-        self.response.client = Client()
-        self.assertTemplateUsed(self.response, 'index.html')
+    # def test_user_view_without_login(self):
+    #     # self.assertTrue(200, self.response.status_code)
+    #     self.response.client = Client()
+    #     self.assertTemplateUsed(self.response, 'index.html')
 
     def test_user_view(self):
         self.client.force_authenticate(user=self.user)
