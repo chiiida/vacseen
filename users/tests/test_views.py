@@ -18,10 +18,10 @@ class ProfileViewTest(TestCase):
         self.user = CustomUser.objects.create(first_name='User A')
         self.user.save()
         self.request_factory = RequestFactory()
-        self.request = self.request_factory.get('/users/profile/')
+        self.request = self.request_factory.get('/users/profile/2/')
         self.request.user = self.user
         self.client = APIClient()
-        self.response = user_view(self.request)
+        self.response = user_view(self.request, user_id=1)
 
     def test_index(self):
         response = self.client.get(path='')
