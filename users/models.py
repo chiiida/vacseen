@@ -3,6 +3,7 @@ from django.db import models
 from datetime import date, time, timedelta
 
 class CustomUser(AbstractUser):
+    """Custom user model"""
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     contact = models.CharField(max_length=30, blank=True, null=True)

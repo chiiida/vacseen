@@ -56,4 +56,4 @@ class Dose(models.Model):
 
     @property
     def not_last_dose(self):
-        return self.dose_count != len(self.vaccine.dose_set.all())
+        return self.dose_count != self.vaccine.dose_set.count()

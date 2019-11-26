@@ -11,7 +11,7 @@ class CustomUserTests(TestCase):
             first_name='UserA', email='private@gmail.com')
         self.user.save()
 
-    def test_user_string(self):
+    def test_string_representation(self):
         self.assertEqual('private@gmail.com', str(self.user))
 
     def test_update_user_info(self):

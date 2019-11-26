@@ -33,10 +33,10 @@ INSTALLED_APPS = [
     'allauth.account',  # new
     'allauth.socialaccount',  # new
     'allauth.socialaccount.providers.google',  # new
+    'rest_framework',
     'users',  # new
     'pages',  # new
     'vaccine',
-    'rest_framework',
 ]
 
 REST_FRAMEWORK = {
@@ -123,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Bangkok'
 
 USE_I18N = True
 
