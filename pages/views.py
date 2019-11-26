@@ -1,6 +1,5 @@
-from django.shortcuts import render, redirect
-
-# Create your views here.
+from django.shortcuts import render, redirect, render_to_response
+from django.views.generic import TemplateView
 
 
 def IndexView(request):
