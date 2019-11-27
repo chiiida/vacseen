@@ -33,9 +33,13 @@
       <li style="float:right" class="nav-log">
         <a href="{% url 'account_logout' %}">Log out</a>
       </li>
-      <!-- {% if havenoti %}
-        <li style="float:right" class="nav-log"><a href="{% url 'account_logout' %}"><i class="fas fa-bell nav-notibell"></i></a></li>
-        {% endif %} -->
+      {% if have_noti %}
+        <li style="float:right" class="nav-log">
+          <a href="{% url 'account_logout' %}">
+            <img src="/static/image/canvas.png" class="nav-noti">
+          </a>
+        </li>
+      {% endif %}
     </ul>
     {% else %}
     <ul class="nav-top">
