@@ -44,9 +44,9 @@ class PagesViewsTest(TestCase):
         self.assertEqual(status, 404)
         self.assertTemplateUsed(response, '404.html')
     
-    def test_500_handler(self):
-        request = Client().get(path='/')
-        response = handler500(request)
-        status = response.status_code
-        self.assertEqual(status, 500)
-        # self.assertTemplateUsed(response, '500.html')
+    # def test_500_handler(self):
+    #     request = Client().get(path='/')
+    #     response = handler500(request)
+    #     status = response.status_code
+    #     self.assertEqual(status, 500)
+    #     self.assertTemplateUsed(response, '500.html')
