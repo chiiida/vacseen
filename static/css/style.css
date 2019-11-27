@@ -108,6 +108,12 @@ li a {
   color: var(--pri-clr);
 }
 
+.nav-noti{
+  width: 30px;
+  height: auto;
+
+}
+
 .logo {
   padding-top: 1rem;
   padding-left: 2rem;

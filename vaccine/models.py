@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import CustomUser
+from datetime import date
 
 
 class VaccineModel(models.Model):
@@ -37,6 +38,7 @@ class Vaccine(models.Model):
     required_age = models.FloatField(default=0.0)
     required_gender = models.CharField(max_length=6, default='None')
     stimulate_phase = models.IntegerField(default=0)
+    taken_date = models.DateField(default=date.today)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     def __str__(self):
