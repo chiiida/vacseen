@@ -8,13 +8,17 @@ from .forms import CustomUserForm, VaccineFormSet
 from datetime import date, timedelta
 
 
-def base_view(request):
+def get_usernoti(request):
     # TODO get user
+    user = CustomUser.objects.get(id=request.user.id)
+    this_year = date.today().year
     # TODO get user vaccine
+    vaccine_set = user.sorted_vaccine()
     # TODO get vaccine nearing date
-    # TODO if yes -> user_noti = true : false
-    # render(req, 'template', {user_noti:user_noti})
-    pass
+    for vaccine in vaccine_set:
+        if vaccine.taken_date.year + vaccine.stimulate_phase >= this_year:
+            return True
+    return False
 
 
 def calculate_age(born):
@@ -29,32 +33,17 @@ def next_date(date: date, duration: int):
     return date + timedelta(days=duration)
 
 
-def signup(request):
-    """Get user's infomation from from then create user and save to database"""
-    if request.method == 'POST':
-        form = CustomUserForm(request.POST)
-        user = CustomUser.objects.get(pk=request.user.pk)
-        if form.is_valid():
-            first_name = form.cleaned_data.get('first_name')
-            last_name = form.cleaned_data.get('last_name')
-            contact = form.cleaned_data.get('contact')
-            emergency_contact = form.cleaned_data.get('emergency_contact')
-            gender = form.cleaned_data.get('gender')
-            birthdate = form.cleaned_data.get('birthdate')
-            age = calculate_age(birthdate)
-            user.update_profile(username=user.email,
-                                first_name=first_name,
-                                last_name=last_name,
-                                contact=contact,
-                                emergency_contact=emergency_contact,
-                                gender=gender,
-                                birthdate=birthdate,
-                                age=age)
-            user.save()
-            return HttpResponseRedirect(reverse('users:vaccination'))
-    else:
-        form = CustomUserForm()
-        return render(request, 'registration/signup.html', {'form': form})
+def upcoming_vaccine(user: CustomUser):
+    """Return list of upcoming vaccines in 10 days"""
+    today = date.today()
+    upcoming_vaccine_list = []
+    for vaccine in user.vaccine_set.all():
+        for dose in vaccine.dose_set.all():
+            if dose.date_expired:
+                delta = dose.date_expired - today
+                if 0 < delta.days <= 7 and not dose.received:
+                    upcoming_vaccine_list.append(dose)
+    return upcoming_vaccine_list
 
 
 def vaccine_suggest(user: CustomUser):
@@ -81,7 +70,36 @@ def vaccine_suggest(user: CustomUser):
             user_dose.save()
 
 
-def vaccination_signup(request):
+def signup_view(request):
+    """Get user's infomation from from then create user and save to database"""
+    if request.method == 'POST':
+        form = CustomUserForm(request.POST)
+        user = CustomUser.objects.get(pk=request.user.pk)
+        if form.is_valid():
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            contact = form.cleaned_data.get('contact')
+            emergency_contact = form.cleaned_data.get('emergency_contact')
+            gender = form.cleaned_data.get('gender')
+            birthdate = form.cleaned_data.get('birthdate')
+            age = calculate_age(birthdate)
+            user.update_profile(username=user.email,
+                                first_name=first_name,
+                                last_name=last_name,
+                                contact=contact,
+                                emergency_contact=emergency_contact,
+                                gender=gender,
+                                birthdate=birthdate,
+                                age=age)
+            user.save()
+            return HttpResponseRedirect(reverse('users:vaccination'))
+    else:
+        form = CustomUserForm()
+        return render(request, 'registration/signup.html',
+                      {'form': form, 'have_noti': False})
+
+
+def vaccination_signup_view(request):
     """
     Get user's vaccination from from then create vaccine and save to database
     """
@@ -99,6 +117,7 @@ def vaccination_signup(request):
                 vaccine = Vaccine(vaccine_name=vacc_model.vaccine_name,
                                   required_age=vacc_model.required_age,
                                   required_gender=vacc_model.required_gender,
+                                  taken_date=expired,
                                   user=request.user)
                 vaccine.save()
                 left_dose = list(vacc_model.dosemodel_set.all()[
@@ -117,20 +136,7 @@ def vaccination_signup(request):
             vaccine_suggest(request.user)
             return HttpResponseRedirect(reverse('users:profile'))
     return render(request, 'registration/vaccination.html',
-                  {'formset': formset, })
-
-
-def upcoming_vaccine(user: CustomUser):
-    """Return list of upcoming vaccines in 10 days"""
-    today = date.today()
-    upcoming_vaccine_list = []
-    for vaccine in user.vaccine_set.all():
-        for dose in vaccine.dose_set.all():
-            if dose.date_expired:
-                delta = dose.date_expired - today
-                if 0 < delta.days <= 7 and not dose.received:
-                    upcoming_vaccine_list.append(dose)
-    return upcoming_vaccine_list
+                  {'formset': formset, 'have_noti': False})
 
 
 @login_required(login_url='home')
@@ -138,7 +144,10 @@ def user_view(request):
     """Render user's page"""
     user = CustomUser.objects.get(id=request.user.id)
     vaccine_set = user.sorted_vaccine()
+    have_noti = get_usernoti(request)
     upcoming_vaccine_list = upcoming_vaccine(user)
-    context = {'user': user, 'vaccine_set': vaccine_set,
+    context = {'user': user,
+               'vaccine_set': vaccine_set,
+               'have_noti': have_noti,
                'upcoming_vaccine': upcoming_vaccine_list}
     return render(request, 'user.html', context)
