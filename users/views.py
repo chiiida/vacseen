@@ -33,6 +33,45 @@ def next_date(date: date, duration: int):
     return date + timedelta(days=duration)
 
 
+def vaccine_suggest(user: CustomUser):
+    """
+    Filter vaccine that match with user
+    then create vaccine and save to database
+    """
+    vaccine_model = VaccineModel.objects.all()
+    user_vaccine_list = []
+    if user.vaccine_set:
+        user_vaccine_list = [
+            vaccine.vaccine_name for vaccine in user.vaccine_set.all()]
+    vaccines = [vaccine for vaccine in vaccine_model
+                if vaccine.vaccine_name not in user_vaccine_list
+                and user.age >= vaccine.required_age]
+    for vaccine in vaccines:
+        user_vaccine = Vaccine(vaccine_name=vaccine.vaccine_name,
+                               required_age=vaccine.required_age,
+                               required_gender=vaccine.required_gender,
+                               user=user)
+        user_vaccine.save()
+        for dose in vaccine.dosemodel_set.all():
+            user_dose = Dose(vaccine=user_vaccine,
+                             dose_count=dose.dose_count,
+                             dose_duration=dose.dose_duration)
+            user_dose.save()
+
+
+def upcoming_vaccine(user: CustomUser):
+    """Return list of upcoming vaccines in 10 days"""
+    today = date.today()
+    upcoming_vaccine_list = []
+    for vaccine in user.vaccine_set.all():
+        for dose in vaccine.dose_set.all():
+            if dose.date_expired:
+                delta = dose.date_expired - today
+                if not dose.received and 0 < delta.days <= 7:
+                    upcoming_vaccine_list.append(dose)
+    return upcoming_vaccine_list
+
+
 def signup_view(request):
     """Get user's infomation from from then create user and save to database"""
     if request.method == 'POST':
@@ -60,32 +99,6 @@ def signup_view(request):
         form = CustomUserForm()
         return render(request, 'registration/signup.html',
                       {'form': form, 'have_noti': False})
-
-
-def vaccine_suggest(user: CustomUser):
-    """
-    Filter vaccine that match with user
-    then create vaccine and save to database
-    """
-    vaccine_model = VaccineModel.objects.all()
-    user_vaccine_list = []
-    if user.vaccine_set:
-        user_vaccine_list = [
-            vaccine.vaccine_name for vaccine in user.vaccine_set.all()]
-    vaccines = [vaccine for vaccine in vaccine_model
-                if vaccine.vaccine_name not in user_vaccine_list
-                and user.age >= vaccine.required_age]
-    for vaccine in vaccines:
-        user_vaccine = Vaccine(vaccine_name=vaccine.vaccine_name,
-                               required_age=vaccine.required_age,
-                               required_gender=vaccine.required_gender,
-                               user=user)
-        user_vaccine.save()
-        for dose in vaccine.dosemodel_set.all():
-            user_dose = Dose(vaccine=user_vaccine,
-                             dose_count=dose.dose_count,
-                             dose_duration=dose.dose_duration)
-            user_dose.save()
 
 
 def vaccination_signup_view(request):
@@ -128,19 +141,6 @@ def vaccination_signup_view(request):
                                             args=(request.user.id,)))
     return render(request, 'registration/vaccination.html',
                   {'formset': formset, 'have_noti': False})
-
-
-def upcoming_vaccine(user: CustomUser):
-    """Return list of upcoming vaccines in 10 days"""
-    today = date.today()
-    upcoming_vaccine_list = []
-    for vaccine in user.vaccine_set.all():
-        for dose in vaccine.dose_set.all():
-            if dose.date_expired:
-                delta = dose.date_expired - today
-                if not dose.received and 0 < delta.days <= 7:
-                    upcoming_vaccine_list.append(dose)
-    return upcoming_vaccine_list
 
 
 @login_required(login_url='home')
