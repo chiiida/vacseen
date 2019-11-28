@@ -36,16 +36,3 @@ class VaccineViewsTest(TestCase):
                          dose_duration=0,
                          received=False)
         self.dose.save()
-
-    def test_track_first_date(self):
-        request = self.request_factory.get(
-            reverse('users:profile', args=(self.user.id,)))
-        request.user = self.user
-        self.client.force_authenticate(user=self.user)
-        data = {'expired': "2019-12-01"}
-        # form = DateExpiredForm(data={'expired': "2019-12-01"})
-        track_first_date(request, vaccine_id=self.vaccine.id)
-        response = self.client.post(
-            reverse('vaccine:trackfirstdate', args=(self.vaccine.id,)), data)
-        self.assertEqual('2019-12-01', self.dose.date_expired)
-        self.assertFalse(self.dose.received)
