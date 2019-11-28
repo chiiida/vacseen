@@ -98,7 +98,7 @@ def vaccination_signup(request):
                         user_dose = Dose(vaccine=vaccine,
                                          dose_count=dose.dose_count,
                                          dose_duration=dose.dose_duration,
-                                         date_expired=next_date(
+                                         date_taken=next_date(
                                              expired, dose.dose_duration),
                                          received=status)
                         user_dose.save()
@@ -114,8 +114,8 @@ def upcoming_vaccine(user: CustomUser):
     upcoming_vaccine_list = []
     for vaccine in user.vaccine_set.all():
         for dose in vaccine.dose_set.all():
-            if dose.date_expired:
-                delta = dose.date_expired - today
+            if dose.date_taken:
+                delta = dose.date_taken - today
                 if not dose.received and 0 < delta.days <= 7:
                     upcoming_vaccine_list.append(dose)
     return upcoming_vaccine_list
