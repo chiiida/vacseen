@@ -9,15 +9,22 @@ from datetime import date, timedelta
 
 
 def get_usernoti(request):
-    # TODO get user
+    """
+    compute if user have a vaccine that need to be retaken within 1 year.
+    """
+    # get user
     user = CustomUser.objects.get(id=request.user.id)
     this_year = date.today().year
-    # TODO get user vaccine
+    # get user vaccine
     vaccine_set = user.sorted_vaccine()
-    # TODO get vaccine nearing date
+    # get vaccine nearing date
     for vaccine in vaccine_set:
-        if vaccine.taken_date.year + vaccine.stimulate_phase >= this_year:
-            return True
+        # TODO get vaccine dose
+        for dose in vaccine.dose_set.all():
+            if dose.date_taken and not dose.received:
+                # TODO compare dose.date_expired with today
+                if (dose.date_taken.year+vaccine.stimulate_phase <= this_year):
+                    return True
     return False
 
 
@@ -65,8 +72,8 @@ def upcoming_vaccine(user: CustomUser):
     upcoming_vaccine_list = []
     for vaccine in user.vaccine_set.all():
         for dose in vaccine.dose_set.all():
-            if dose.date_expired:
-                delta = dose.date_expired - today
+            if dose.date_taken:
+                delta = dose.date_taken - today
                 if not dose.received and 0 < delta.days <= 7:
                     upcoming_vaccine_list.append(dose)
     return upcoming_vaccine_list
@@ -132,7 +139,7 @@ def vaccination_signup_view(request):
                         user_dose = Dose(vaccine=vaccine,
                                          dose_count=dose.dose_count,
                                          dose_duration=dose.dose_duration,
-                                         date_expired=next_date(
+                                         date_taken=next_date(
                                              expired, dose.dose_duration),
                                          received=status)
                         user_dose.save()
@@ -149,6 +156,7 @@ def user_view(request, user_id: int):
     user = CustomUser.objects.get(id=user_id)
     vaccine_set = user.sorted_vaccine()
     have_noti = get_usernoti(request)
+    print(have_noti)
     upcoming_vaccine_list = upcoming_vaccine(user)
     context = {'user': user,
                'vaccine_set': vaccine_set,

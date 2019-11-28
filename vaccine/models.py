@@ -40,7 +40,6 @@ class Vaccine(models.Model):
     required_age = models.FloatField(default=0.0)
     required_gender = models.CharField(max_length=6, default='None')
     stimulate_phase = models.IntegerField(default=0)
-    taken_date = models.DateField(default=date.today)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -54,7 +53,7 @@ class Dose(models.Model):
     vaccine = models.ForeignKey(Vaccine, on_delete=models.CASCADE)
     dose_count = models.IntegerField(default=1)
     dose_duration = models.IntegerField(default=0)
-    date_expired = models.DateField(blank=True, null=True)
+    date_taken = models.DateField(blank=True, null=True)
     received = models.BooleanField(default=False)
 
     def __str__(self):
