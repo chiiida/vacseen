@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 
 from .models import CustomUser
 from vaccine.models import VaccineModel, Vaccine, Dose
-from .forms import CustomUserForm, VaccineFormSet
+from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
 from datetime import date, timedelta
 
 
@@ -169,10 +169,11 @@ def user_view(request, user_id: int):
     user = CustomUser.objects.get(id=user_id)
     vaccine_set = user.sorted_vaccine()
     have_noti = get_usernoti(request)
-    print(have_noti)
     upcoming_vaccine_list = upcoming_vaccine(user)
+    form = VaccinationForm()
     context = {'user': user,
                'vaccine_set': vaccine_set,
                'have_noti': have_noti,
-               'upcoming_vaccine': upcoming_vaccine_list}
+               'upcoming_vaccine': upcoming_vaccine_list,
+               'form': form}
     return render(request, 'user.html', context)
