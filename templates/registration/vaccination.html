@@ -3,9 +3,6 @@
 
 {% block content %}
 <div class="vacc-bg m-auto">
-    <!-- <header>
-        <div class="logo">VACSEEN</div>
-    </header> -->
 
     <div class="col-lg-8 m-auto">
         <div class="page-title">Vaccination</div>
@@ -23,6 +20,30 @@
                         </div>
                         {{ form.vaccine_name }}
                         <datalist placeholder="Vaccine name" id="vaccine">
+                            <!-- <option value="BCG"></option>
+                            <option value="dT"></option>
+                            <option value="DTP4"></option>
+                            <option value="DTP5"></option>
+                            <option value="DTP-HB1"></option>
+                            <option value="DTP-HB2"></option>
+                            <option value="DTP-HB3"></option>
+                            <option value="HB"></option>
+                            <option value="HB1"></option>
+                            <option value="HB2"></option>
+                            <option value="HPV1"></option>
+                            <option value="HPV2"></option>
+                            <option value="IPV"></option>
+                            <option value="LAJE"></option>
+                            <option value="LAJE1"></option>
+                            <option value="LAJE2"></option>
+                            <option value="MMR1"></option>
+                            <option value="MMR2"></option>
+                            <option value="MR"></option>
+                            <option value="OPV1"></option>
+                            <option value="OPV2"></option>
+                            <option value="OPV3"></option>
+                            <option value="OPV4"></option>
+                            <option value="OPV5"></option> -->
                             <option value="BCG">
                             <option value="HB1">
                             <option value="HB2">
@@ -37,27 +58,32 @@
                         {% endfor %}
                     </div>
                     <div class="row m-auto">
-                        <button class="add-form-row add-vac-btn" formmethod="post">
+                        <button class="add-form-row add-vac-btn">
                             <p>+</p>
                         </button>
                     </div>
                     <div class="terms-box mx-auto">
                         <h5 class="terms-title">Terms and Conditions</h5>
-                        <p class="terms-sub">&emsp;&emsp;&emsp;Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
+                        <p class="terms-sub">&emsp;&emsp;&emsp;Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Impedit
                             magni veritatis, odit, autem dolorum
-                            temporibus molestiae quam itaque eos velit atque quia voluptates nihil quae ut rerum alias. Numquam,
-                            nostrum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit magni veritatis, odit,
+                            temporibus molestiae quam itaque eos velit atque quia voluptates nihil quae ut rerum alias.
+                            Numquam,
+                            nostrum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit magni veritatis,
+                            odit,
                             autem dolorum
-                            temporibus molestiae quam itaque eos velit atque quia voluptates nihil quae ut rerum alias. Numquam,
+                            temporibus molestiae quam itaque eos velit atque quia voluptates nihil quae ut rerum alias.
+                            Numquam,
                             nostrum. </p>
                     </div>
                     <div style="padding-top: 30px; padding-left: 5%;" class="form-check terms-check m-auto">
-                        <input required style="margin-top: 1px;" class="form-check-input" type="checkbox" value="" id="terms-check-box">
+                        <input required style="margin-top: 1px;" class="form-check-input" type="checkbox" value=""
+                            id="terms-check-box">
                         <label class="form-check-label terms-check-text" for="defaultCheck1">
                             <h6>I have read and agree to the terms and conditions</h6>
                         </label>
                     </div>
-                    <button type="submit" class="save-btn float-right">Save</button>
+                    <button type="submit" class="save-btn float-right" formmethod="post">Save</button>
                 </form>
             </div>
         </div>
