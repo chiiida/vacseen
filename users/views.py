@@ -21,8 +21,8 @@ def get_usernoti(request):
     return False
 
 
-def calculate_age(born):
-    """Return user's age compute from birthdate"""
+def calculate_age(born: date):
+    """Return user's age computed from birthdate"""
     today = date.today()
     month = abs(today.month - born.month)/10
     return (today.year - born.year)+month
@@ -31,43 +31,6 @@ def calculate_age(born):
 def next_date(date: date, duration: int):
     """Return date that need to receive next dose (injuction) of vaccine"""
     return date + timedelta(days=duration)
-
-
-def upcoming_vaccine(user: CustomUser):
-    """Return list of upcoming vaccines in 10 days"""
-    today = date.today()
-    upcoming_vaccine_list = []
-    for vaccine in user.vaccine_set.all():
-        for dose in vaccine.dose_set.all():
-            if dose.date_expired:
-                delta = dose.date_expired - today
-                if 0 < delta.days <= 7 and not dose.received:
-                    upcoming_vaccine_list.append(dose)
-    return upcoming_vaccine_list
-
-
-def vaccine_suggest(user: CustomUser):
-    """
-    Filter vaccine that match with user
-    then create vaccine and save to database
-    """
-    vaccine_model = VaccineModel.objects.all()
-    user_vaccine_list = [
-        vaccine.vaccine_name for vaccine in user.vaccine_set.all()]
-    vaccines = [vaccine for vaccine in vaccine_model
-                if vaccine.vaccine_name not in user_vaccine_list
-                and user.age >= vaccine.required_age]
-    for vaccine in vaccines:
-        user_vaccine = Vaccine(vaccine_name=vaccine.vaccine_name,
-                               required_age=vaccine.required_age,
-                               required_gender=vaccine.required_gender,
-                               user=user)
-        user_vaccine.save()
-        for dose in vaccine.dosemodel_set.all():
-            user_dose = Dose(vaccine=user_vaccine,
-                             dose_count=dose.dose_count,
-                             dose_duration=dose.dose_duration)
-            user_dose.save()
 
 
 def signup_view(request):
@@ -99,9 +62,36 @@ def signup_view(request):
                       {'form': form, 'have_noti': False})
 
 
+def vaccine_suggest(user: CustomUser):
+    """
+    Filter vaccine that match with user
+    then create vaccine and save to database
+    """
+    vaccine_model = VaccineModel.objects.all()
+    user_vaccine_list = []
+    if user.vaccine_set:
+        user_vaccine_list = [
+            vaccine.vaccine_name for vaccine in user.vaccine_set.all()]
+    vaccines = [vaccine for vaccine in vaccine_model
+                if vaccine.vaccine_name not in user_vaccine_list
+                and user.age >= vaccine.required_age]
+    for vaccine in vaccines:
+        user_vaccine = Vaccine(vaccine_name=vaccine.vaccine_name,
+                               required_age=vaccine.required_age,
+                               required_gender=vaccine.required_gender,
+                               user=user)
+        user_vaccine.save()
+        for dose in vaccine.dosemodel_set.all():
+            user_dose = Dose(vaccine=user_vaccine,
+                             dose_count=dose.dose_count,
+                             dose_duration=dose.dose_duration)
+            user_dose.save()
+
+
 def vaccination_signup_view(request):
     """
-    Get user's vaccination from from then create vaccine and save to database
+    Get user's vaccination from from
+    then create vaccine and save to database.
     """
     if request.method == 'GET':
         formset = VaccineFormSet(request.GET or None)
@@ -109,40 +99,54 @@ def vaccination_signup_view(request):
         formset = VaccineFormSet(request.POST)
         if formset.is_valid():
             for form in formset:
-                vaccine_name = form.cleaned_data.get('vaccine_name')
-                dose_count = form.cleaned_data.get('dose_count')
-                expired = form.cleaned_data.get('expired')
-                vacc_model = VaccineModel.objects.get(
-                    vaccine_name=vaccine_name)
-                vaccine = Vaccine(vaccine_name=vacc_model.vaccine_name,
-                                  required_age=vacc_model.required_age,
-                                  required_gender=vacc_model.required_gender,
-                                  taken_date=expired,
-                                  user=request.user)
-                vaccine.save()
-                left_dose = list(vacc_model.dosemodel_set.all()[
-                                 (dose_count-1):])
-                for dose in left_dose:
-                    status = False
-                    if next_date(expired, dose.dose_duration) == expired:
-                        status = True
-                    user_dose = Dose(vaccine=vaccine,
-                                     dose_count=dose.dose_count,
-                                     dose_duration=dose.dose_duration,
-                                     date_expired=next_date(
-                                         expired, dose.dose_duration),
-                                     received=status)
-                    user_dose.save()
+                if form.cleaned_data.get('vaccine_name'):
+                    vaccine_name = form.cleaned_data.get('vaccine_name')
+                    dose_count = form.cleaned_data.get('dose_count')
+                    expired = form.cleaned_data.get('expired')
+                    vacModel = VaccineModel.objects.get(
+                        vaccine_name=vaccine_name)
+                    vaccine = Vaccine(vaccine_name=vacModel.vaccine_name,
+                                      required_age=vacModel.required_age,
+                                      required_gender=vacModel.required_gender,
+                                      user=request.user)
+                    vaccine.save()
+                    left_dose = list(vacModel.dosemodel_set.all()[
+                                    (dose_count-1):])
+                    for dose in left_dose:
+                        status = False
+                        if next_date(expired, dose.dose_duration) == expired:
+                            status = True
+                        user_dose = Dose(vaccine=vaccine,
+                                         dose_count=dose.dose_count,
+                                         dose_duration=dose.dose_duration,
+                                         date_expired=next_date(
+                                             expired, dose.dose_duration),
+                                         received=status)
+                        user_dose.save()
             vaccine_suggest(request.user)
-            return HttpResponseRedirect(reverse('users:profile'))
+        return HttpResponseRedirect(reverse('users:profile',
+                                            args=(request.user.id,)))
     return render(request, 'registration/vaccination.html',
                   {'formset': formset, 'have_noti': False})
 
 
+def upcoming_vaccine(user: CustomUser):
+    """Return list of upcoming vaccines in 10 days"""
+    today = date.today()
+    upcoming_vaccine_list = []
+    for vaccine in user.vaccine_set.all():
+        for dose in vaccine.dose_set.all():
+            if dose.date_expired:
+                delta = dose.date_expired - today
+                if not dose.received and 0 < delta.days <= 7:
+                    upcoming_vaccine_list.append(dose)
+    return upcoming_vaccine_list
+
+
 @login_required(login_url='home')
-def user_view(request):
+def user_view(request, user_id: int):
     """Render user's page"""
-    user = CustomUser.objects.get(id=request.user.id)
+    user = CustomUser.objects.get(id=user_id)
     vaccine_set = user.sorted_vaccine()
     have_noti = get_usernoti(request)
     upcoming_vaccine_list = upcoming_vaccine(user)

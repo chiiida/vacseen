@@ -24,9 +24,9 @@
                     {% for dose in upcoming_vaccine %}
                     <div class="one-check">
                         <div>
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <button><a href="{% url 'vaccine:received' dose.id %}">✔</a></button>
                             <label class="form-check-label" for="defaultCheck1">
-                                {{ dose }}
+                                {{ dose.vaccine.vaccine_name }}: dose {{ dose.dose_count }}
                             </label>
                         </div>
                         <div>
@@ -74,7 +74,15 @@
                                     <div class="vl"></div>
                                 {% endif %}
                             {% else %}
-                                <a href="{% url 'users:vaccination' %}">Start tracking</a>
+                                {% if dose.dose_count == 1 %}
+                                <form action="{% url 'vaccine:trackfirstdate' vaccine.id %}" method="post" class="col-lg-12">
+                                    {% csrf_token %}
+                                    <div class="vacc-date">
+                                        {{ form.expired }}
+                                    </div>
+                                    <button type="submit" formmethod="post">Start tracking</button>
+                                </form>
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
                     </div>

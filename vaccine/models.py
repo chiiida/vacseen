@@ -5,6 +5,7 @@ from datetime import date
 
 class VaccineModel(models.Model):
     """
+    Vaccine model from keep in database as resource
     count age that less than one year as decimal
     ex. 1 month old = 0.1, 2 years 5 month old = 2.5
     """
@@ -31,6 +32,7 @@ class DoseModel(models.Model):
 
 class Vaccine(models.Model):
     """
+    User's vaccine model, 
     count age that less than one year as decimal
     ex. 1 month old = 0.1, 2 years 5 month old = 2.5
     """
@@ -60,4 +62,4 @@ class Dose(models.Model):
 
     @property
     def not_last_dose(self):
-        return self.dose_count != len(self.vaccine.dose_set.all())
+        return self.dose_count != self.vaccine.dose_set.count()
