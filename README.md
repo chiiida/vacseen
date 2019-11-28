@@ -6,7 +6,6 @@ Vacseen
 </p>
 
 [![Build Status](https://travis-ci.com/llleyelll/vacseen.svg?token=Vf6PJtHdqGqqThMwgTem&branch=master)](https://travis-ci.com/llleyelll/vacseen)
-
 [![codecov](https://codecov.io/gh/llleyelll/vacseen/branch/master/graph/badge.svg)](https://codecov.io/gh/llleyelll/vacseen)
 
 
