@@ -19,7 +19,7 @@ def track_first_date(request, vaccine_id: int):
             expired = form.cleaned_data.get('expired')
             for dose in vacc_model.dosemodel_set.all():
                 user_dose = vaccine.dose_set.get(dose_count=dose.dose_count)
-                user_dose.date_expired = next_date(expired, dose.dose_duration)
+                user_dose.date_taken = next_date(expired, dose.dose_duration)
                 user_dose.save()
     return redirect(reverse('users:profile', args=(request.user.id,)))
 

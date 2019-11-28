@@ -147,7 +147,20 @@ def vaccination_signup_view(request):
         return HttpResponseRedirect(reverse('users:profile',
                                             args=(request.user.id,)))
     return render(request, 'registration/vaccination.html',
-                  {'formset': formset, 'have_noti': False})
+                  {'formset': formset, })
+
+
+def upcoming_vaccine(user: CustomUser):
+    """Return list of upcoming vaccines in 10 days"""
+    today = date.today()
+    upcoming_vaccine_list = []
+    for vaccine in user.vaccine_set.all():
+        for dose in vaccine.dose_set.all():
+            if dose.date_taken:
+                delta = dose.date_taken - today
+                if not dose.received and 0 < delta.days <= 7:
+                    upcoming_vaccine_list.append(dose)
+    return upcoming_vaccine_list
 
 
 @login_required(login_url='home')

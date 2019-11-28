@@ -30,7 +30,7 @@
                             </label>
                         </div>
                         <div>
-                            <p>{{ dose.date_expired }}</p>
+                            <p>{{ dose.date_taken }}</p>
                         </div>
                     </div>
                     {% endfor %}
@@ -61,14 +61,14 @@
                     data-parent="#accordionExample">
                     <div class="card-body">
                         {% for dose in vaccine.dose_set.all %}
-                            {% if dose.date_expired %}
+                            {% if dose.date_taken %}
                                 <div class="status">
                                     {% if dose.received %}
                                     <div class="status-received"></div>
                                     {% endif %}
                                 </div>
                                 <div class="dose">
-                                    Dose: {{ dose.dose_count }} {{ dose.date_expired }}
+                                    Dose: {{ dose.dose_count }} {{ dose.date_taken }}
                                 </div>
                                 {% if dose.not_last_dose %}
                                     <div class="vl"></div>
