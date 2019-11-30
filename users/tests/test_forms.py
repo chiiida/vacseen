@@ -87,3 +87,11 @@ class FormsTest(TestCase):
                 'form-1-expired': ""
             })
         self.assertFalse(formset.is_valid())
+    
+    def test_valid_date_taken_form(self):
+        form = DateExpiredForm(
+            data={
+                'expired': "2019-01-01"
+            }
+        )
+        self.assertTrue(form.is_valid())

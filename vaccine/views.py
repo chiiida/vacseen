@@ -1,11 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from users.views import next_date
 from users.forms import DateExpiredForm
-from .models import *
+from vaccine.models import *
 
 
+@login_required(login_url='home')
 def track_first_date(request, vaccine_id: int):
     """
     Get input from the user which is the first date that user will receive 
@@ -24,9 +26,12 @@ def track_first_date(request, vaccine_id: int):
     return redirect(reverse('users:profile', args=(request.user.id,)))
 
 
+@login_required(login_url='home')
 def received_dose(request, dose_id: int):
     """Get input from the user that the user received that dose."""
-    dose = Dose.objects.get(id=dose_id)
-    dose.received = True
-    dose.save()
+    if request.method == 'POST':
+        status = True
+        dose = Dose.objects.get(id=dose_id)
+        dose.received = status
+        dose.save()
     return redirect(reverse('users:profile', args=(request.user.id,)))

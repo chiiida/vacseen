@@ -1,7 +1,9 @@
 from django.test import TestCase, RequestFactory, Client
-from users.models import CustomUser
 from rest_framework.test import force_authenticate, APIClient
+
+from users.models import CustomUser
 from pages.views import *
+from vacseen import urls
 
 
 class PagesViewsTest(TestCase):
@@ -43,10 +45,13 @@ class PagesViewsTest(TestCase):
         status = response.status_code
         self.assertEqual(status, 404)
         self.assertTemplateUsed(response, '404.html')
+        self.assertTrue(urls.handler404.endswith('.handler404'))
     
-    # def test_500_handler(self):
-    #     request = Client().get(path='/')
-    #     response = handler500(request)
-    #     status = response.status_code
-    #     self.assertEqual(status, 500)
-    #     self.assertTemplateUsed(response, '500.html')
+    def test_500_handler(self):
+        request = self.request_factory.get(path='/')
+        response = handler500(request)
+        response.client = Client()
+        status = response.status_code
+        self.assertEqual(status, 500)
+        self.assertTrue(urls.handler500.endswith('.handler500'))
+        # self.assertTemplateUsed(response, '500.html')q
