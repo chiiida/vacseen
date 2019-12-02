@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from datetime import date, time, timedelta
+
 
 class CustomUser(AbstractUser):
     """Custom user model"""
@@ -18,6 +18,6 @@ class CustomUser(AbstractUser):
     def update_profile(self, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
-    
+
     def sorted_vaccine(self):
         return self.vaccine_set.all().order_by('vaccine_name')

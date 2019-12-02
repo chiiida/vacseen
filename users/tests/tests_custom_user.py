@@ -4,6 +4,7 @@ from users.models import CustomUser
 from vaccine.models import *
 
 
+
 class CustomUserTests(TestCase):
 
     def setUp(self):

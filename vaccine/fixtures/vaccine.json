@@ -6,7 +6,7 @@
       "vaccine_name": "BCG",
       "required_age": 0.0,
       "required_gender": "None",
-      "stimulate_phase": 0
+      "stimulate_phase": 1
     }
   },
   {
@@ -16,7 +16,7 @@
       "vaccine_name": "HB1",
       "required_age": 0.0,
       "required_gender": "None",
-      "stimulate_phase": 0
+      "stimulate_phase": 1
     }
   },
   {
@@ -26,7 +26,7 @@
       "vaccine_name": "HB2",
       "required_age": 0.1,
       "required_gender": "None",
-      "stimulate_phase": 0
+      "stimulate_phase": 1
     }
   },
   {
@@ -36,7 +36,7 @@
       "vaccine_name": "DTP-HB1",
       "required_age": 0.2,
       "required_gender": "None",
-      "stimulate_phase": 0
+      "stimulate_phase": 1
     }
   },
   {
@@ -46,7 +46,7 @@
       "vaccine_name": "OPV1",
       "required_age": 0.2,
       "required_gender": "None",
-      "stimulate_phase": 0
+      "stimulate_phase": 1
     }
   },
   {
@@ -56,7 +56,7 @@
       "vaccine_name": "Hepatitis A",
       "required_age": 1.0,
       "required_gender": "None",
-      "stimulate_phase": 0
+      "stimulate_phase": 1
     }
   },
   {

@@ -1,49 +1,72 @@
-{% load static %}
-{% load socialaccount %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% load static %} {% load socialaccount %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Vacseen</title>
-    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="{% static 'favicon.ico' %}"
+      type="image/x-icon"
+    />
+    <!-- Font awesome  -->
+    <script
+      src="https://kit.fontawesome.com/21af1254cb.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <!-- custom CSS -->
-</head>
+  </head>
 
-<body>
+  <body>
     {% if user.is_authenticated %}
     <ul class="nav-top">
-        <li class="nav-vac">VACSEEN</li>
-        <li style="float:right" class="nav-log"><a href="{% url 'account_logout' %}">Log out</a></li>
+      <li><a class="nav-vac" href="#">VACSEEN</a></li>
+      <li style="float:right" class="nav-log">
+        <a href="{% url 'account_logout' %}">Log out</a>
+      </li>
+      {% if have_noti %}
+        <li style="float:right" class="nav-log">
+          <a href="{% url 'account_logout' %}">
+            <img src="/static/image/canvas.png" class="nav-noti">
+          </a>
+        </li>
+      {% endif %}
     </ul>
     {% else %}
     <ul class="nav-top">
-        <li><a class="nav-vac" href="#">VACSEEN</a></li>
-        <li style="float:right" class="nav-log"><a href="{% provider_login_url 'google' %}">Log in</a></li>
+      <li><a class="nav-vac" href="#">VACSEEN</a></li>
+      <li style="float:right" class="nav-log">
+        <a href="{% provider_login_url 'google' %}">Log in</a>
+      </li>
     </ul>
-    {% endif %}
-        
-
-    {% block content %}
-    {% endblock %}
+    {% endif %} {% block content %} {% endblock %}
 
     <!-- Jquery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
     <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
     <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-</body>
-
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

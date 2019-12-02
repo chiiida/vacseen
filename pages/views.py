@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, redirect
 from django.urls import reverse
 
 
@@ -9,7 +9,10 @@ def IndexView(request):
 
 def LoginHandler(request):
     """Login handler for checking if user already signup or not."""
-    if request.user.gender and request.user.birthdate and request.user.contact and request.user.emergency_contact and request.user.first_name and request.user.last_name:
+    if request.user.gender and request.user.birthdate \
+            and request.user.contact \
+            and request.user.emergency_contact \
+            and request.user.first_name and request.user.last_name:
         return redirect(reverse('users:profile', args=(request.user.id,)))
     else:
         return redirect('users:signup')

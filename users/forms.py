@@ -1,8 +1,7 @@
 from django import forms
-from django.forms import formset_factory, modelformset_factory
+from django.forms import formset_factory
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
-from vaccine.models import VaccineModel, Vaccine, Dose
 import datetime
 
 GENDER_CHOICES = [
@@ -12,15 +11,12 @@ GENDER_CHOICES = [
 
 
 class CustomUserCreationForm(UserCreationForm):
-    """User's profile input form."""
-    first_name = forms.CharField(label='First name',
-                                 widget=forms.TextInput(
-                                     attrs={'class': 'form-control-reg',
-                                            'placeholder': 'Enter First Name'}))
-    last_name = forms.CharField(label='Last name',
-                                widget=forms.TextInput(
-                                    attrs={'class': 'form-control-reg',
-                                           'placeholder': 'Enter Last Name'}))
+    first_name = forms.CharField(label='First name', widget=forms.TextInput(
+        attrs={'class': 'form-control-reg',
+               'placeholder': 'Enter First Name'}))
+    last_name = forms.CharField(label='Last name', widget=forms.TextInput(
+        attrs={'class': 'form-control-reg',
+               'placeholder': 'Enter Last Name'}))
     contact = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control-reg',
                'placeholder': 'Enter Phone Number'}))
@@ -73,7 +69,8 @@ class VaccinationForm(forms.Form):
     """User's vaccination input form."""
     vaccine_name = forms.CharField(label='Vaccine name',
                                    widget=forms.TextInput(
-                                       attrs={'class': 'form-control-vacc vacc-name',
+                                       attrs={'class':
+                                              'form-control-vacc vacc-name',
                                               'placeholder': 'Vaccine name',
                                               'id': 'vaccinename',
                                               'list': 'vaccine'}))
@@ -83,9 +80,11 @@ class VaccinationForm(forms.Form):
     expired = forms.DateField(widget=forms.SelectDateWidget(
         years=range(1940, 2020)), initial=datetime.date.today)
 
+
 class DateExpiredForm(forms.Form):
     """User's first date of vaccination input form."""
     expired = forms.DateField(widget=forms.SelectDateWidget(
         years=range(1940, 2020)), initial=datetime.date.today)
+
 
 VaccineFormSet = formset_factory(VaccinationForm, extra=1)
