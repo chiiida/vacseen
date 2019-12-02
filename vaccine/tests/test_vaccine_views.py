@@ -1,6 +1,7 @@
-from django.test import TestCase, RequestFactory, Client
 from rest_framework.test import force_authenticate, APIClient
 from datetime import date
+from django.test import TestCase, RequestFactory, Client
+from django.http import QueryDict, JsonResponse
 import requests
 
 from users.forms import DateExpiredForm
@@ -24,38 +25,62 @@ class VaccineViewsTest(TestCase):
         self.user.save()
         self.client.force_authenticate(user=self.user)
         self.vacc_model = VaccineModel.objects.create(vaccine_name='BCG',
-                                       required_age=0.0,
-                                       required_gender='None')
+                                                      required_age=0.0,
+                                                      required_gender='None')
         self.vacc_model.save()
         self.dose_model = DoseModel.objects.create(vaccine=self.vacc_model,
-                                    dose_count=1,
-                                    dose_duration=0)
+                                                   dose_count=1,
+                                                   dose_duration=0)
         self.dose_model.save()
         self.vaccine = Vaccine.objects.create(vaccine_name=self.vacc_model.vaccine_name,
-                               user=self.user)
+                                              user=self.user)
         self.vaccine.save()
         self.dose = Dose.objects.create(vaccine=self.vaccine,
-                         dose_count=1,
-                         dose_duration=0,
-                         received=False)
+                                        dose_count=1,
+                                        dose_duration=0,
+                                        received=False)
         self.dose.save()
 
     def test_track_first_date(self):
-        url = reverse('vaccine:trackfirstdate', args=[self.vaccine.id,])
-        response = self.client.post(url, data={'expired': date(2019, 12, 12)})
+        url = reverse('vaccine:trackfirstdate', args=[self.vaccine.id, ])
+        ordinary_dict = {'expired_month': ['12'], 'expired_day': [
+            '3'], 'expired_year': ['2019']}
+        data = QueryDict('', mutable=True)
+        data.update(ordinary_dict)
+        response = self.client.post(url, data=ordinary_dict)
         self.dose.refresh_from_db()
+        self.dose.save()
         self.assertFalse(self.dose.received)
-        # self.assertTrue(response.data['expired'])
-        # self.assertEqual('2019-12-01', self.dose.date_taken)
-    
+        expected_url = f'/?next=/vaccine/{self.dose.id}/'
+        self.assertEqual(expected_url, response.url)
+
     def test_received_dose(self):
         url = reverse('vaccine:received', args=[self.dose.id,])
-        response = self.client.post(url, data={'status': True})
-        # request = self.request_factory.get(url)
-        # request.user = self.user
-        # received_dose(request, self.dose.id)
-        # print(response)
-        # print(self.dose.received)
+        response = self.client.post(url, data={'received-btn': '✔',})
         self.dose.refresh_from_db()
-        # print(self.dose.received)
-        # self.assertTrue(response.data['status'])
+        expected_url = f'/?next=/vaccine/received/dose/{self.dose.id}/'
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(expected_url, response.url)
+    
+    def test_add_vaccine(self):
+        url = reverse('vaccine:addvaccine')
+        ordinary_dict = {'form-TOTAL_FORMS': ['1'],
+                         'form-INITIAL_FORMS': ['0'],
+                         'form-MIN_NUM_FORMS': ['0'],
+                         'form-MAX_NUM_FORMS': ['1000'],
+                         'form-0-vaccine_name': ['OPV'],
+                         'form-0-dose_count': ['1'],
+                         'form-0-date_taken_month': ['12'],
+                         'form-0-date_taken_day': ['3'],
+                         'form-0-date_taken_year': ['2019']}
+        response = self.client.post(url, data=ordinary_dict, format="json")
+        self.user.refresh_from_db()
+        user_vaccine_list = [
+            v.vaccine_name for v in self.user.vaccine_set.all()]
+        print((response.request))
+        # print(dir(response.client.post))
+        print(response.data)
+        print(user_vaccine_list)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual('/?next=/vaccine/add/', response.url)
+        # self.assertTrue('OPV' in user_vaccine_list)

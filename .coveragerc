@@ -5,6 +5,7 @@ omit =
         *__init__*
         *manage.py*
         *static/*
+        *venv*
 
 [report]
 # Regexes for lines to exclude from consideration

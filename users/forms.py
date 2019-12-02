@@ -76,14 +76,14 @@ class VaccinationForm(forms.Form):
                                               'list': 'vaccine'}))
     dose_count = forms.IntegerField(widget=forms.NumberInput(
         attrs={'class': 'form-control-vacc vacc-dose',
-               'placeholder': 'Dose count', 'max': '3', 'min': '1'}))
-    expired = forms.DateField(widget=forms.SelectDateWidget(
+               'placeholder': 'Dose count', 'max': '3', 'min': '0'}))
+    date_taken = forms.DateField(widget=forms.SelectDateWidget(
         years=range(1940, 2020)), initial=datetime.date.today)
 
 
 class DateExpiredForm(forms.Form):
     """User's first date of vaccination input form."""
-    expired = forms.DateField(widget=forms.SelectDateWidget(
+    date_taken = forms.DateField(widget=forms.SelectDateWidget(
         years=range(1940, 2020)), initial=datetime.date.today)
 
 

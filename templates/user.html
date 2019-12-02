@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="user-upcoming">
-            <h2>upcoming vaccine</h2>
+            <h2>Upcoming vaccines</h2>
             <hr>
             <div class="upcoming-box">
                 <div class="form-check">
@@ -26,7 +26,7 @@
                         <div>
                             <form action="{% url 'vaccine:received' dose.id %}" method="post">
                                 {% csrf_token %}
-                                <button formmethod="post">✔</button>
+                                <input type="submit" class="received-btn" value="✔" name="received-btn" formmethod="post">
                             </form>
                             <label class="form-check-label" for="defaultCheck1">
                                 {{ dose.vaccine.vaccine_name }}: dose {{ dose.dose_count }}
@@ -40,8 +40,8 @@
                 </div>
             </div>
             <div class="add-remove">
-                <a href="{% url 'users:vaccination' %}" class="user-vaccine-add">
-                    EDIT
+                <a href="{% url 'vaccine:addvaccine' %}" class="user-vaccine-add">
+                    ADD VACCINE
                 </a>
             </div>
         </div>
@@ -83,13 +83,14 @@
                                 <form action="{% url 'vaccine:trackfirstdate' vaccine.id %}" method="post" class="col-lg-12">
                                     {% csrf_token %}
                                     <div class="vacc-date">
-                                        {{ form.expired }}
+                                        {{ form.date_taken }}
                                     </div>
                                     <button type="submit" formmethod="post">Start tracking</button>
                                 </form>
                                 {% endif %}
                             {% endif %}
-                        {% endfor %}
+                            {% endfor %}
+                            <a type="submit" class="btn del-vacc" value="Remove" name="del-vacc" href="{% url 'vaccine:delvaccine' vaccine.id %}">Remove</a>
                     </div>
                 </div>
             </div>

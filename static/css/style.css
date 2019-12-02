@@ -347,7 +347,7 @@ user page
 
 .user-vaccine-add,
 .user-vaccine-remove {
-  width: 200px;
+  width: fit-content;
   background-color: var(--tri-clr);
   border-radius: 8px;
   display: inline-block;
@@ -357,6 +357,10 @@ user page
   font-size: 20px;
   font-weight: bold;
   padding: 15px 32px;
+  text-decoration: none;
+}
+
+.user-vaccine-add a {
   text-decoration: none;
 }
 
