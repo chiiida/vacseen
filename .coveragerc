@@ -6,6 +6,7 @@ omit =
         *manage.py*
         *static/*
         *views.py*
+        *venv*
 
 [report]
 # Regexes for lines to exclude from consideration
