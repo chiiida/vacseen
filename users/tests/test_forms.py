@@ -38,13 +38,26 @@ class FormsTest(TestCase):
             })
         self.assertFalse(form.is_valid())
 
+    def test_invalid_custom_user_form(self):
+        """Test the invalid user form."""
+        form = CustomUserChangeForm(
+            data={
+                'first_name': "firstname",
+                'last_name': "lastname",
+                'contact': "0823456789",
+                'emergency_contact': "191",
+                'gender': 'Male',
+                'birthdate': "1999-07-30"
+            })
+        self.assertTrue(form.is_valid())
+
     def test_valid_vaccination_form(self):
         """Test the valid vaccination form."""
         form = VaccinationForm(
             data={
                 'vaccine_name': "Hepatitis A",
                 'dose_count': "1",
-                'expired': "2019-01-01"
+                'date_taken': "2019-01-01"
             })
         self.assertTrue(form.is_valid())
 
@@ -54,7 +67,7 @@ class FormsTest(TestCase):
             data={
                 'vaccine_name': "Hepatitis A",
                 'dose_count': "",
-                'expired': ""
+                'date_taken': ""
             })
         self.assertFalse(form.is_valid())
 
@@ -66,10 +79,10 @@ class FormsTest(TestCase):
                 'form-INITIAL_FORMS': '1',
                 'form-0-vaccine_name': "Hepatitis A",
                 'form-0-dose_count': "1",
-                'form-0-expired': "2019-01-01",
+                'form-0-date_taken': "2019-01-01",
                 'form-1-vaccine_name': "BCG",
                 'form-1-dose_count': "1",
-                'form-1-expired': "2019-05-01"
+                'form-1-date_taken': "2019-05-01"
             })
         self.assertTrue(formset.is_valid())
 
@@ -81,17 +94,17 @@ class FormsTest(TestCase):
                 'form-INITIAL_FORMS': '1',
                 'form-0-vaccine_name': "Hepatitis A",
                 'form-0-dose_count': "1",
-                'form-0-expired': "2019-01-01",
+                'form-0-data_taken': "2019-01-01",
                 'form-1-vaccine_name': "",
                 'form-1-dose_count': "1",
-                'form-1-expired': ""
+                'form-1-data_taken': ""
             })
         self.assertFalse(formset.is_valid())
     
     def test_valid_date_taken_form(self):
         form = DateExpiredForm(
             data={
-                'expired': "2019-01-01"
+                'date_taken': "2019-01-01"
             }
         )
         self.assertTrue(form.is_valid())

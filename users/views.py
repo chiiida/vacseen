@@ -2,12 +2,15 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, reverse
 from django.http import HttpResponseRedirect
 from datetime import date, timedelta
+import logging
 
 from vaccine.models import VaccineModel, Vaccine, Dose
 from vaccine.views import create_vaccine
 from .models import CustomUser
 from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
 
+
+# logger = logging.getLogger('userlog')
 
 def get_usernoti(request):
     """
@@ -106,6 +109,7 @@ def vaccination_signup_view(request):
     elif request.method == 'POST':
         formset = VaccineFormSet(request.POST)
         if formset.is_valid():
+            print(request.user)
             for form in formset:
                 if form.cleaned_data.get('vaccine_name'):
                     vaccine_name = form.cleaned_data.get('vaccine_name')

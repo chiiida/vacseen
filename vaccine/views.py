@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from datetime import date, timedelta
+import logging
 
 from users.forms import *
 from users.models import CustomUser

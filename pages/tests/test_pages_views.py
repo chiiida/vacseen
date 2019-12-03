@@ -4,6 +4,7 @@ from rest_framework.test import force_authenticate, APIClient
 from users.models import CustomUser
 from pages.views import *
 from vacseen import urls
+from vacseen.settings import LOGIN_REDIRECT_URL
 
 
 class PagesViewsTest(TestCase):
@@ -13,6 +14,20 @@ class PagesViewsTest(TestCase):
         self.client = APIClient()
         self.user = CustomUser.objects.create(first_name='User A')
         self.user.save()
+        self.signed_up_user = CustomUser.objects.create(username='User',
+                                         first_name='User',
+                                         last_name='A',
+                                         contact='081764889',
+                                         emergency_contact='0878274444',
+                                         gender='Male',
+                                         birthdate='1999-07-30')
+        self.signed_up_user.save()
+    
+    def test_render_index(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'index.html')
+        self.assertContains(response, 'Sign in with Google')
 
     def test_login_handler_without_signup(self):
         request = self.request_factory.get('/users/profile/')
@@ -24,19 +39,13 @@ class PagesViewsTest(TestCase):
             response, '/users/signup/')
 
     def test_login_handler_already_signup(self):
-        user = CustomUser.objects.create(username='User',
-                                         first_name='User',
-                                         last_name='A',
-                                         contact='081764889',
-                                         emergency_contact='0878274444',
-                                         gender='Male',
-                                         birthdate='1999-07-30')
-        user.save()
-        request = self.request_factory.get('/users/profile/')
-        request.user = user
-        self.client.force_authenticate(user=user)
+        request = self.request_factory.get('/accout/login/')
+        request.user = self.signed_up_user
+        self.client.force_authenticate(user=self.signed_up_user)
         response = LoginHandler(request)
-        response.client = Client()
+        response.client = self.client
+        status = response.status_code
+        self.assertEqual(status, 302)
         self.assertRedirects(
             response, '/users/profile/2/', target_status_code=302)
 
@@ -54,4 +63,3 @@ class PagesViewsTest(TestCase):
         status = response.status_code
         self.assertEqual(status, 500)
         self.assertTrue(urls.handler500.endswith('.handler500'))
-        # self.assertTemplateUsed(response, '500.html')q

@@ -77,10 +77,6 @@ class VaccineViewsTest(TestCase):
         self.user.refresh_from_db()
         user_vaccine_list = [
             v.vaccine_name for v in self.user.vaccine_set.all()]
-        print((response.request))
-        # print(dir(response.client.post))
-        print(response.data)
-        print(user_vaccine_list)
         self.assertEqual(response.status_code, 302)
         self.assertEqual('/?next=/vaccine/add/', response.url)
         # self.assertTrue('OPV' in user_vaccine_list)

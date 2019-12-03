@@ -1,5 +1,18 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+import datetime
+import logging
+
+logger = logging.getLogger('userlog')
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 
 def IndexView(request):
@@ -13,6 +26,7 @@ def LoginHandler(request):
             and request.user.contact \
             and request.user.emergency_contact \
             and request.user.first_name and request.user.last_name:
+        logger.info("Successful login from " + get_client_ip(request))
         return redirect(reverse('users:profile', args=(request.user.id,)))
     else:
         return redirect('users:signup')
