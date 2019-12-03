@@ -559,3 +559,10 @@ div.dot-inner {
   box-shadow: 0 0 1pt 2pt rgb(113, 141, 156);
   outline: none;
 }
+
+/* parental view */
+.pr{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
