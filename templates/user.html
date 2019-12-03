@@ -13,7 +13,7 @@
                 <h2>{{ user.gender }}, {{ user.age }}
                     {% if user.age > 0.11 %} years {% else %} months {% endif %}
                 </h2>
-                <a href="#">edit profile</a>
+                <p id="uuid">your uuid is: {{user.parental_key}}</p>
             </div>
         </div>
         <div class="user-upcoming">
