@@ -109,7 +109,7 @@ li a {
 }
 
 .nav-noti{
-  width: 30px;
+  width: 40px;
   height: auto;
 
 }
@@ -154,6 +154,60 @@ div.main > div.hero > div.hero-text {
   justify-content: center;
 }
 
+
+div.main > div.hero > div.hero-text > img {
+  top : 150px ;
+  position: absolute;
+  width : auto ;
+  height: 300px;
+  /* padding-bottom: 50px; */
+  animation-name: cf4FadeInOut;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+}
+
+@keyframes cf4FadeInOut {
+  0% {
+    opacity:1;
+  }
+  17% {
+    opacity:1;
+  }
+  25% {
+    opacity:0;
+  }
+  92% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+#logor img:nth-of-type(1) {
+  animation-delay: 8s;
+}
+#logor img:nth-of-type(2) {
+  animation-delay: 6s;
+}
+#logor img:nth-of-type(3) {
+  animation-delay: 4s;
+}
+#logor img:nth-of-type(4) {
+  animation-delay: 2s;
+}
+#logor img:nth-of-type(5) {
+  animation-delay: 0;
+}
+
+div.main > div.hero > div.hero-text > p {
+  position: relative;
+  padding-top: 350px;
+  font-size: 20px;
+  color: white;
+}
+
 div.main > div.cta {
   color: var(--sec-clr);
   width: 45%;
@@ -163,10 +217,44 @@ div.main > div.cta {
   align-items: center;
   font-size: 200%;
 }
-h4 {
+
+div.main > div.cta > h4 {
   padding-bottom: 50px;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter;
+  display: inline-block;
+  position: relative;
+  animation-duration: 10s;
+  animation-timing-function: steps(25, end);
+  animation-iteration-count: infinite;
 }
 
+div.main > div.cta > h4::after {
+  content: "|";
+  position: absolute;
+  right: 0;
+  animation: caret infinite;
+  animation-duration: 2s;
+  animation-timing-function: steps(1, end);
+}
+
+@keyframes typewriter {
+  0%, 100% {
+    width: 0;
+  }
+  20%, 80% {
+    width: 10.7em;
+  }
+}
+@keyframes caret {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
 .google-button {
   padding-top: 1200px;
   height: 40px;
@@ -256,7 +344,24 @@ div.main-reg h1 {
   font-weight: bold;
   padding-top: 10px;
   padding-bottom: 10px;
+  background: linear-gradient(90deg, var(--tri-clr), #fff, var(--tri-clr));
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 3s linear ;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
 }
+
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
+}
+
+
 
 div.form-group-reg {
   padding-left: 27rem;
@@ -324,6 +429,7 @@ user page
 
 .user-upcoming > h2 {
   margin: 2%;
+  color: var(--sec-clr);
 }
 
 .user-upcoming > p {
@@ -406,6 +512,15 @@ user page
   margin: -5px 0px -5px 7px;
 }
 
+#vaccine-btn {
+  color: #5d8294;
+}
+#start-track {
+  color : var(--tri-clr) ;
+  padding: 7px;
+  border-radius: 5px;
+  background: white;
+}
 /* ===================
 regis vaccination page
 ===================   */

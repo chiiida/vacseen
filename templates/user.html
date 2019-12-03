@@ -4,15 +4,27 @@
 {% load socialaccount %}
 {% if user.is_authenticated %}
 
+<style>
+    ul {
+        background-color: #e6eff1;
+    }
+    li a {
+        color: #4e6d7c;
+    }
+    .nav-vac {
+        color: #4e6d7c;
+    }
+</style>
+
 <div class="main light-bg">
     <div class="user-info">
         <div class="user-profile">
             <img alt="" class="user-portrait" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
             <div class="user-profile-basic">
                 <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-                <h2>{{ user.gender }}, {{ user.age }}
+                <h3>{{ user.gender }}, {{ user.age }}
                     {% if user.age > 0.11 %} years {% else %} months {% endif %}
-                </h2>
+                </h3>
                 <a href="#">edit profile</a>
             </div>
         </div>
@@ -50,7 +62,7 @@
             <div class="card">
                 <div class="card-header" id="heading{{ forloop.counter }}">
                     <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                        <button id="vaccine-btn"class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapse{{ forloop.counter }}" aria-expanded="false"
                             aria-controls="collapse{{ forloop.counter }}">
                             {{ vaccine.vaccine_name }}
@@ -80,7 +92,7 @@
                                     <div class="vacc-date">
                                         {{ form.expired }}
                                     </div>
-                                    <button type="submit" formmethod="post">Start tracking</button>
+                                    <button id="start-track" type="submit" formmethod="post">Start tracking</button>
                                 </form>
                                 {% endif %}
                             {% endif %}
