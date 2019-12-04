@@ -70,9 +70,9 @@ class ProfileViewTest(TestCase):
         
     def test_user_view(self):
         self.client.force_authenticate(user=self.signed_up_user)
-        url = reverse('users:profile', args=[self.signed_up_user.id, ])
+        url = reverse('users:profile')
         response = self.client.get(path=url, follow=True)
-        expected_url = '/?next=/users/profile/2/'
+        expected_url = '/?next=/users/profile/'
         self.assertRedirects(response, expected_url)
         self.assertEqual(response.status_code, 200)
         # self.assertContains(response, self.user.first_name + ' ' + self.user.last_name)

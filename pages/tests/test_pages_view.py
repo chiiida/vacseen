@@ -47,7 +47,7 @@ class PagesViewsTest(TestCase):
         status = response.status_code
         self.assertEqual(status, 302)
         self.assertRedirects(
-            response, '/users/profile/2/', target_status_code=302)
+            response, '/users/profile/', target_status_code=302)
 
     def test_404_handler(self):
         response = self.client.get(path='/users/signup/beebooo')
