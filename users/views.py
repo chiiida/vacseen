@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
 from datetime import date, timedelta
 import logging
@@ -93,8 +93,7 @@ def vaccination_signup_view(request):
                                    dose_count,
                                    date_taken)
             vaccine_suggest(request.user)
-        return HttpResponseRedirect(reverse('users:profile',
-                                            args=(request.user.id,)))
+        return redirect('users:profile')
     return render(request, 'registration/vaccination.html',
                   {'formset': formset, })
 
@@ -116,25 +115,46 @@ def request_user_view(request):
     if request.method == 'GET':
         return render(request, 'request_user.html')
     elif request.method == 'POST':
-        print(request.POST['uuid'])
-        user = CustomUser.objects.get(parental_key=request.POST['uuid'])
-        return HttpResponseRedirect(reverse('users:profile',
-                                            args=([user.id])))
+        try:
+            user = CustomUser.objects.get(parental_key=request.POST['uuid'])
+        except (KeyError, CustomUser.DoesNotExist):
+            return render(request, 'request_user.html', {
+                'error_message': "Could not find uuid.",
+            })
+        else:
+            uuid = request.POST['uuid'][:4]
+            return HttpResponseRedirect(reverse('users:parental',
+                                            kwargs={'user_id': user.id,
+                                                    'uuid': uuid}))
 
 
 @login_required(login_url='home')
-def user_view(request, user_id: int):
+def user_view(request):
     """Render user's page"""
-    print(request.POST)
-    if user_id == request.user.id:
-        user = CustomUser.objects.get(id=user_id)
-        vaccine_set = user.sorted_vaccine()
-        have_noti = get_usernoti(request)
-        upcoming_vaccine_list = upcoming_vaccine(user)
-        form = VaccinationForm()
-        context = {'user': user,
+    print(request.user.id)
+    # print(user_id)
+    # if user_id == request.user.id:
+    user = CustomUser.objects.get(id=request.user.id)
+    vaccine_set = user.sorted_vaccine()
+    have_noti = get_usernoti(request)
+    upcoming_vaccine_list = upcoming_vaccine(user)
+    form = VaccinationForm()
+    context = {'user': user,
                 'vaccine_set': vaccine_set,
                 'have_noti': have_noti,
                 'upcoming_vaccine': upcoming_vaccine_list,
                 'form': form}
-        return render(request, 'user.html', context)
+    return render(request, 'user.html', context)
+
+
+@login_required(login_url='home')
+def parental_view(request, user_id: int, uuid: str):
+    user = CustomUser.objects.get(id=user_id)
+    if uuid == user.parental_key[:4]:
+        user = CustomUser.objects.get(id=user_id)
+        vaccine_set = user.sorted_vaccine()
+        upcoming_vaccine_list = upcoming_vaccine(user)
+        context = {'user': user,
+                   'vaccine_set': vaccine_set,
+                   'upcoming_vaccine': upcoming_vaccine_list}
+        return render(request, 'parental.html', context)

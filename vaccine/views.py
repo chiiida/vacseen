@@ -111,7 +111,7 @@ def track_first_date(request, vaccine_id: int):
                 user_dose.date_taken = next_date(
                     date_taken, dose.dose_duration)
                 user_dose.save()
-    return redirect(reverse('users:profile', args=(request.user.id,)))
+    return redirect('users:profile')
 
 
 @login_required(login_url='home')
@@ -130,7 +130,7 @@ def received_dose(request, dose_id: int):
                                 dose.date_taken, dose.vaccine.stimulate_phase),
                             received=False)
             new_dose.save()
-    return redirect(reverse('users:profile', args=(request.user.id,)))
+    return redirect('users:profile')
 
 
 @login_required(login_url='home')
@@ -153,8 +153,7 @@ def add_vaccine(request):
                                        vaccine_name,
                                        dose_count,
                                        date_taken)
-        return HttpResponseRedirect(reverse('users:profile',
-                                            args=(request.user.id,)))
+        return redirect('users:profile')
     return render(request, 'add_vaccine.html',
                   {'formset': formset, })
 
@@ -165,5 +164,4 @@ def del_vaccine(request, vaccine_id: int):
     if request.method == 'POST':
         vaccine = Vaccine.objects.get(pk=request.POST['del-vacc'])
         vaccine.delete()
-        return HttpResponseRedirect(reverse('users:profile',
-                                            args=(request.user.id,)))
+        return redirect('users:profile')

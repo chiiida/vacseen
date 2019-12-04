@@ -27,7 +27,7 @@ def LoginHandler(request):
             and request.user.emergency_contact \
             and request.user.first_name and request.user.last_name:
         # logger.info("Successful login from " + get_client_ip(request))
-        return redirect(reverse('users:profile', args=(request.user.id,)))
+        return redirect('users:profile')
     else:
         return redirect('users:signup')
 
