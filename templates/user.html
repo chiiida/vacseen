@@ -26,7 +26,7 @@
                         <div>
                             <form action="{% url 'vaccine:received' dose.id %}" method="post">
                                 {% csrf_token %}
-                                <input type="submit" class="received-btn" value="✔" name="received-btn" formmethod="post">
+                                <button type="submit" class="received-btn" value="received" name="received-btn" formmethod="post">ฉีดแร้ว</button>
                             </form>
                             <label class="form-check-label" for="defaultCheck1">
                                 {{ dose.vaccine.vaccine_name }}: dose {{ dose.dose_count }}
@@ -90,7 +90,10 @@
                                 {% endif %}
                             {% endif %}
                             {% endfor %}
-                            <a type="submit" class="btn del-vacc" value="Remove" name="del-vacc" href="{% url 'vaccine:delvaccine' vaccine.id %}">Remove</a>
+                            <form action="{% url 'vaccine:delvaccine' vaccine.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="del-vacc" value="{{ vaccine.id }}" name="del-vacc" formmethod="post">Remove</button>
+                            </form>
                     </div>
                 </div>
             </div>

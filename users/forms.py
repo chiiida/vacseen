@@ -76,7 +76,7 @@ class VaccinationForm(forms.Form):
                                               'list': 'vaccine'}))
     dose_count = forms.IntegerField(widget=forms.NumberInput(
         attrs={'class': 'form-control-vacc vacc-dose',
-               'placeholder': 'Dose count', 'max': '3', 'min': '0'}))
+               'placeholder': 'Dose count', 'max': '3', 'min': '1'}))
     date_taken = forms.DateField(widget=forms.SelectDateWidget(
         years=range(1940, 2020)), initial=datetime.date.today)
 

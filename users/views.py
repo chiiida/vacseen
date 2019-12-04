@@ -5,7 +5,7 @@ from datetime import date, timedelta
 import logging
 
 from vaccine.models import VaccineModel, Vaccine, Dose
-from vaccine.views import create_vaccine
+from vaccine.views import create_vaccine, vaccine_suggest
 from .models import CustomUser
 from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
 
@@ -42,32 +42,6 @@ def calculate_age(born: date):
 def next_date(date: date, duration: int):
     """Return date that need to receive next dose (injuction) of vaccine"""
     return date + timedelta(days=duration)
-
-
-def vaccine_suggest(user: CustomUser):
-    """
-    Filter vaccine that match with user
-    then create vaccine and save to database
-    """
-    vaccine_model = VaccineModel.objects.all()
-    user_vaccine_list = []
-    if user.vaccine_set:
-        user_vaccine_list = [
-            vaccine.vaccine_name for vaccine in user.vaccine_set.all()]
-    vaccines = [vaccine for vaccine in vaccine_model
-                if vaccine.vaccine_name not in user_vaccine_list
-                and user.age >= vaccine.required_age]
-    for vaccine in vaccines:
-        user_vaccine = Vaccine(vaccine_name=vaccine.vaccine_name,
-                               required_age=vaccine.required_age,
-                               required_gender=vaccine.required_gender,
-                               user=user)
-        user_vaccine.save()
-        for dose in vaccine.dosemodel_set.all():
-            user_dose = Dose(vaccine=user_vaccine,
-                             dose_count=dose.dose_count,
-                             dose_duration=dose.dose_duration)
-            user_dose.save()
 
 
 def signup_view(request):
@@ -139,6 +113,15 @@ def upcoming_vaccine(user: CustomUser):
     return sorted(upcoming_vaccine_list, key=lambda d: d.date_taken)
 
 
+def request_user_view(request):
+    if request.method == 'GET':
+        return render(request, 'request_user.html')
+    elif request.method == 'POST':
+        user = CustomUser.objects.get(parental_key=request.POST['uuid'])
+        return HttpResponseRedirect(reverse('users:profile',
+                                            args=([user.id])))
+
+
 @login_required(login_url='home')
 def user_view(request, user_id: int):
     """Render user's page"""
@@ -149,10 +132,10 @@ def user_view(request, user_id: int):
         upcoming_vaccine_list = upcoming_vaccine(user)
         form = VaccinationForm()
         context = {'user': user,
-                   'vaccine_set': vaccine_set,
-                   'have_noti': have_noti,
-                   'upcoming_vaccine': upcoming_vaccine_list,
-                   'form': form}
+                'vaccine_set': vaccine_set,
+                'have_noti': have_noti,
+                'upcoming_vaccine': upcoming_vaccine_list,
+                'form': form}
         return render(request, 'user.html', context)
     # else:
     #     logger.error('Something went wrong!')
