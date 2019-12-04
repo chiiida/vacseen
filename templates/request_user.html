@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+<div class="pr">
+  <h1 class="pr-h1">Parental Access</h1>
+  <p class="pr-p">please enter your child key to view thier profile.</p>
+  <form method="post">
+    {% csrf_token %}
+    <input type="text" name="uuid" id="uuid" class="pr-i" />
+    <button class="save-btn" type="submit" formmethod="post">Request access</button>
+  </form>
+  
+</div>
+
+{% endblock %}

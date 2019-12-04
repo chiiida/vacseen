@@ -150,17 +150,15 @@ def vaccination_signup_view(request):
                   {'formset': formset, })
 
 
-def upcoming_vaccine(user: CustomUser):
-    """Return list of upcoming vaccines in 10 days"""
-    today = date.today()
-    upcoming_vaccine_list = []
-    for vaccine in user.vaccine_set.all():
-        for dose in vaccine.dose_set.all():
-            if dose.date_taken:
-                delta = dose.date_taken - today
-                if not dose.received and 0 < delta.days <= 7:
-                    upcoming_vaccine_list.append(dose)
-    return upcoming_vaccine_list
+@login_required(login_url='home')
+def request_user_view(request):
+    if request.method == 'GET':
+        return render(request, 'request_user.html')
+    elif request.method == 'POST':
+        print(request.POST['uuid'])
+        user = CustomUser.objects.get(parental_key=request.POST['uuid'])
+        return HttpResponseRedirect(reverse('users:profile',
+                                            args=([user.id])))
 
 
 @login_required(login_url='home')
@@ -171,6 +169,7 @@ def user_view(request, user_id: int):
     have_noti = get_usernoti(request)
     upcoming_vaccine_list = upcoming_vaccine(user)
     form = VaccinationForm()
+    print((user.parental_key))
     context = {'user': user,
                'vaccine_set': vaccine_set,
                'have_noti': have_noti,

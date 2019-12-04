@@ -33,6 +33,9 @@
       <li style="float:right" class="nav-log">
         <a href="{% url 'account_logout' %}">Log out</a>
       </li>
+      <li style="float:right" class="nav-log">
+        <a href="{% url 'users:request_user' %}">Parental Access</a>
+      </li>
       {% if have_noti %}
         <li style="float:right" class="nav-log">
           <a href="{% url 'account_logout' %}">
@@ -40,6 +43,7 @@
           </a>
         </li>
       {% endif %}
+
     </ul>
     {% else %}
     <ul class="nav-top">
