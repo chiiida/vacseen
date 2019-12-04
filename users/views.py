@@ -83,7 +83,6 @@ def vaccination_signup_view(request):
     elif request.method == 'POST':
         formset = VaccineFormSet(request.POST)
         if formset.is_valid():
-            print(request.user)
             for form in formset:
                 if form.cleaned_data.get('vaccine_name'):
                     vaccine_name = form.cleaned_data.get('vaccine_name')
@@ -117,6 +116,7 @@ def request_user_view(request):
     if request.method == 'GET':
         return render(request, 'request_user.html')
     elif request.method == 'POST':
+        print(request.POST['uuid'])
         user = CustomUser.objects.get(parental_key=request.POST['uuid'])
         return HttpResponseRedirect(reverse('users:profile',
                                             args=([user.id])))
@@ -125,6 +125,7 @@ def request_user_view(request):
 @login_required(login_url='home')
 def user_view(request, user_id: int):
     """Render user's page"""
+    print(request.POST)
     if user_id == request.user.id:
         user = CustomUser.objects.get(id=user_id)
         vaccine_set = user.sorted_vaccine()
@@ -137,6 +138,3 @@ def user_view(request, user_id: int):
                 'upcoming_vaccine': upcoming_vaccine_list,
                 'form': form}
         return render(request, 'user.html', context)
-    # else:
-    #     logger.error('Something went wrong!')
-    #     return 0

@@ -35,8 +35,7 @@ def create_vaccine(user_id: int, vaccine_name: str, dose_count: int, date_taken:
         next_dose = Dose(vaccine=vaccine,
                          dose_count=vaccine.dose_set.count() + 1,
                          date_taken=next_date(
-                             user_dose.date_taken, vaccine.stimulate_phase),
-                         received=False)
+                             user_dose.date_taken, vaccine.stimulate_phase))
         next_dose.save()
     else:
         left_dose = list(vacModel.dosemodel_set.all()[(dose_count - 1):])
@@ -85,8 +84,7 @@ def vaccine_suggest(user: CustomUser):
         user_vaccine.save()
         if vaccine.stimulate_phase > 0:
             user_dose = Dose(vaccine=user_vaccine,
-                             dose_count=1,
-                             received=False)
+                             dose_count=1)
             user_dose.save()
         else:
             for dose in vaccine.dosemodel_set.all():
@@ -161,6 +159,7 @@ def add_vaccine(request):
                   {'formset': formset, })
 
 
+@login_required(login_url='home')
 def del_vaccine(request, vaccine_id: int):
     """Remove specify vaccine from user's input"""
     if request.method == 'POST':
