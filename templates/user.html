@@ -25,9 +25,9 @@
             <img alt="" class="user-portrait" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
             <div class="user-profile-basic">
                 <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-                <h3>{{ user.gender }}, {{ user.age }}
+                <h4>{{ user.gender }}, {{ user.age }}
                     {% if user.age > 0.11 %} years {% else %} months {% endif %}
-                </h3>
+                </h4>
                 <a href="#">edit profile</a>
             </div>
         </div>
