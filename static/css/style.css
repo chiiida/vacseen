@@ -556,6 +556,34 @@ user page
   margin-bottom: 0;
   color: #5d8294;
 }
+
+.form-check-label {
+  margin-left: 4rem;
+  padding: 0.2rem;
+  font-size: 18px ;
+}
+
+.form-check-label-parent {
+  font-size: 18px ;
+  padding: 0.2rem;
+
+}
+.taken-date {
+  font-size: 18px ;
+  padding: 0.2rem;
+
+}
+
+.received-btn{
+  position: absolute;
+  padding: 2px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 6px;
+  left: 20px;
+  background: var(--pri-clr) ;
+  color:  var(--tri-clr);
+}
 .del-vacc{
   position: right;
   color : red ;

@@ -42,14 +42,14 @@
                         <div>
                             <form action="{% url 'vaccine:received' dose.id %}" method="post">
                                 {% csrf_token %}
-                                <button type="submit" class="received-btn" value="received" name="received-btn" formmethod="post">ฉีดแร้ว</button>
+                                <button type="submit" class="received-btn" value="received" name="received-btn" formmethod="post">vaccinated</button>
                             </form>
                             <label class="form-check-label" for="defaultCheck1">
-                                {{ dose.vaccine.vaccine_name }}: dose {{ dose.dose_count }}
+                                {{ dose.vaccine.vaccine_name }} : dose {{ dose.dose_count }}
                             </label>
                         </div>
                         <div>
-                            <p>{{ dose.date_taken }}</p>
+                            <p class="taken-date">{{ dose.date_taken }}</p>
                         </div>
                     </div>
                     {% endfor %}

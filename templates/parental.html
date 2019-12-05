@@ -4,6 +4,21 @@
 {% load socialaccount %}
 {% if user.is_authenticated %}
 
+<style>
+    body{
+        background: #e6eff1;
+    }
+    ul {
+        background-color: #e6eff1;
+    }
+    li a {
+        color: #4e6d7c;
+    }
+    .nav-vac {
+        color: #4e6d7c;
+    }
+</style>
+
 <div class="main light-bg">
     <div class="user-info">
         <div class="user-profile">
@@ -13,7 +28,8 @@
                 <h2>{{ user.gender }}, {{ user.age }}
                     {% if user.age > 0.11 %} years {% else %} months {% endif %}
                 </h2>
-                <p id="uuid">uuid is: {{user.parental_key}}</p>
+                <p class="id-p" id="uuid">your uuid is: </p>
+                <p class="id-p" id="uuid">{{user.parental_key}}</p>
             </div>
         </div>
         <div class="user-upcoming">
@@ -24,12 +40,12 @@
                     {% for dose in upcoming_vaccine %}
                     <div class="one-check">
                         <div>
-                            <label class="form-check-label" for="defaultCheck1">
-                                {{ dose.vaccine.vaccine_name }}: dose {{ dose.dose_count }}
+                            <label class="form-check-label-parent" for="defaultCheck1">
+                                {{ dose.vaccine.vaccine_name }} : dose {{ dose.dose_count }}
                             </label>
                         </div>
                         <div>
-                            <p>{{ dose.date_taken }}</p>
+                            <p class="taken-date">{{ dose.date_taken }}</p>
                         </div>
                     </div>
                     {% endfor %}
@@ -47,7 +63,7 @@
                         aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapse{{ forloop.counter }}" aria-expanded="false"
-                            aria-controls="collapse{{ forloop.counter }}">
+                            aria-controls="collapse{{ forloop.counter }}" id="vac-name-btn">
                             {{ vaccine.vaccine_name }}
                         </button>
                     </h2>
