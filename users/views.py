@@ -6,6 +6,37 @@ from .models import CustomUser
 from vaccine.models import VaccineModel, Vaccine, Dose
 from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
 from datetime import date, timedelta
+from uuid import UUID
+
+
+def is_valid_uuid(uuid_to_test, version=4):
+    """
+    Check if uuid_to_test is a valid UUID.
+
+    Parameters
+    ----------
+    uuid_to_test : str
+    version : {1, 2, 3, 4}
+
+    Returns
+    -------
+    `True` if uuid_to_test is a valid UUID, otherwise `False`.
+
+    Examples
+    --------
+    >>> is_valid_uuid('c9bf9e57-1685-4c89-bafb-ff5af830be8a')
+    True
+    >>> is_valid_uuid('c9bf9e58')
+    False
+    """
+    if not isinstance(uuid_to_test, str):
+        raise TypeError('not a string')
+    try:
+        uuid_obj = UUID(uuid_to_test, version=version)
+    except ValueError:
+        return False
+
+    return str(uuid_obj) == uuid_to_test
 
 
 def get_usernoti(request):
@@ -152,13 +183,16 @@ def vaccination_signup_view(request):
 
 @login_required(login_url='home')
 def request_user_view(request):
+    """Render page for user to request to view other user page."""
     if request.method == 'GET':
         return render(request, 'request_user.html')
     elif request.method == 'POST':
-        print(request.POST['uuid'])
-        user = CustomUser.objects.get(parental_key=request.POST['uuid'])
-        return HttpResponseRedirect(reverse('users:profile',
-                                            args=([user.id])))
+        if is_valid_uuid(request.POST['uuid']):
+            user = CustomUser.objects.get(parental_key=request.POST['uuid'])
+            return HttpResponseRedirect(reverse('users:profile',
+                                                args=([user.id])))
+        else:
+            return HttpResponseRedirect('/')
 
 
 @login_required(login_url='home')

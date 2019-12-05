@@ -4,7 +4,6 @@ from users.models import CustomUser
 from vaccine.models import *
 
 
-
 class CustomUserTests(TestCase):
 
     def setUp(self):
@@ -28,7 +27,7 @@ class CustomUserTests(TestCase):
                               user=self.user)
         vaccine_two.save()
         vaccine_three = Vaccine(vaccine_name='DTP-HB1',
-                              user=self.user)
+                                user=self.user)
         vaccine_three.save()
         vaccines = list(self.user.sorted_vaccine())
         self.assertEqual('UserA: BCG', str(vaccines[0]))
