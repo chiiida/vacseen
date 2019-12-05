@@ -76,6 +76,7 @@ def vaccine_suggest(user: CustomUser):
         user_vaccine = Vaccine(vaccine_name=vaccine.vaccine_name,
                                required_age=vaccine.required_age,
                                required_gender=vaccine.required_gender,
+                               stimulate_phase=vaccine.stimulate_phase,
                                user=user)
         user_vaccine.save()
         if vaccine.stimulate_phase > 0:
@@ -101,14 +102,18 @@ def track_first_date(request, vaccine_id: int):
     if request.method == 'POST':
         form = DateExpiredForm(request.POST)
         if form.is_valid():
-            print(vacc_model)
             date_taken = form.cleaned_data.get('date_taken')
-            for dose in vacc_model.dosemodel_set.all():
-                user_dose = vaccine.dose_set.get(dose_count=dose.dose_count)
-                user_dose.date_taken = next_date(
-                    date_taken, dose.dose_duration)
-                print(user_dose.date_taken)
+            if vaccine.stimulate_phase > 0:
+                user_dose = vaccine.dose_set.all()[0]
+                user_dose.date_taken = date_taken
                 user_dose.save()
+            else:
+                for dose in vacc_model.dosemodel_set.all():
+                    user_dose = vaccine.dose_set.get(
+                        dose_count=dose.dose_count)
+                    user_dose.date_taken = next_date(
+                        date_taken, dose.dose_duration)
+                    user_dose.save()
     return redirect('users:profile')
 
 
