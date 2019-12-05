@@ -39,15 +39,30 @@ class ParentAccessLoggedinTest(TestCase):
         status_code = response.status_code
         self.assertEqual(status_code, 200)
 
-    def test_post_valid_uuid_request_page(self):
+    def test_post_exist_valid_uuid_request_page(self):
         """
         test if logged in user can post to request page
+        with valid and existing uuid4
         """
         response = self.client.post(
             path='/users/request_user/',
             data={'uuid': self.second_user.parental_key},
             follow=True)
         status_code = response.status_code
+        self.assertEqual(status_code, 200)
+
+    def test_post_null_valid_uuid_request_page(self):
+        """
+        test if logged in user can post to request page
+        with valid but does not exist uuid4
+        """
+        response = self.client.post(
+            path='/users/request_user/',
+            data={'uuid': uuid4()},
+        )
+        status_code = response.status_code
+        content = str(response.content)
+        self.assertIn("Could not find user with this uuid.", content)
         self.assertEqual(status_code, 200)
 
     def test_post_invalid_uuid_request_page(self):
@@ -59,7 +74,9 @@ class ParentAccessLoggedinTest(TestCase):
             data={'uuid': 'totally-valid-uuid4'},
         )
         status_code = response.status_code
-        self.assertEqual(status_code, 302)
+        content = str(response.content)
+        self.assertIn("Invalid uuid.", content)
+        self.assertEqual(status_code, 200)
 
 
 class ParentAccessNotLoggedinTest(TestCase):
