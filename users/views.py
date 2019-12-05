@@ -1,12 +1,16 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
-
-from .models import CustomUser
-from vaccine.models import VaccineModel, Vaccine, Dose
-from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
 from datetime import date, timedelta
+import logging
 
+from vaccine.models import VaccineModel, Vaccine, Dose
+from vaccine.views import create_vaccine, vaccine_suggest
+from .models import CustomUser
+from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
+
+
+# logger = logging.getLogger('userlog')
 
 def get_usernoti(request):
     """
@@ -38,45 +42,6 @@ def calculate_age(born: date):
 def next_date(date: date, duration: int):
     """Return date that need to receive next dose (injuction) of vaccine"""
     return date + timedelta(days=duration)
-
-
-def vaccine_suggest(user: CustomUser):
-    """
-    Filter vaccine that match with user
-    then create vaccine and save to database
-    """
-    vaccine_model = VaccineModel.objects.all()
-    user_vaccine_list = []
-    if user.vaccine_set:
-        user_vaccine_list = [
-            vaccine.vaccine_name for vaccine in user.vaccine_set.all()]
-    vaccines = [vaccine for vaccine in vaccine_model
-                if vaccine.vaccine_name not in user_vaccine_list
-                and user.age >= vaccine.required_age]
-    for vaccine in vaccines:
-        user_vaccine = Vaccine(vaccine_name=vaccine.vaccine_name,
-                               required_age=vaccine.required_age,
-                               required_gender=vaccine.required_gender,
-                               user=user)
-        user_vaccine.save()
-        for dose in vaccine.dosemodel_set.all():
-            user_dose = Dose(vaccine=user_vaccine,
-                             dose_count=dose.dose_count,
-                             dose_duration=dose.dose_duration)
-            user_dose.save()
-
-
-def upcoming_vaccine(user: CustomUser):
-    """Return list of upcoming vaccines in 10 days"""
-    today = date.today()
-    upcoming_vaccine_list = []
-    for vaccine in user.vaccine_set.all():
-        for dose in vaccine.dose_set.all():
-            if dose.date_taken:
-                delta = dose.date_taken - today
-                if not dose.received and 0 < delta.days <= 7:
-                    upcoming_vaccine_list.append(dose)
-    return upcoming_vaccine_list
 
 
 def signup_view(request):
@@ -122,57 +87,74 @@ def vaccination_signup_view(request):
                 if form.cleaned_data.get('vaccine_name'):
                     vaccine_name = form.cleaned_data.get('vaccine_name')
                     dose_count = form.cleaned_data.get('dose_count')
-                    expired = form.cleaned_data.get('expired')
-                    vacModel = VaccineModel.objects.get(
-                        vaccine_name=vaccine_name)
-                    vaccine = Vaccine(vaccine_name=vacModel.vaccine_name,
-                                      required_age=vacModel.required_age,
-                                      required_gender=vacModel.required_gender,
-                                      user=request.user)
-                    vaccine.save()
-                    left_dose = list(vacModel.dosemodel_set.all()[
-                                    (dose_count-1):])
-                    for dose in left_dose:
-                        status = False
-                        if next_date(expired, dose.dose_duration) == expired:
-                            status = True
-                        user_dose = Dose(vaccine=vaccine,
-                                         dose_count=dose.dose_count,
-                                         dose_duration=dose.dose_duration,
-                                         date_taken=next_date(
-                                             expired, dose.dose_duration),
-                                         received=status)
-                        user_dose.save()
+                    date_taken = form.cleaned_data.get('date_taken')
+                    create_vaccine(request.user.id,
+                                   vaccine_name,
+                                   dose_count,
+                                   date_taken)
             vaccine_suggest(request.user)
-        return HttpResponseRedirect(reverse('users:profile',
-                                            args=(request.user.id,)))
+        return redirect('users:profile')
     return render(request, 'registration/vaccination.html',
                   {'formset': formset, })
 
 
-@login_required(login_url='home')
+def upcoming_vaccine(user: CustomUser):
+    """Return list of upcoming vaccines in 10 days"""
+    today = date.today()
+    upcoming_vaccine_list = []
+    for vaccine in user.vaccine_set.all():
+        for dose in vaccine.dose_set.all():
+            if dose.date_taken:
+                delta = dose.date_taken - today
+                if not dose.received and 0 <= delta.days <= 7:
+                    upcoming_vaccine_list.append(dose)
+    return sorted(upcoming_vaccine_list, key=lambda d: d.date_taken)
+
+
 def request_user_view(request):
     if request.method == 'GET':
         return render(request, 'request_user.html')
     elif request.method == 'POST':
-        print(request.POST['uuid'])
-        user = CustomUser.objects.get(parental_key=request.POST['uuid'])
-        return HttpResponseRedirect(reverse('users:profile',
-                                            args=([user.id])))
+        try:
+            user = CustomUser.objects.get(parental_key=request.POST['uuid'])
+        except (KeyError, CustomUser.DoesNotExist):
+            return render(request, 'request_user.html', {
+                'error_message': "Could not find uuid.",
+            })
+        else:
+            uuid = request.POST['uuid'][:4]
+            return HttpResponseRedirect(reverse('users:parental',
+                                            kwargs={'user_id': user.id,
+                                                    'uuid': uuid}))
 
 
 @login_required(login_url='home')
-def user_view(request, user_id: int):
+def user_view(request):
     """Render user's page"""
-    user = CustomUser.objects.get(id=user_id)
+    print(request.user.id)
+    # print(user_id)
+    # if user_id == request.user.id:
+    user = CustomUser.objects.get(id=request.user.id)
     vaccine_set = user.sorted_vaccine()
     have_noti = get_usernoti(request)
     upcoming_vaccine_list = upcoming_vaccine(user)
     form = VaccinationForm()
-    print((user.parental_key))
     context = {'user': user,
-               'vaccine_set': vaccine_set,
-               'have_noti': have_noti,
-               'upcoming_vaccine': upcoming_vaccine_list,
-               'form': form}
+                'vaccine_set': vaccine_set,
+                'have_noti': have_noti,
+                'upcoming_vaccine': upcoming_vaccine_list,
+                'form': form}
     return render(request, 'user.html', context)
+
+
+@login_required(login_url='home')
+def parental_view(request, user_id: int, uuid: str):
+    user = CustomUser.objects.get(id=user_id)
+    if uuid == user.parental_key[:4]:
+        user = CustomUser.objects.get(id=user_id)
+        vaccine_set = user.sorted_vaccine()
+        upcoming_vaccine_list = upcoming_vaccine(user)
+        context = {'user': user,
+                   'vaccine_set': vaccine_set,
+                   'upcoming_vaccine': upcoming_vaccine_list}
+        return render(request, 'parental.html', context)
