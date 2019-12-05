@@ -14,5 +14,4 @@ class CustomUserAdmin(UserAdmin):
                            'gender', 'birthdate')}),
     )
 
-
 admin.site.register(CustomUser, CustomUserAdmin)

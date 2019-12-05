@@ -485,7 +485,7 @@ user page
 
 .user-vaccine-add,
 .user-vaccine-remove {
-  width: 200px;
+  width: fit-content;
   background-color: var(--tri-clr);
   border-radius: 8px;
   display: inline-block;
@@ -495,6 +495,10 @@ user page
   font-size: 20px;
   font-weight: bold;
   padding: 15px 32px;
+  text-decoration: none;
+}
+
+.user-vaccine-add a {
   text-decoration: none;
 }
 
@@ -542,6 +546,29 @@ user page
   border-left: 6px solid #4e6d7c;
   height: 30px;
   margin: -5px 0px -5px 7px;
+}
+
+.card {
+  margin-left: 4rem;
+}
+
+.id-p {
+  margin-bottom: 0;
+  color: #5d8294;
+}
+.del-vacc{
+  position: right;
+  color : red ;
+  padding: 7px;
+  border-radius: 5px;
+  background: white;
+  margin-top: 0.5rem;
+  margin-left: 2.5rem;
+}
+
+#vac-name-btn {
+  color: var(--tri-clr);
+
 }
 
 #vaccine-btn {
@@ -705,4 +732,51 @@ div.dot-inner {
 .save-btn:focus {
   box-shadow: 0 0 1pt 2pt rgb(113, 141, 156);
   outline: none;
+}
+
+/* parental view */
+.pr{
+  background: var(--pri-clr);
+  padding : 7rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.pr-h1 {
+  font-size: 50px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: var(--tri-clr);
+}
+
+
+.pr-p {
+  color: var(--tri-clr);
+  padding: 50px ;
+  font-size: 20px;
+}
+
+.pr-er{
+  color: rgb(255, 0, 0);
+
+}
+
+.pr-i {
+  width: 400px;
+  padding: 8px ;
+  border-radius: 10px;
+  text-align: center;
+}
+
+
+.request-btn {
+  margin-top: 2rem;
+  padding: 10px;
+  padding-left: 20px ;
+  padding-right: 20px ;
+  border-radius: 10px;
+  text-align: center;
+  background: var(--tri-clr);
+  color: white;
 }

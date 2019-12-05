@@ -23,15 +23,19 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <!-- custom CSS -->
+    
+  <!-- custom CSS -->
   </head>
 
   <body>
     {% if user.is_authenticated %}
     <ul class="nav-top">
-      <li><a class="nav-vac" href="#">VACSEEN</a></li>
+      <li><a class="nav-vac" href="{% url 'users:profile' %}">VACSEEN</a></li>
       <li style="float:right" class="nav-log">
         <a href="{% url 'account_logout' %}">Log out</a>
+      </li>
+      <li style="float:right" class="nav-log">
+        <a href="{% url 'users:request_user' %}">Parental Access</a>
       </li>
       {% if have_noti %}
         <li style="float:right" class="nav-log">
@@ -40,6 +44,7 @@
           </a>
         </li>
       {% endif %}
+
     </ul>
     {% else %}
     <ul class="nav-top">

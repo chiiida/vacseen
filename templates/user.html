@@ -28,18 +28,22 @@
                 <h4>{{ user.gender }}, {{ user.age }}
                     {% if user.age > 0.11 %} years {% else %} months {% endif %}
                 </h4>
-                <a href="#">edit profile</a>
+                <p class="id-p" id="uuid">your uuid is: </p>
+                <p class="id-p" id="uuid">{{user.parental_key}}</p>
             </div>
         </div>
         <div class="user-upcoming">
-            <h2>upcoming vaccine</h2>
+            <h2>Upcoming vaccines</h2>
             <hr>
             <div class="upcoming-box">
                 <div class="form-check">
                     {% for dose in upcoming_vaccine %}
                     <div class="one-check">
                         <div>
-                            <button><a href="{% url 'vaccine:received' dose.id %}">✔</a></button>
+                            <form action="{% url 'vaccine:received' dose.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="received-btn" value="received" name="received-btn" formmethod="post">ฉีดแร้ว</button>
+                            </form>
                             <label class="form-check-label" for="defaultCheck1">
                                 {{ dose.vaccine.vaccine_name }}: dose {{ dose.dose_count }}
                             </label>
@@ -52,8 +56,8 @@
                 </div>
             </div>
             <div class="add-remove">
-                <a href="{% url 'users:vaccination' %}" class="user-vaccine-add">
-                    EDIT
+                <a href="{% url 'vaccine:addvaccine' %}" class="user-vaccine-add">
+                    ADD VACCINE
                 </a>
             </div>
         </div>
@@ -64,10 +68,12 @@
             {% for vaccine in vaccine_set.all %}
             <div class="card">
                 <div class="card-header" id="heading{{ forloop.counter }}">
-                    <h2 class="mb-0">
-                        <button id="vaccine-btn"class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                    <h2 class="mb-0 collapsed" data-toggle="collapse"
                             data-target="#collapse{{ forloop.counter }}" aria-expanded="false"
                             aria-controls="collapse{{ forloop.counter }}">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapse{{ forloop.counter }}" aria-expanded="false"
+                            aria-controls="collapse{{ forloop.counter }}" id="vac-name-btn">
                             {{ vaccine.vaccine_name }}
                         </button>
                     </h2>
@@ -93,13 +99,17 @@
                                 <form action="{% url 'vaccine:trackfirstdate' vaccine.id %}" method="post" class="col-lg-12">
                                     {% csrf_token %}
                                     <div class="vacc-date">
-                                        {{ form.expired }}
+                                        {{ form.date_taken }}
                                     </div>
                                     <button id="start-track" type="submit" formmethod="post">Start tracking</button>
                                 </form>
                                 {% endif %}
                             {% endif %}
-                        {% endfor %}
+                            {% endfor %}
+                            <form action="{% url 'vaccine:delvaccine' vaccine.id %}" method="post">
+                                {% csrf_token %}
+                                <center><button type="submit" class="del-vacc" value="{{ vaccine.id }}" name="del-vacc" formmethod="post">Remove</button></center>
+                            </form>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load socialaccount %}
+{% if user.is_authenticated %}
+
+<div class="main light-bg">
+    <div class="user-info">
+        <div class="user-profile">
+            <img alt="" class="user-portrait" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" />
+            <div class="user-profile-basic">
+                <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                <h2>{{ user.gender }}, {{ user.age }}
+                    {% if user.age > 0.11 %} years {% else %} months {% endif %}
+                </h2>
+                <p id="uuid">uuid is: {{user.parental_key}}</p>
+            </div>
+        </div>
+        <div class="user-upcoming">
+            <h2>Upcoming vaccines</h2>
+            <hr>
+            <div class="upcoming-box">
+                <div class="form-check">
+                    {% for dose in upcoming_vaccine %}
+                    <div class="one-check">
+                        <div>
+                            <label class="form-check-label" for="defaultCheck1">
+                                {{ dose.vaccine.vaccine_name }}: dose {{ dose.dose_count }}
+                            </label>
+                        </div>
+                        <div>
+                            <p>{{ dose.date_taken }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="user-vaccines">
+        <div class="accordion" id="accordionExample">
+
+            {% for vaccine in vaccine_set.all %}
+            <div class="card">
+                <div class="card-header" id="heading{{ forloop.counter }}">
+                    <h2 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}"
+                        aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#collapse{{ forloop.counter }}" aria-expanded="false"
+                            aria-controls="collapse{{ forloop.counter }}">
+                            {{ vaccine.vaccine_name }}
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapse{{ forloop.counter }}" class="collapse" aria-labelledby="heading{{ forloop.counter }}"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+                        {% for dose in vaccine.dose_set.all %}
+                        {% if dose.date_taken %}
+                        <div class="status">
+                            {% if dose.received %}
+                            <div class="status-received"></div>
+                            {% endif %}
+                        </div>
+                        <div class="dose">
+                            Dose: {{ dose.dose_count }} {{ dose.date_taken }}
+                        </div>
+                        {% if dose.not_last_dose %}
+                        <div class="vl"></div>
+                        {% endif %}
+                        {% else %}
+                        {% if dose.dose_count == 1 %}
+                        Haven't set a date yet.
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
