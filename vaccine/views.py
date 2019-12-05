@@ -1,13 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 from datetime import date, timedelta
-import logging
 
-from users.forms import *
+from users.forms import DateExpiredForm, VaccineFormSet
 from users.models import CustomUser
-from vaccine.models import *
+from vaccine.models import VaccineModel, Vaccine, Dose
 
 
 def next_date(date: date, duration: int):
@@ -15,10 +12,10 @@ def next_date(date: date, duration: int):
     return date + timedelta(days=duration)
 
 
-def create_vaccine(user_id: int, vaccine_name: str, dose_count: int, date_taken: date):
+def create_vaccine(user_id: int, vacc_name: str, dose_count: int, date: date):
     """Create vaccine including requried dose by duplicate from model"""
     vacModel = VaccineModel.objects.get(
-        vaccine_name=vaccine_name)
+        vaccine_name=vacc_name)
     user = CustomUser.objects.get(id=user_id)
     vaccine = Vaccine(vaccine_name=vacModel.vaccine_name,
                       required_age=vacModel.required_age,
@@ -29,7 +26,7 @@ def create_vaccine(user_id: int, vaccine_name: str, dose_count: int, date_taken:
     if vaccine.stimulate_phase > 0:
         user_dose = Dose(vaccine=vaccine,
                          dose_count=dose_count,
-                         date_taken=date_taken,
+                         date_taken=date,
                          received=True)
         user_dose.save()
         next_dose = Dose(vaccine=vaccine,
@@ -41,7 +38,7 @@ def create_vaccine(user_id: int, vaccine_name: str, dose_count: int, date_taken:
         left_dose = list(vacModel.dosemodel_set.all()[(dose_count - 1):])
         for dose in left_dose:
             status = False
-            if next_date(date_taken, dose.dose_duration) == date_taken and dose_count > 0:
+            if next_date(date, dose.dose_duration) == date and dose_count > 0:
                 status = True
             user_dose = Dose(vaccine=vaccine,
                              dose_count=dose.dose_count,
@@ -49,7 +46,7 @@ def create_vaccine(user_id: int, vaccine_name: str, dose_count: int, date_taken:
                              received=status)
             if dose_count != 0:
                 user_dose.date_taken = next_date(
-                    date_taken, dose.dose_duration)
+                    date, dose.dose_duration)
             user_dose.save()
 
 
@@ -74,7 +71,6 @@ def vaccine_suggest(user: CustomUser):
     Filter vaccine that match with user
     then create vaccine and save to database
     """
-    vaccine_model = VaccineModel.objects.all()
     vaccines = filter_vaccine(user)
     for vaccine in vaccines:
         user_vaccine = Vaccine(vaccine_name=vaccine.vaccine_name,
@@ -105,11 +101,13 @@ def track_first_date(request, vaccine_id: int):
     if request.method == 'POST':
         form = DateExpiredForm(request.POST)
         if form.is_valid():
+            print(vacc_model)
             date_taken = form.cleaned_data.get('date_taken')
             for dose in vacc_model.dosemodel_set.all():
                 user_dose = vaccine.dose_set.get(dose_count=dose.dose_count)
                 user_dose.date_taken = next_date(
                     date_taken, dose.dose_duration)
+                print(user_dose.date_taken)
                 user_dose.save()
     return redirect('users:profile')
 
@@ -118,7 +116,7 @@ def track_first_date(request, vaccine_id: int):
 def received_dose(request, dose_id: int):
     """Get input from the user that the user received that dose."""
     if request.method == 'POST':
-        status = request.POST['received-btn']
+        status = request.POST['receivedbtn']
         dose = Dose.objects.get(id=dose_id)
         if status == 'received':
             dose.received = True
@@ -162,6 +160,6 @@ def add_vaccine(request):
 def del_vaccine(request, vaccine_id: int):
     """Remove specify vaccine from user's input"""
     if request.method == 'POST':
-        vaccine = Vaccine.objects.get(pk=request.POST['del-vacc'])
+        vaccine = Vaccine.objects.get(pk=request.POST['delvacc'])
         vaccine.delete()
         return redirect('users:profile')

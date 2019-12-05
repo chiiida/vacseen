@@ -2,15 +2,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
 from datetime import date, timedelta
-import logging
 
-from vaccine.models import VaccineModel, Vaccine, Dose
 from vaccine.views import create_vaccine, vaccine_suggest
 from .models import CustomUser
 from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
 
-
-# logger = logging.getLogger('userlog')
 
 def get_usernoti(request):
     """
@@ -124,26 +120,23 @@ def request_user_view(request):
         else:
             uuid = request.POST['uuid'][:4]
             return HttpResponseRedirect(reverse('users:parental',
-                                            kwargs={'user_id': user.id,
-                                                    'uuid': uuid}))
+                                                kwargs={'user_id': user.id,
+                                                        'uuid': uuid}))
 
 
 @login_required(login_url='home')
 def user_view(request):
     """Render user's page"""
-    print(request.user.id)
-    # print(user_id)
-    # if user_id == request.user.id:
     user = CustomUser.objects.get(id=request.user.id)
     vaccine_set = user.sorted_vaccine()
     have_noti = get_usernoti(request)
     upcoming_vaccine_list = upcoming_vaccine(user)
     form = VaccinationForm()
     context = {'user': user,
-                'vaccine_set': vaccine_set,
-                'have_noti': have_noti,
-                'upcoming_vaccine': upcoming_vaccine_list,
-                'form': form}
+               'vaccine_set': vaccine_set,
+               'have_noti': have_noti,
+               'upcoming_vaccine': upcoming_vaccine_list,
+               'form': form}
     return render(request, 'user.html', context)
 
 

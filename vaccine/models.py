@@ -1,6 +1,5 @@
 from django.db import models
 from users.models import CustomUser
-from datetime import date
 
 
 class VaccineModel(models.Model):
