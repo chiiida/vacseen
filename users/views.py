@@ -40,8 +40,6 @@ def is_valid_uuid(uuid_to_test, version=4):
     return str(uuid_obj) == uuid_to_test
 
 
-# logger = logging.getLogger('userlog')
-
 def get_outbreak(request):
     """
     give outbreak alert to users
@@ -165,15 +163,12 @@ def request_user_view(request):
                                                             'uuid': uuid}))
         else:
             return render(request, 'request_user.html', {
-                    'error_message': "Invalid uuid.",
-                })
+                    'error_message': "Invalid uuid."})
 
 
 @login_required(login_url='home')
 def user_view(request):
     """Render user's page"""
-    # print(user_id)
-    # if user_id == request.user.id:
     user = CustomUser.objects.get(id=request.user.id)
     vaccine_set = user.sorted_vaccine()
     have_outbreak = get_outbreak(request)

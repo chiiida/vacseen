@@ -1,8 +1,7 @@
 from django.test import TestCase
 
 from users.models import CustomUser
-from vaccine.models import *
-
+from vaccine.models import Vaccine
 
 class CustomUserTests(TestCase):
 
