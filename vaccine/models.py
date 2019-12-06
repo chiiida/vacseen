@@ -1,6 +1,20 @@
 from django.db import models
 from users.models import CustomUser
-from datetime import date
+import datetime
+
+
+class Outbreak(models.Model):
+    """
+    Outbreak model will be use to alert user
+    that is in outbreak location
+    """
+    disease = models.CharField(max_length=50)
+    location = models.CharField(max_length=50)
+    recommend_vaccine = models.CharField(max_length=50)
+    added_date = models.DateField(default=datetime.date.today, blank=True)
+
+    def __str__(self):
+        return f"{self.disease} outbreak at {self.location} ({self.added_date})"
 
 
 class VaccineModel(models.Model):

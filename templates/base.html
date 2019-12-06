@@ -36,14 +36,27 @@
       <li style="float:right" class="nav-log">
         <a href="{% url 'users:request_user' %}">Parental Access</a>
       </li>
-      {% if have_noti %}
-        <li style="float:right" class="nav-log">
-          <a href="{% url 'account_logout' %}">
-            <img src="/static/image/canvas.png" class="nav-noti">
-          </a>
-        </li>
-      {% endif %}
 
+      <li style="float:right" class="nav-log">
+        <a class="outbreak-toggler">
+          {% if have_outbreak %}
+          <!-- pic with red dot -->
+          <img src="/static/image/canvas.png" class="nav-noti" />
+          {% else %}
+          <!-- pic without red dot -->
+          <img src="/static/image/canvas.png" class="nav-noti" />
+          {% endif %}
+        </a>
+      </li>
+      <div class="outbreak">
+        <ul>
+          {% if have_outbreak %} {% for outbreak in have_outbreak %}
+          <li class="outbreak-li">{{ outbreak }}</li>
+          {% endfor %} {% else %}
+          <li class="outbreak-li">There is no outbreak at this time. :D</li>
+          {% endif %}
+        </ul>
+      </div>
     </ul>
     {% else %}
     <ul class="nav-top">
@@ -72,5 +85,6 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="{% static 'js/base.js' %}"></script>
   </body>
 </html>
