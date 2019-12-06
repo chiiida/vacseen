@@ -95,12 +95,20 @@ li a {
   padding: 10px 12px;
   text-decoration: none;
 }
+
+li a:hover {
+  color:var(--sec-clr);
+  text-decoration: none;
+}
+
 .nav-vac {
   padding: 8px;
   font-size: 2rem;
   font-weight: 1000;
   color: var(--pri-clr);
 }
+
+
 .nav-log {
   /* padding: 10px; */
   float: right;
@@ -499,6 +507,11 @@ user page
 }
 
 .user-vaccine-add a {
+  text-decoration: none;
+}
+
+.user-vaccine-add:hover {
+  color:var(--sec-clr);
   text-decoration: none;
 }
 

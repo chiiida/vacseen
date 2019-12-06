@@ -319,6 +319,31 @@
     },
 
     {
+      "model": "vaccine.vaccinemodel",
+      "pk": 28,
+      "fields": {
+        "vaccine_name": "Pneumococcal vaccine",
+        "required_age": 50,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 29,
+      "fields": {
+        "vaccine_name": "Zoster vaccine",
+        "required_age": 50,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+
+
+
+    {
       "model": "vaccine.dosemodel",
       "pk": 1,
       "fields": { "vaccine": 1, "dose_count": 1, "dose_duration": 0 }
@@ -688,6 +713,25 @@
       "model": "vaccine.dosemodel",
       "pk": 61,
       "fields": { "vaccine": 26, "dose_count": 3, "dose_duration": 180 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 62,
+      "fields": { "vaccine": 27, "dose_count": 1, "dose_duration": 0 }
+    },
+
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 63,
+      "fields": { "vaccine": 28, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 64,
+      "fields": { "vaccine": 29, "dose_count": 1, "dose_duration": 0 }
     }
 
 
