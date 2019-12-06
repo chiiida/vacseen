@@ -2,12 +2,41 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
 from datetime import date, timedelta
-import logging
 
-from vaccine.models import VaccineModel, Vaccine, Dose
 from vaccine.views import create_vaccine, vaccine_suggest
 from .models import CustomUser
 from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
+from uuid import UUID
+
+
+def is_valid_uuid(uuid_to_test, version=4):
+    """
+    Check if uuid_to_test is a valid UUID.
+
+    Parameters
+    ----------
+    uuid_to_test : str
+    version : {1, 2, 3, 4}
+
+    Returns
+    -------
+    `True` if uuid_to_test is a valid UUID, otherwise `False`.
+
+    Examples
+    --------
+    >>> is_valid_uuid('c9bf9e57-1685-4c89-bafb-ff5af830be8a')
+    True
+    >>> is_valid_uuid('c9bf9e58')
+    False
+    """
+    if not isinstance(uuid_to_test, str):
+        raise TypeError('not a string')
+    try:
+        uuid_obj = UUID(uuid_to_test, version=version)
+    except ValueError:
+        return False
+
+    return str(uuid_obj) == uuid_to_test
 
 
 # logger = logging.getLogger('userlog')
@@ -111,21 +140,29 @@ def upcoming_vaccine(user: CustomUser):
     return sorted(upcoming_vaccine_list, key=lambda d: d.date_taken)
 
 
+@login_required(login_url='home')
 def request_user_view(request):
+    """Render page for user to request to view other user page."""
     if request.method == 'GET':
         return render(request, 'request_user.html')
     elif request.method == 'POST':
-        try:
-            user = CustomUser.objects.get(parental_key=request.POST['uuid'])
-        except (KeyError, CustomUser.DoesNotExist):
-            return render(request, 'request_user.html', {
-                'error_message': "Could not find uuid.",
-            })
+        if is_valid_uuid(request.POST['uuid']):
+            try:
+                user = CustomUser.objects.get(
+                    parental_key=request.POST['uuid'])
+            except (KeyError, CustomUser.DoesNotExist):
+                return render(request, 'request_user.html', {
+                    'error_message': "Could not find user with this uuid.",
+                })
+            else:
+                uuid = request.POST['uuid'][:4]
+                return HttpResponseRedirect(reverse('users:parental',
+                                                    kwargs={'user_id': user.id,
+                                                            'uuid': uuid}))
         else:
-            uuid = request.POST['uuid'][:4]
-            return HttpResponseRedirect(reverse('users:parental',
-                                            kwargs={'user_id': user.id,
-                                                    'uuid': uuid}))
+            return render(request, 'request_user.html', {
+                    'error_message': "Invalid uuid.",
+                })
 
 
 @login_required(login_url='home')
@@ -140,10 +177,10 @@ def user_view(request):
     upcoming_vaccine_list = upcoming_vaccine(user)
     form = VaccinationForm()
     context = {'user': user,
-                'vaccine_set': vaccine_set,
-                'have_noti': have_noti,
-                'upcoming_vaccine': upcoming_vaccine_list,
-                'form': form}
+               'vaccine_set': vaccine_set,
+               'have_noti': have_noti,
+               'upcoming_vaccine': upcoming_vaccine_list,
+               'form': form}
     return render(request, 'user.html', context)
 
 
