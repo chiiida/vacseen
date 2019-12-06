@@ -163,7 +163,7 @@ def request_user_view(request):
                                                             'uuid': uuid}))
         else:
             return render(request, 'request_user.html', {
-                    'error_message': "Invalid uuid.",
+                    'error_message': "Invalid uuid."})
 
 
 @login_required(login_url='home')
