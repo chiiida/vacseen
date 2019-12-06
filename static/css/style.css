@@ -108,10 +108,9 @@ li a {
   color: var(--pri-clr);
 }
 
-.nav-noti{
+.nav-noti {
   width: 30px;
   height: auto;
-
 }
 
 .logo {
@@ -565,8 +564,30 @@ div.dot-inner {
 }
 
 /* parental view */
-.pr{
+.pr {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ===================
+  outbreak section
+===================   */
+
+.outbreak {
+  display: none;
+  position: absolute;
+  opacity: 0;
+  z-index: 999;
+}
+
+.outbreak-li {
+  background: #000;
+  display: block;
+}
+
+.outbreak-show {
+  display: inline;
+  opacity: 1;
+  transition: opacity 500ms linear;
 }

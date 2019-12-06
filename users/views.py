@@ -4,28 +4,63 @@ from django.http import HttpResponseRedirect
 from datetime import date, timedelta
 
 from vaccine.views import create_vaccine, vaccine_suggest
+from vaccine.models import Outbreak
 from .models import CustomUser
 from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
+from uuid import UUID
 
 
-def get_usernoti(request):
+def is_valid_uuid(uuid_to_test, version=4):
     """
-    compute if user have a vaccine that need to be retaken within 1 year.
+    Check if uuid_to_test is a valid UUID.
+
+    Parameters
+    ----------
+    uuid_to_test : str
+    version : {1, 2, 3, 4}
+
+    Returns
+    -------
+    `True` if uuid_to_test is a valid UUID, otherwise `False`.
+
+    Examples
+    --------
+    >>> is_valid_uuid('c9bf9e57-1685-4c89-bafb-ff5af830be8a')
+    True
+    >>> is_valid_uuid('c9bf9e58')
+    False
+    """
+    if not isinstance(uuid_to_test, str):
+        raise TypeError('not a string')
+    try:
+        uuid_obj = UUID(uuid_to_test, version=version)
+    except ValueError:
+        return False
+
+    return str(uuid_obj) == uuid_to_test
+
+
+def get_outbreak(request):
+    """
+    give outbreak alert to users
     """
     # get user
-    user = CustomUser.objects.get(id=request.user.id)
-    this_year = date.today().year
-    # get user vaccine
-    vaccine_set = user.sorted_vaccine()
-    # get vaccine nearing date
-    for vaccine in vaccine_set:
-        # TODO get vaccine dose
-        for dose in vaccine.dose_set.all():
-            if dose.date_taken and not dose.received:
-                # TODO compare dose.date_expired with today
-                if (dose.date_taken.year+vaccine.stimulate_phase <= this_year):
-                    return True
-    return False
+    # user = CustomUser.objects.get(id=request.user.id)
+    # this_year = date.today().year
+    # # get user vaccine
+    # vaccine_set = user.sorted_vaccine()
+    # # get vaccine nearing date
+    # for vaccine in vaccine_set:
+    #     # TODO get vaccine dose
+    #     for dose in vaccine.dose_set.all():
+    #         if dose.date_taken and not dose.received:
+    #             # TODO compare dose.date_expired with today
+    #             if (dose.date_taken.year+vaccine.stimulate_phase <= this_year):
+    #                 return True
+    # return False
+    outbreaks_all = Outbreak.objects.all()
+    outbreaks = [str(outbreak) for outbreak in outbreaks_all]
+    return outbreaks
 
 
 def calculate_age(born: date):
@@ -66,7 +101,7 @@ def signup_view(request):
     else:
         form = CustomUserForm()
         return render(request, 'registration/signup.html',
-                      {'form': form, 'have_noti': False})
+                      {'form': form, 'have_outbreak': False})
 
 
 def vaccination_signup_view(request):
@@ -107,21 +142,28 @@ def upcoming_vaccine(user: CustomUser):
     return sorted(upcoming_vaccine_list, key=lambda d: d.date_taken)
 
 
+@login_required(login_url='home')
 def request_user_view(request):
+    """Render page for user to request to view other user page."""
     if request.method == 'GET':
         return render(request, 'request_user.html')
     elif request.method == 'POST':
-        try:
-            user = CustomUser.objects.get(parental_key=request.POST['uuid'])
-        except (KeyError, CustomUser.DoesNotExist):
-            return render(request, 'request_user.html', {
-                'error_message': "Could not find uuid.",
-            })
+        if is_valid_uuid(request.POST['uuid']):
+            try:
+                user = CustomUser.objects.get(
+                    parental_key=request.POST['uuid'])
+            except (KeyError, CustomUser.DoesNotExist):
+                return render(request, 'request_user.html', {
+                    'error_message': "Could not find user with this uuid.",
+                })
+            else:
+                uuid = request.POST['uuid'][:4]
+                return HttpResponseRedirect(reverse('users:parental',
+                                                    kwargs={'user_id': user.id,
+                                                            'uuid': uuid}))
         else:
-            uuid = request.POST['uuid'][:4]
-            return HttpResponseRedirect(reverse('users:parental',
-                                                kwargs={'user_id': user.id,
-                                                        'uuid': uuid}))
+            return render(request, 'request_user.html', {
+                    'error_message': "Invalid uuid.",
 
 
 @login_required(login_url='home')
@@ -129,12 +171,12 @@ def user_view(request):
     """Render user's page"""
     user = CustomUser.objects.get(id=request.user.id)
     vaccine_set = user.sorted_vaccine()
-    have_noti = get_usernoti(request)
+    have_outbreak = get_outbreak(request)
     upcoming_vaccine_list = upcoming_vaccine(user)
     form = VaccinationForm()
     context = {'user': user,
                'vaccine_set': vaccine_set,
-               'have_noti': have_noti,
+               'have_outbreak': have_outbreak,
                'upcoming_vaccine': upcoming_vaccine_list,
                'form': form}
     return render(request, 'user.html', context)
