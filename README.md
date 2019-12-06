@@ -65,11 +65,14 @@ $ venv\Scripts\activate
 ```
 (venv) python manage.py createsuperuser
 ``` 
-5. Add and configure Google credential in `http://127.0.0.1:8000/admin` after starting the server.
+5. Run server
+```
+(venv) python manage.py runserver --insecure
+```
+6. Add and configure Google credential in `http://127.0.0.1:8000/admin` after starting the server.
  - In `Site` -> set your domain field to match your domain (example. '127.0.0.1')
  - In `Social` -> set your provider as Google, fill your `Client id` and `Secret key`.
-
-6. Exit the virtualenv when done. Have fun!
+7. Exit the virtualenv when done. Have fun!
 ```
 (venv) deactivate
 ```

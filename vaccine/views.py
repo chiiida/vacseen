@@ -61,8 +61,9 @@ def filter_vaccine(user: CustomUser):
     vaccines_list = []
     for vaccine in vaccine_model:
         if vaccine.vaccine_name not in user_vaccine_list:
-            if user.age >= vaccine.required_age and vaccine.required_gender in ('None', user.gender):
-                vaccines_list.append(vaccine)
+            if vaccine.required_gender in ('None', user.gender):
+                if user.age >= vaccine.required_age:
+                    vaccines_list.append(vaccine)
     return vaccines_list
 
 
