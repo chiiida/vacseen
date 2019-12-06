@@ -119,7 +119,6 @@ li a:hover {
 .nav-noti{
   width: 40px;
   height: auto;
-
 }
 
 .logo {
@@ -820,4 +819,40 @@ div.dot-inner {
   text-align: center;
   background: var(--tri-clr);
   color: white;
+}
+/* ===================
+  outbreak section
+===================   */
+
+
+
+.outbreak {
+  display: none;
+  position: absolute;
+  opacity: 0;
+  z-index: 999;
+}
+.outbreak img {
+  width: 40px;
+  position: absolute;
+  left: 868px;
+  top: 40px;
+}
+.outbreak-li {
+  position: absolute;
+  width: 380px;
+  top: 65px;
+  left: 540px;
+  border-radius: 10px;
+  background: var(--sec-clr);
+  padding: 1rem;
+  color: white;
+  font-size: 16px;
+  display: block;
+}
+
+.outbreak-show {
+  display: inline;
+  opacity: 1;
+  transition: opacity 500ms linear;
 }
