@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from datetime import date, timedelta
 
 from vaccine.views import create_vaccine, vaccine_suggest
+from vaccine.models import Outbreak
 from .models import CustomUser
 from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
 from uuid import UUID
@@ -41,24 +42,27 @@ def is_valid_uuid(uuid_to_test, version=4):
 
 # logger = logging.getLogger('userlog')
 
-def get_usernoti(request):
+def get_outbreak(request):
     """
-    compute if user have a vaccine that need to be retaken within 1 year.
+    give outbreak alert to users
     """
     # get user
-    user = CustomUser.objects.get(id=request.user.id)
-    this_year = date.today().year
-    # get user vaccine
-    vaccine_set = user.sorted_vaccine()
-    # get vaccine nearing date
-    for vaccine in vaccine_set:
-        # TODO get vaccine dose
-        for dose in vaccine.dose_set.all():
-            if dose.date_taken and not dose.received:
-                # TODO compare dose.date_expired with today
-                if (dose.date_taken.year+vaccine.stimulate_phase <= this_year):
-                    return True
-    return False
+    # user = CustomUser.objects.get(id=request.user.id)
+    # this_year = date.today().year
+    # # get user vaccine
+    # vaccine_set = user.sorted_vaccine()
+    # # get vaccine nearing date
+    # for vaccine in vaccine_set:
+    #     # TODO get vaccine dose
+    #     for dose in vaccine.dose_set.all():
+    #         if dose.date_taken and not dose.received:
+    #             # TODO compare dose.date_expired with today
+    #             if (dose.date_taken.year+vaccine.stimulate_phase <= this_year):
+    #                 return True
+    # return False
+    outbreaks_all = Outbreak.objects.all()
+    outbreaks = [str(outbreak) for outbreak in outbreaks_all]
+    return outbreaks
 
 
 def calculate_age(born: date):
@@ -99,7 +103,7 @@ def signup_view(request):
     else:
         form = CustomUserForm()
         return render(request, 'registration/signup.html',
-                      {'form': form, 'have_noti': False})
+                      {'form': form, 'have_outbreak': False})
 
 
 def vaccination_signup_view(request):
@@ -168,17 +172,16 @@ def request_user_view(request):
 @login_required(login_url='home')
 def user_view(request):
     """Render user's page"""
-    print(request.user.id)
     # print(user_id)
     # if user_id == request.user.id:
     user = CustomUser.objects.get(id=request.user.id)
     vaccine_set = user.sorted_vaccine()
-    have_noti = get_usernoti(request)
+    have_outbreak = get_outbreak(request)
     upcoming_vaccine_list = upcoming_vaccine(user)
     form = VaccinationForm()
     context = {'user': user,
                'vaccine_set': vaccine_set,
-               'have_noti': have_noti,
+               'have_outbreak': have_outbreak,
                'upcoming_vaccine': upcoming_vaccine_list,
                'form': form}
     return render(request, 'user.html', context)
