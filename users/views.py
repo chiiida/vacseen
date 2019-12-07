@@ -2,12 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
 from datetime import date, timedelta
+from uuid import UUID
 
 from vaccine.views import create_vaccine, vaccine_suggest
 from vaccine.models import Outbreak
 from .models import CustomUser
 from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
-from uuid import UUID
+from pages.views import get_client_ip, logger
 
 
 def is_valid_uuid(uuid_to_test, version=4):
@@ -44,20 +45,6 @@ def get_outbreak(request):
     """
     give outbreak alert to users
     """
-    # get user
-    # user = CustomUser.objects.get(id=request.user.id)
-    # this_year = date.today().year
-    # # get user vaccine
-    # vaccine_set = user.sorted_vaccine()
-    # # get vaccine nearing date
-    # for vaccine in vaccine_set:
-    #     # TODO get vaccine dose
-    #     for dose in vaccine.dose_set.all():
-    #         if dose.date_taken and not dose.received:
-    #             # TODO compare dose.date_expired with today
-    #             if (dose.date_taken.year+vaccine.stimulate_phase <= this_year):
-    #                 return True
-    # return False
     outbreaks_all = Outbreak.objects.all()
     outbreaks = [str(outbreak) for outbreak in outbreaks_all]
     return outbreaks
@@ -97,6 +84,9 @@ def signup_view(request):
                                 birthdate=birthdate,
                                 age=age)
             user.save()
+            client_ip = get_client_ip(request)
+            logger.debug('Update profile for {} from {}'.format(
+                request.user, client_ip))
             return HttpResponseRedirect(reverse('users:vaccination'))
     else:
         form = CustomUserForm()
@@ -124,6 +114,9 @@ def vaccination_signup_view(request):
                                    dose_count,
                                    date_taken)
             vaccine_suggest(request.user)
+            client_ip = get_client_ip(request)
+            logger.debug('Request update vaccination for {} from {}'.format(
+                request.user, client_ip))
         return redirect('users:profile')
     return render(request, 'registration/vaccination.html',
                   {'formset': formset, })
@@ -153,6 +146,8 @@ def request_user_view(request):
                 user = CustomUser.objects.get(
                     parental_key=request.POST['uuid'])
             except (KeyError, CustomUser.DoesNotExist):
+                client_ip = get_client_ip(request)
+                logger.warning('Request wrong uuid from {}'.format(client_ip))
                 return render(request, 'request_user.html', {
                     'error_message': "Could not find user with this uuid.",
                 })
@@ -163,7 +158,7 @@ def request_user_view(request):
                                                             'uuid': uuid}))
         else:
             return render(request, 'request_user.html', {
-                    'error_message': "Invalid uuid."})
+                'error_message': "Invalid uuid."})
 
 
 @login_required(login_url='home')
@@ -192,4 +187,6 @@ def parental_view(request, user_id: int, uuid: str):
         context = {'user': user,
                    'vaccine_set': vaccine_set,
                    'upcoming_vaccine': upcoming_vaccine_list}
+        client_ip = get_client_ip(request)
+        logger.debug('Parental view for {} from {}'.format(user, client_ip))
         return render(request, 'parental.html', context)

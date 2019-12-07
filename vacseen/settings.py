@@ -21,6 +21,32 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config(
 
 ALLOWED_HOSTS = ['127.0.0.1', 'vacseen.herokuapp.com']
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'timestamp': {
+            'format': '{asctime} {levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'applogfile': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'timestamp',
+            'filename': os.path.join(BASE_DIR, 'vacseen.log'),
+            'maxBytes': 1024*1024*15,  # 15MB
+            'backupCount': 100,
+        },
+    },
+    'loggers': {
+        'vacseen': {
+            'handlers': ['applogfile'],
+            'level': 'DEBUG',
+        },
+    }
+}
 
 # Application definition
 
