@@ -143,5 +143,4 @@ LOGOUT_REDIRECT_URL = 'home'  # new
 
 ACCOUNT_LOGOUT_ON_GET = True
 
-if 'HEROKU' in os.environ:
-    django_heroku.settings(locals())
+django_heroku.settings(locals())
