@@ -25,7 +25,9 @@ install:
   - pip install codecov
   
 script:
-  - coverage run manage.py test users/tests vaccine/tests pages/tests
+  - coverage run manage.py test users/tests 
+  - coverage run manage.py test vaccine/tests
+  - coverage run manage.py test pages/tests
 
 notifications:
   slack: vacseen:7ogtQG6Nde9OFbafzV41HWHd
