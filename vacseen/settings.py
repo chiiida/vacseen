@@ -132,19 +132,4 @@ LOGOUT_REDIRECT_URL = 'home'  # new
 
 ACCOUNT_LOGOUT_ON_GET = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/]
-
-
-if config('HEROKU', default=False, cast=bool):
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
-    django_heroku.settings(locals())
-else:
-    STATIC_URL = '/static/'
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, "static"),
-    ]
+django_heroku.settings(locals())
