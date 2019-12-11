@@ -107,4 +107,5 @@ venv.bak/
 .vscode
 .vscode/settings.json
 devenv/
-staticfiles/
+staticfiles/rest_framework
+staticfiles/admin
