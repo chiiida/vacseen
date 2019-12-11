@@ -135,7 +135,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/]
 STATIC_URL = '/static/'
-
+print('HEROKU' in os.environ)
 if 'HEROKU' in os.environ:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     STATICFILES_DIRS = (
