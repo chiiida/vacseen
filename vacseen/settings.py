@@ -1,4 +1,5 @@
 import os
+import django_heroku
 from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -138,6 +139,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-if '/app' in os.environ['HOME']:
-    import django_heroku
-    django_heroku.settings(locals())
+django_heroku.settings(locals())
