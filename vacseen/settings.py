@@ -19,7 +19,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config(
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config(
     'SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET', default='secrect')
 
-ALLOWED_HOSTS = ['127.0.0.1', 'vacseen.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'vacseen.herokuapp.com']
 
 
 # Application definition
@@ -61,6 +61,7 @@ ACCOUNT_EMAIL_REQUIRED = True  # new
 ACCOUNT_USERNAME_REQUIRED = False  # new
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -129,7 +130,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'loginhandler'  # new
@@ -138,4 +138,12 @@ LOGOUT_REDIRECT_URL = 'home'  # new
 ACCOUNT_LOGOUT_ON_GET = True
 
 if 'HEROKU' in os.environ:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     django_heroku.settings(locals())
+else:
+    STATIC_ROOT = 'static'
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
