@@ -39,11 +39,17 @@ LOGGING = {
             'maxBytes': 1024*1024*15,  # 15MB
             'backupCount': 100,
         },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'timestamp'
+        }
     },
     'loggers': {
         'vacseen': {
-            'handlers': ['applogfile'],
+            'handlers': ['applogfile', 'console'],
             'level': 'DEBUG',
+            'propagate': False
         },
     }
 }

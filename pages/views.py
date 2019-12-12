@@ -17,7 +17,6 @@ def get_client_ip(request):
 
 def IndexView(request):
     """Render index page (login with OAuth page)."""
-    print(dir(request.GET))
     if str(request.user) == 'AnonymousUser':
         client_ip = get_client_ip(request)
         logger.error('Try to access from {}'.format(client_ip))
