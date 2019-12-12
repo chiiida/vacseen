@@ -10,11 +10,6 @@ services:
 
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
-  - python manage.py makemigrations vaccine
-  - python manage.py makemigrations users
-  - python manage.py migrate vaccine
-  - python manage.py migrate users
-  - python manage.py collectstatic --noinput
 
 test:
   adapter: postgresql
@@ -25,13 +20,13 @@ install:
   - pip install codecov
   
 script:
-  - coverage run manage.py test users/tests 
-  - coverage run manage.py test vaccine/tests
-  - coverage run manage.py test pages/tests
+  - coverage run manage.py test users/tests vaccine/tests pages/tests
 
 notifications:
   slack: vacseen:7ogtQG6Nde9OFbafzV41HWHd
 
 after_success:
   - codecov
-  
+
+env:
+  - TRAVIS_SECURE_ENV_VARS = true
