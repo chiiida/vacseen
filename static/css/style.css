@@ -95,12 +95,20 @@ li a {
   padding: 10px 12px;
   text-decoration: none;
 }
+
+li a:hover {
+  color:var(--sec-clr);
+  text-decoration: none;
+}
+
 .nav-vac {
   padding: 8px;
   font-size: 2rem;
   font-weight: 1000;
   color: var(--pri-clr);
 }
+
+
 .nav-log {
   /* padding: 10px; */
   float: right;
@@ -108,8 +116,8 @@ li a {
   color: var(--pri-clr);
 }
 
-.nav-noti {
-  width: 30px;
+.nav-noti{
+  width: 40px;
   height: auto;
 }
 
@@ -153,6 +161,60 @@ div.main > div.hero > div.hero-text {
   justify-content: center;
 }
 
+
+div.main > div.hero > div.hero-text > img {
+  top : 150px ;
+  position: absolute;
+  width : auto ;
+  height: 300px;
+  /* padding-bottom: 50px; */
+  animation-name: cf4FadeInOut;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+}
+
+@keyframes cf4FadeInOut {
+  0% {
+    opacity:1;
+  }
+  17% {
+    opacity:1;
+  }
+  25% {
+    opacity:0;
+  }
+  92% {
+    opacity:0;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
+#logor img:nth-of-type(1) {
+  animation-delay: 8s;
+}
+#logor img:nth-of-type(2) {
+  animation-delay: 6s;
+}
+#logor img:nth-of-type(3) {
+  animation-delay: 4s;
+}
+#logor img:nth-of-type(4) {
+  animation-delay: 2s;
+}
+#logor img:nth-of-type(5) {
+  animation-delay: 0;
+}
+
+div.main > div.hero > div.hero-text > p {
+  position: relative;
+  padding-top: 350px;
+  font-size: 20px;
+  color: white;
+}
+
 div.main > div.cta {
   color: var(--sec-clr);
   width: 45%;
@@ -162,10 +224,44 @@ div.main > div.cta {
   align-items: center;
   font-size: 200%;
 }
-h4 {
+
+div.main > div.cta > h4 {
   padding-bottom: 50px;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter;
+  display: inline-block;
+  position: relative;
+  animation-duration: 10s;
+  animation-timing-function: steps(25, end);
+  animation-iteration-count: infinite;
 }
 
+div.main > div.cta > h4::after {
+  content: "|";
+  position: absolute;
+  right: 0;
+  animation: caret infinite;
+  animation-duration: 2s;
+  animation-timing-function: steps(1, end);
+}
+
+@keyframes typewriter {
+  0%, 100% {
+    width: 0;
+  }
+  20%, 80% {
+    width: 10.7em;
+  }
+}
+@keyframes caret {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
 .google-button {
   padding-top: 1200px;
   height: 40px;
@@ -255,7 +351,24 @@ div.main-reg h1 {
   font-weight: bold;
   padding-top: 10px;
   padding-bottom: 10px;
+  background: linear-gradient(90deg, var(--tri-clr), #fff, var(--tri-clr));
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 3s linear ;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
 }
+
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
+}
+
+
 
 div.form-group-reg {
   padding-left: 27rem;
@@ -314,7 +427,39 @@ user page
   border-radius: 50%;
   object-fit: cover;
   margin: 0 5%;
+  -webkit-animation: shadow-drop-2-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	animation: shadow-drop-2-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
+
+@-webkit-keyframes shadow-drop-2-center {
+  0% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translateZ(50px);
+            transform: translateZ(50px);
+    -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+  }
+}
+@keyframes shadow-drop-2-center {
+  0% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translateZ(50px);
+            transform: translateZ(50px);
+    -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+  }
+}
+
 
 .user-upcoming {
   padding-top: 5%;
@@ -323,6 +468,7 @@ user page
 
 .user-upcoming > h2 {
   margin: 2%;
+  color: var(--sec-clr);
 }
 
 .user-upcoming > p {
@@ -360,6 +506,11 @@ user page
 }
 
 .user-vaccine-add a {
+  text-decoration: none;
+}
+
+.user-vaccine-add:hover {
+  color:var(--sec-clr);
   text-decoration: none;
 }
 
@@ -405,10 +556,70 @@ user page
 
 .vl {
   border-left: 6px solid #4e6d7c;
-  height: 60px;
+  height: 30px;
   margin: -5px 0px -5px 7px;
 }
 
+.card {
+  margin-left: 4rem;
+}
+
+.id-p {
+  margin-bottom: 0;
+  color: #5d8294;
+}
+
+.form-check-label {
+  margin-left: 4rem;
+  padding: 0.2rem;
+  font-size: 18px ;
+}
+
+.form-check-label-parent {
+  font-size: 18px ;
+  padding: 0.2rem;
+
+}
+.taken-date {
+  font-size: 18px ;
+  padding: 0.2rem;
+
+}
+
+.received-btn{
+  position: absolute;
+  padding: 2px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 6px;
+  left: 20px;
+  background: var(--pri-clr) ;
+  color:  var(--tri-clr);
+}
+.del-vacc{
+  position: right;
+  color : red ;
+  padding: 7px;
+  border-radius: 5px;
+  background: white;
+  margin-top: 0.5rem;
+  margin-left: 2.5rem;
+}
+
+#vac-name-btn {
+  color: var(--tri-clr);
+
+}
+
+#vaccine-btn {
+  color: #5d8294;
+}
+#start-track {
+  color : var(--tri-clr) ;
+  padding: 7px;
+  border-radius: 5px;
+  background: white;
+}
 /* ===================
 regis vaccination page
 ===================   */
@@ -564,15 +775,56 @@ div.dot-inner {
 }
 
 /* parental view */
-.pr {
-  display: flex;
+.pr{
+  background: var(--pri-clr);
+  padding : 7rem;
+  text-align: center;
   align-items: center;
   justify-content: center;
 }
 
+.pr-h1 {
+  font-size: 50px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: var(--tri-clr);
+}
+
+
+.pr-p {
+  color: var(--tri-clr);
+  padding: 50px ;
+  font-size: 20px;
+}
+
+.pr-er{
+  color: rgb(255, 0, 0);
+
+}
+
+.pr-i {
+  width: 400px;
+  padding: 8px ;
+  border-radius: 10px;
+  text-align: center;
+}
+
+
+.request-btn {
+  margin-top: 2rem;
+  padding: 10px;
+  padding-left: 20px ;
+  padding-right: 20px ;
+  border-radius: 10px;
+  text-align: center;
+  background: var(--tri-clr);
+  color: white;
+}
 /* ===================
   outbreak section
 ===================   */
+
+
 
 .outbreak {
   display: none;
@@ -580,9 +832,22 @@ div.dot-inner {
   opacity: 0;
   z-index: 999;
 }
-
+.outbreak img {
+  width: 40px;
+  position: absolute;
+  left: 868px;
+  top: 40px;
+}
 .outbreak-li {
-  background: #000;
+  position: absolute;
+  width: 380px;
+  top: 65px;
+  left: 540px;
+  border-radius: 10px;
+  background: var(--sec-clr);
+  padding: 1rem;
+  color: white;
+  font-size: 16px;
   display: block;
 }
 

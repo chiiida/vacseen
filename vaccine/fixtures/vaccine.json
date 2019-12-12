@@ -88,6 +88,262 @@
     },
 
     {
+      "model": "vaccine.vaccinemodel",
+      "pk": 8,
+      "fields": {
+        "vaccine_name": "Rotavirus (monovalent)",
+        "required_age": 0.2,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 9,
+      "fields": {
+        "vaccine_name": "Rotavirus (pentavalent)",
+        "required_age": 0.2,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 10,
+      "fields": {
+        "vaccine_name": "Haemophilus influenzae type b (PRP-T) -- Start at 2-6 month",
+        "required_age": 0.2,
+        "required_gender": "None",
+        "stimulate_phase": 60
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 11,
+      "fields": {
+        "vaccine_name": "Haemophilus influenzae type b (PRP-T) -- Start at 7-11 month",
+        "required_age": 0.7,
+        "required_gender": "None",
+        "stimulate_phase": 60
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 12,
+      "fields": {
+        "vaccine_name": "Haemophilus influenzae type b (PRP-T) -- Start at 12-24 month",
+        "required_age": 1,
+        "required_gender": "None",
+        "stimulate_phase": 60
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 13,
+      "fields": {
+        "vaccine_name": "Varicellazoster -- Start at 1-12 years ",
+        "required_age": 1,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 14,
+      "fields": {
+        "vaccine_name": "Varicellazoster -- Start at 13 years ",
+        "required_age": 13,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 14,
+      "fields": {
+        "vaccine_name": "Varicellazoster -- Start at 13 years ",
+        "required_age": 13,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 15,
+      "fields": {
+        "vaccine_name": "Hepatitis A",
+        "required_age": 1,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 16,
+      "fields": {
+        "vaccine_name": "Streptococcus pneumoniae 23-valent polysaccharide ( >2 years) ",
+        "required_age": 2,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 17,
+      "fields": {
+        "vaccine_name": "Streptococcus pneumoniae 23-valent polysaccharide ( >65 years) ",
+        "required_age": 65,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+    
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 18,
+      "fields": {
+        "vaccine_name": "Streptococcus pneumoniae 10-valent conjugate (PCV-10) -- Start at 2-6 month ",
+        "required_age": 0.2,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 19,
+      "fields": {
+        "vaccine_name": "Streptococcus pneumoniae 10-valent conjugate (PCV-10) -- Start at 7-23 month ",
+        "required_age": 0.7,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 20,
+      "fields": {
+        "vaccine_name": "Streptococcus pneumoniae 10-valent conjugate (PCV-10) -- Start at 2-5 years ",
+        "required_age": 2,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 21,
+      "fields": {
+        "vaccine_name": "Neisseria meningitidis polysaccharide (MPSV 4)",
+        "required_age": 2,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 22,
+      "fields": {
+        "vaccine_name": "Neisseria meningitidis polysaccharide (MCV4) -- Start at 9-23 month ",
+        "required_age": 0.9,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 23,
+      "fields": {
+        "vaccine_name": "Neisseria meningitidis polysaccharide (MCV4) ",
+        "required_age": 2,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 24,
+      "fields": {
+        "vaccine_name": "Rabies (before touching)",
+        "required_age": 0,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 25,
+      "fields": {
+        "vaccine_name": "Rabies (after touching)",
+        "required_age": 0,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 26,
+      "fields": {
+        "vaccine_name": "HPV",
+        "required_age": 0,
+        "required_gender": "Female",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 27,
+      "fields": {
+        "vaccine_name": "Quadrivalent Influenza vaccine",
+        "required_age": 0.6,
+        "required_gender": "None",
+        "stimulate_phase": 365
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 28,
+      "fields": {
+        "vaccine_name": "Pneumococcal vaccine",
+        "required_age": 50,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+    {
+      "model": "vaccine.vaccinemodel",
+      "pk": 29,
+      "fields": {
+        "vaccine_name": "Zoster vaccine",
+        "required_age": 50,
+        "required_gender": "None",
+        "stimulate_phase": -1
+      }
+    },
+
+
+
+
+    {
       "model": "vaccine.dosemodel",
       "pk": 1,
       "fields": { "vaccine": 1, "dose_count": 1, "dose_duration": 0 }
@@ -210,9 +466,273 @@
       "model": "vaccine.dosemodel",
       "pk": 20,
       "fields": { "vaccine": 7, "dose_count": 2, "dose_duration": 540 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 21,
+      "fields": { "vaccine": 8, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 22,
+      "fields": { "vaccine": 8, "dose_count": 2, "dose_duration": 60 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 23,
+      "fields": { "vaccine": 8, "dose_count": 3, "dose_duration": 60 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 24,
+      "fields": { "vaccine": 9, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 25,
+      "fields": { "vaccine": 9, "dose_count": 2, "dose_duration": 60 }
+    },
+
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 26,
+      "fields": { "vaccine": 10, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 27,
+      "fields": { "vaccine": 10, "dose_count": 2, "dose_duration": 60 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 28,
+      "fields": { "vaccine": 10, "dose_count": 3, "dose_duration": 60 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 29,
+      "fields": { "vaccine": 11, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 30,
+      "fields": { "vaccine": 11, "dose_count": 2, "dose_duration": 60 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 31,
+      "fields": { "vaccine": 12, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 32,
+      "fields": { "vaccine": 13, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 33,
+      "fields": { "vaccine": 13, "dose_count": 2, "dose_duration": 900 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 34,
+      "fields": { "vaccine": 14, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 35,
+      "fields": { "vaccine": 14, "dose_count": 2, "dose_duration": 30 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 36,
+      "fields": { "vaccine": 15, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 37,
+      "fields": { "vaccine": 15, "dose_count": 2, "dose_duration": 180 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 38,
+      "fields": { "vaccine": 16, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 39,
+      "fields": { "vaccine": 16, "dose_count": 2, "dose_duration": 1800 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 40,
+      "fields": { "vaccine": 17, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 41,
+      "fields": { "vaccine": 18, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 42,
+      "fields": { "vaccine": 18, "dose_count": 2, "dose_duration": 42 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 43,
+      "fields": { "vaccine": 18, "dose_count": 3, "dose_duration": 42 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 44,
+      "fields": { "vaccine": 19, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 45,
+      "fields": { "vaccine": 19, "dose_count": 2, "dose_duration": 42 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 46,
+      "fields": { "vaccine": 20, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 47,
+      "fields": { "vaccine": 21, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 48,
+      "fields": { "vaccine": 22, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 49,
+      "fields": { "vaccine": 22, "dose_count": 2, "dose_duration": 90 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 50,
+      "fields": { "vaccine": 23, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 51,
+      "fields": { "vaccine": 24, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 52,
+      "fields": { "vaccine": 24, "dose_count": 2, "dose_duration": 7 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 53,
+      "fields": { "vaccine": 24, "dose_count": 3, "dose_duration": 21 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 54,
+      "fields": { "vaccine": 25, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 55,
+      "fields": { "vaccine": 25, "dose_count": 2, "dose_duration": 3 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 56,
+      "fields": { "vaccine": 25, "dose_count": 3, "dose_duration": 7 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 57,
+      "fields": { "vaccine": 25, "dose_count": 4, "dose_duration": 14 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 58,
+      "fields": { "vaccine": 25, "dose_count": 5, "dose_duration": 30 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 59,
+      "fields": { "vaccine": 26, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 60,
+      "fields": { "vaccine": 26, "dose_count": 2, "dose_duration": 30 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 61,
+      "fields": { "vaccine": 26, "dose_count": 3, "dose_duration": 180 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 62,
+      "fields": { "vaccine": 27, "dose_count": 1, "dose_duration": 0 }
+    },
+
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 63,
+      "fields": { "vaccine": 28, "dose_count": 1, "dose_duration": 0 }
+    },
+
+    {
+      "model": "vaccine.dosemodel",
+      "pk": 64,
+      "fields": { "vaccine": 29, "dose_count": 1, "dose_duration": 0 }
     }
-
-
 
 
 ]

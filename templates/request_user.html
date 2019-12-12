@@ -1,12 +1,28 @@
 {% extends 'base.html' %} {% block content %}
+
+<style>
+        body{
+            background: #e6eff1;
+        }
+        ul {
+            background-color: #e6eff1;
+        }
+        li a {
+            color: #4e6d7c;
+        }
+        .nav-vac {
+            color: #4e6d7c;
+        }
+</style>
+
 <div class="pr">
     <h1 class="pr-h1">Parental Access</h1>
     <p class="pr-p">please enter your child key to view thier profile.</p>
-    {% if error_message %}<p>{{ error_message }}</p>{% endif %}
+    {% if error_message %}<p class="pr-er">{{ error_message }}</p>{% endif %}
     <form method="post">
         {% csrf_token %}
         <input type="text" name="uuid" id="uuid" class="pr-i" />
-        <button class="save-btn" type="submit" formmethod="post">Request access</button>
+        <center><div><button class="request-btn"  type="submit" formmethod="post">Request access</button></div></center>
     </form>
 
 </div>
