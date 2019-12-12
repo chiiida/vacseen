@@ -144,4 +144,6 @@ LOGOUT_REDIRECT_URL = 'home'
 
 ACCOUNT_LOGOUT_ON_GET = True
 
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+
 django_heroku.settings(locals())
