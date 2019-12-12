@@ -1,3 +1,4 @@
+import dj_database_url
 import os
 import django_heroku
 from decouple import config
@@ -102,6 +103,9 @@ DATABASES = {
         'PASSWORD': os.environ['DB_PASSWORD'],
     }
 }
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
