@@ -23,7 +23,8 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <!-- custom CSS -->
+    
+  <!-- custom CSS -->
   </head>
 
   <body>
@@ -41,14 +42,15 @@
         <a class="outbreak-toggler">
           {% if have_outbreak %}
           <!-- pic with red dot -->
-          <img src="/static/image/canvas.png" class="nav-noti" />
+          <img src="/static/image/notification.svg" class="nav-noti" />
           {% else %}
           <!-- pic without red dot -->
-          <img src="/static/image/canvas.png" class="nav-noti" />
+          <img src="/static/image/notification.svg" class="nav-noti" />
           {% endif %}
         </a>
       </li>
       <div class="outbreak">
+        <img src="/static/image/noti-tri.png" class="nav-noti-tri" />
         <ul>
           {% if have_outbreak %} {% for outbreak in have_outbreak %}
           <li class="outbreak-li">{{ outbreak }}</li>
