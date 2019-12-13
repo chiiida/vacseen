@@ -2,12 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
 from datetime import date, timedelta
+from uuid import UUID
 
 from vaccine.views import create_vaccine, vaccine_suggest
 from vaccine.models import Outbreak
 from .models import CustomUser
 from .forms import CustomUserForm, VaccineFormSet, VaccinationForm
-from uuid import UUID
+from pages.views import get_client_ip, logger
 
 
 def is_valid_uuid(uuid_to_test, version=4):
@@ -83,6 +84,9 @@ def signup_view(request):
                                 birthdate=birthdate,
                                 age=age)
             user.save()
+            client_ip = get_client_ip(request)
+            logger.info('Update profile for {} from {}'.format(
+                request.user, client_ip))
             return HttpResponseRedirect(reverse('users:vaccination'))
     else:
         form = CustomUserForm()
@@ -110,6 +114,9 @@ def vaccination_signup_view(request):
                                    dose_count,
                                    date_taken)
             vaccine_suggest(request.user)
+            client_ip = get_client_ip(request)
+            logger.info('Request update vaccination for {} from {}'.format(
+                request.user, client_ip))
         return redirect('users:profile')
     return render(request, 'registration/vaccination.html',
                   {'formset': formset, })
@@ -139,6 +146,8 @@ def request_user_view(request):
                 user = CustomUser.objects.get(
                     parental_key=request.POST['uuid'])
             except (KeyError, CustomUser.DoesNotExist):
+                client_ip = get_client_ip(request)
+                logger.warning('Request wrong uuid from {}'.format(client_ip))
                 return render(request, 'request_user.html', {
                     'error_message': "Could not find user with this uuid.",
                 })
@@ -149,7 +158,7 @@ def request_user_view(request):
                                                             'uuid': uuid}))
         else:
             return render(request, 'request_user.html', {
-                    'error_message': "Invalid uuid."})
+                'error_message': "Invalid uuid."})
 
 
 @login_required(login_url='home')
@@ -188,4 +197,6 @@ def parental_view(request, user_id: int, uuid: str):
                    'age': age,
                    'vaccine_set': vaccine_set,
                    'upcoming_vaccine': upcoming_vaccine_list}
+        client_ip = get_client_ip(request)
+        logger.info('Parental view for {} from {}'.format(user, client_ip))
         return render(request, 'parental.html', context)
