@@ -408,6 +408,11 @@ user page
   color: #fff;
 }
 
+.user-info {
+  margin-top: 5%;
+  margin-bottom: auto;
+}
+
 .user-profile {
   width: 40vw;
   display: flex;
@@ -570,7 +575,7 @@ user page
 }
 
 .form-check-label {
-  margin-left: 4rem;
+  margin-left: 5rem;
   padding: 0.2rem;
   font-size: 18px ;
 }
@@ -823,9 +828,6 @@ div.dot-inner {
 /* ===================
   outbreak section
 ===================   */
-
-
-
 .outbreak {
   display: none;
   position: absolute;
