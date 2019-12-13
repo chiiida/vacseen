@@ -1,6 +1,6 @@
 import os
-import django_heroku
 from decouple import config
+# import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,6 +21,38 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config(
 
 ALLOWED_HOSTS = ['127.0.0.1', 'vacseen.herokuapp.com']
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'timestamp': {
+            'format': '{asctime} {levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'applogfile': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'timestamp',
+            'filename': os.path.join(BASE_DIR, 'vacseen.log'),
+            'maxBytes': 1024*1024*15,  # 15MB
+            'backupCount': 100,
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'timestamp'
+        }
+    },
+    'loggers': {
+        'vacseen': {
+            'handlers': ['applogfile', 'console'],
+            'level': 'INFO',
+            'propagate': False
+        },
+    }
+}
 
 # Application definition
 
@@ -130,17 +162,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-
-LOGIN_REDIRECT_URL = 'loginhandler'
-
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'loginhandler'  # new
+LOGOUT_REDIRECT_URL = 'home'  # new
 
 ACCOUNT_LOGOUT_ON_GET = True
 

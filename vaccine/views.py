@@ -4,6 +4,7 @@ from datetime import date, timedelta
 
 from users.forms import DateExpiredForm, VaccineFormSet
 from users.models import CustomUser
+from pages.views import get_client_ip, logger
 from vaccine.models import VaccineModel, Vaccine, Dose
 
 
@@ -153,6 +154,10 @@ def track_first_date(request, vaccine_id: int):
                     user_dose.date_taken = next_date(
                         date_taken, dose.dose_duration)
                     user_dose.save()
+        client_ip = get_client_ip(request)
+        logger.info(
+            'User: {} request update first date to receive {} from {}'.format(
+                str(request.user), vaccine, client_ip))
     return redirect('users:profile')
 
 
@@ -172,6 +177,9 @@ def received_dose(request, dose_id: int):
                                 dose.date_taken, dose.vaccine.stimulate_phase),
                             received=False)
             new_dose.save()
+        client_ip = get_client_ip(request)
+        logger.info('User: {} received dose request from {}'.format(
+            str(request.user), client_ip))
     return redirect('users:profile')
 
 
@@ -195,6 +203,9 @@ def add_vaccine(request):
                                        vaccine_name,
                                        dose_count,
                                        date_taken)
+        client_ip = get_client_ip(request)
+        logger.info('User: {} add vaccines request from {}'.format(
+            str(request.user), client_ip))
         return redirect('users:profile')
     return render(request, 'add_vaccine.html',
                   {'formset': formset, })
@@ -205,5 +216,8 @@ def del_vaccine(request, vaccine_id: int):
     """Remove specify vaccine from user's input"""
     if request.method == 'POST':
         vaccine = Vaccine.objects.get(pk=request.POST['delvacc'])
+        client_ip = get_client_ip(request)
+        logger.info('User: {} remove {} request from {}'.format(
+            str(request.user), vaccine, client_ip))
         vaccine.delete()
         return redirect('users:profile')

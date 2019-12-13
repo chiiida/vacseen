@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
     gender = models.CharField(max_length=6)
     birthdate = models.DateField(blank=True, null=True)
     age = models.FloatField(default=0.0)
-    parental_key = models.CharField(max_length=255, unique=True, default=uuid4)
+    parental_key = models.CharField(max_length=10, unique=True, default=uuid4)
 
     def __str__(self):
         return self.email

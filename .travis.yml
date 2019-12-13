@@ -17,7 +17,4 @@ notifications:
 
 after_success:
   - codecov
-
-env:
-  - TRAVIS_SECURE_ENV_VARS = true
   
