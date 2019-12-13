@@ -32,7 +32,7 @@ LOGGING = {
     },
     'handlers': {
         'applogfile': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'timestamp',
             'filename': os.path.join(BASE_DIR, 'vacseen.log'),
@@ -40,7 +40,7 @@ LOGGING = {
             'backupCount': 100,
         },
         'console': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
             'formatter': 'timestamp'
         }
@@ -48,7 +48,7 @@ LOGGING = {
     'loggers': {
         'vacseen': {
             'handlers': ['applogfile', 'console'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': False
         },
     }

@@ -85,7 +85,7 @@ def signup_view(request):
                                 age=age)
             user.save()
             client_ip = get_client_ip(request)
-            logger.debug('Update profile for {} from {}'.format(
+            logger.info('Update profile for {} from {}'.format(
                 request.user, client_ip))
             return HttpResponseRedirect(reverse('users:vaccination'))
     else:
@@ -115,7 +115,7 @@ def vaccination_signup_view(request):
                                    date_taken)
             vaccine_suggest(request.user)
             client_ip = get_client_ip(request)
-            logger.debug('Request update vaccination for {} from {}'.format(
+            logger.info('Request update vaccination for {} from {}'.format(
                 request.user, client_ip))
         return redirect('users:profile')
     return render(request, 'registration/vaccination.html',
@@ -188,5 +188,5 @@ def parental_view(request, user_id: int, uuid: str):
                    'vaccine_set': vaccine_set,
                    'upcoming_vaccine': upcoming_vaccine_list}
         client_ip = get_client_ip(request)
-        logger.debug('Parental view for {} from {}'.format(user, client_ip))
+        logger.info('Parental view for {} from {}'.format(user, client_ip))
         return render(request, 'parental.html', context)

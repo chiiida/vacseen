@@ -30,11 +30,11 @@ def LoginHandler(request):
             and request.user.contact \
             and request.user.emergency_contact \
             and request.user.first_name and request.user.last_name:
-        logger.debug('Successful login as {} from {}'.format(
+        logger.info('Successful login as {} from {}'.format(
             request.user.username, client_ip))
         return redirect('users:profile')
     else:
-        logger.debug('Signup as {} from {}'.format(
+        logger.info('Signup as {} from {}'.format(
             request.user.username, client_ip))
         return redirect('users:signup')
 

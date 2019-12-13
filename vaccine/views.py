@@ -117,8 +117,9 @@ def track_first_date(request, vaccine_id: int):
                         date_taken, dose.dose_duration)
                     user_dose.save()
         client_ip = get_client_ip(request)
-        logger.debug(
-            'Request update first date to receive {} from {}'.format(vaccine, client_ip))
+        logger.info(
+            'User: {} request update first date to receive {} from {}'.format(
+                str(request.user), vaccine, client_ip))
     return redirect('users:profile')
 
 
@@ -139,7 +140,8 @@ def received_dose(request, dose_id: int):
                             received=False)
             new_dose.save()
         client_ip = get_client_ip(request)
-        logger.debug('Received dose request from {}'.format(client_ip))
+        logger.info('User: {} received dose request from {}'.format(
+            str(request.user), client_ip))
     return redirect('users:profile')
 
 
@@ -164,7 +166,8 @@ def add_vaccine(request):
                                        dose_count,
                                        date_taken)
         client_ip = get_client_ip(request)
-        logger.debug('Add vaccines request from {}'.format(client_ip))
+        logger.info('User: {} add vaccines request from {}'.format(
+            str(request.user), client_ip))
         return redirect('users:profile')
     return render(request, 'add_vaccine.html',
                   {'formset': formset, })
@@ -176,6 +179,7 @@ def del_vaccine(request, vaccine_id: int):
     if request.method == 'POST':
         vaccine = Vaccine.objects.get(pk=request.POST['delvacc'])
         client_ip = get_client_ip(request)
-        logger.debug('Remove {} request from {}'.format(vaccine, client_ip))
+        logger.info('User: {} remove {} request from {}'.format(
+            str(request.user), vaccine, client_ip))
         vaccine.delete()
         return redirect('users:profile')
