@@ -7,6 +7,20 @@ from users.models import CustomUser
 from vaccine.models import VaccineModel, Vaccine, Dose
 
 
+VACCINES = ['Neisseria meningitidis polysaccharide (MCV4) -- Start at 9-23 month',
+            'Neisseria meningitidis polysaccharide (MCV4)',
+            'Streptococcus pneumoniae 10-valent conjugate (PCV-10) -- Start at 2-5 years',
+            'Streptococcus pneumoniae 10-valent conjugate (PCV-10) -- Start at 7-23 month',
+            'Streptococcus pneumoniae 10-valent conjugate (PCV-10) -- Start at 2-6 month',
+            'Streptococcus pneumoniae 23-valent polysaccharide ( >65 years)',
+            'Streptococcus pneumoniae 23-valent polysaccharide ( >2 years)',
+            'Varicellazoster -- Start at 1-12 years',
+            'Varicellazoster -- Start at 13 years',
+            'Haemophilus influenzae type b (PRP-T) -- Start at 12-24 month',
+            'Haemophilus influenzae type b (PRP-T) -- Start at 7-11 month',
+            'Haemophilus influenzae type b (PRP-T) -- Start at 2-6 month']
+
+
 def next_date(date: date, duration: int):
     """Return date that need to receive next dose (injuction) of vaccine"""
     return date + timedelta(days=duration)
@@ -50,6 +64,27 @@ def create_vaccine(user_id: int, vacc_name: str, dose_count: int, date: date):
             user_dose.save()
 
 
+def is_suitable(vaccine_name: str, age: float):
+    """Check the vaccine that suitable for the user by check age."""
+    age_check = {
+        '0': [0.9, 1.11],
+        '1': [2, 999],
+        '2': [2, 5],
+        '3': [0.7, 1.11],
+        '4': [0.2, 0.6],
+        '5': [65, 999],
+        '6': [2, 999],
+        '7': [1, 12],
+        '8': [13, 999],
+        '9': [1, 2],
+        '10': [0.7, 0.11],
+        '11': [0.2, 0.6]
+    }
+    index = VACCINES.index(vaccine_name)
+    requried_age = age_check[str(index)]
+    return requried_age[0] <= age <= requried_age[1]
+
+
 def filter_vaccine(user: CustomUser):
     """Filter vaccine by user's age and user's gender"""
     vaccine_model = VaccineModel.objects.all()
@@ -57,13 +92,16 @@ def filter_vaccine(user: CustomUser):
     if user.vaccine_set:
         user_vaccine_list = [
             vaccine.vaccine_name for vaccine in user.vaccine_set.all()]
-
     vaccines_list = []
     for vaccine in vaccine_model:
         if vaccine.vaccine_name not in user_vaccine_list:
             if vaccine.required_gender in ('None', user.gender):
                 if user.age >= vaccine.required_age:
-                    vaccines_list.append(vaccine)
+                    if vaccine.vaccine_name in VACCINES:
+                        if is_suitable(vaccine.vaccine_name, user.age):
+                            vaccines_list.append(vaccine)
+                    else:
+                        vaccines_list.append(vaccine)
     return vaccines_list
 
 
