@@ -109,7 +109,7 @@ def vaccination_signup_view(request):
                                    vaccine_name,
                                    dose_count,
                                    date_taken)
-            vaccine_suggest(request.user)
+        vaccine_suggest(request.user)
         return redirect('users:profile')
     return render(request, 'registration/vaccination.html',
                   {'formset': formset, })
