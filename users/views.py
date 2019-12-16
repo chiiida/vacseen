@@ -191,11 +191,15 @@ def parental_view(request, user_id: int, uuid: str):
         age = user.age * 100
     if uuid == user.parental_key[:4]:
         user = CustomUser.objects.get(id=user_id)
-        vaccine_set = user.sorted_vaccine()
+        user_vacc = []
+        for vac in user.vaccine_set.all():
+            dose_list = list(vac.dose_set.all())
+            if dose_list[0].received:
+                user_vacc.append(vac)
         upcoming_vaccine_list = upcoming_vaccine(user)
         context = {'user': user,
                    'age': age,
-                   'vaccine_set': vaccine_set,
+                   'vaccine_set': user_vacc,
                    'upcoming_vaccine': upcoming_vaccine_list}
         client_ip = get_client_ip(request)
         logger.info('Parental view for {} from {}'.format(user, client_ip))

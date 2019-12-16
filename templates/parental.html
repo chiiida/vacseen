@@ -56,7 +56,7 @@
     <div class="user-vaccines">
         <div class="accordion" id="accordionExample">
 
-            {% for vaccine in vaccine_set.all %}
+            {% for vaccine in vaccine_set %}
             <div class="card">
                 <div class="card-header" id="heading{{ forloop.counter }}">
                     <h2 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}"
