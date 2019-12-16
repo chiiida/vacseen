@@ -28,7 +28,7 @@
                 <h2>{{ user.gender }}, {{ user.age }}
                     {% if user.age > 0.11 %} years {% else %} months {% endif %}
                 </h2>
-                <p class="id-p" id="uuid">your uuid is: </p>
+                <p class="id-p" id="uuid">uuid is: </p>
                 <p class="id-p" id="uuid">{{user.parental_key}}</p>
             </div>
         </div>
@@ -41,7 +41,7 @@
                     <div class="one-check">
                         <div>
                             <label class="form-check-label-parent" for="defaultCheck1">
-                                {{ dose.vaccine.vaccine_name }} : dose {{ dose.dose_count }}
+                                {{ dose.vaccine.vaccine_name|truncatechars:15 }} : dose {{ dose.dose_count }}
                             </label>
                         </div>
                         <div>
